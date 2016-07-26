@@ -30,7 +30,7 @@ public class Entity {
     }
     
     public void render(Screen screen) {
-       if (sprite != null) screen.renderSprite (x,y,sprite,true);
+       if (sprite != null) screen.renderSprite ((int)x, (int)y,sprite,true);
     }
     
     public int getX() {

@@ -68,6 +68,6 @@ public class Dummy extends Mob {
             sprite = Sprite.dummy;
         }
 
-        screen.renderAI(x - 16, y - 16, this);
+        screen.renderAI((int)(x - 16),(int)(y - 16), this);
     }
 }

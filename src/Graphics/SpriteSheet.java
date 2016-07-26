@@ -21,6 +21,7 @@ public class SpriteSheet {
     public static SpriteSheet Enemy = new SpriteSheet("/textures/Enemy.png", 128);
     public static SpriteSheet dummymove = new SpriteSheet(Enemy, 0, 1, 1, 3, 32);
     public static SpriteSheet chasermove = new SpriteSheet(Enemy, 1, 1, 1, 3, 32);
+    public static SpriteSheet starmove = new SpriteSheet(Enemy, 2, 1, 1, 3, 32);
     
     private Sprite[] sprites;
 

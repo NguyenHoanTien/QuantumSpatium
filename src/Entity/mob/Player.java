@@ -1,5 +1,6 @@
 package Entity.mob;
 
+import Entity.Entity;
 import Entity.projectile.Projectile;
 import Entity.projectile.WizardProjectile;
 import Graphics.AnimateSprite;
@@ -9,16 +10,16 @@ import Graphics.SpriteSheet;
 import Input.Keyboard;
 import Input.Mouse;
 import game.Game;
+import java.util.List;
 import java.util.Random;
 
 public class Player extends Mob {
 
     private Keyboard input;
     private Sprite sprite;
-
-
+    
     private int firerate = 0;
-    private int speed = 4;
+    private double speed = 4;
     private AnimateSprite playerAni = new AnimateSprite(SpriteSheet.playermove, 32, 32, 3);
 
     public Player(Keyboard input) {
@@ -35,8 +36,9 @@ public class Player extends Mob {
 
     public void update() {
         playerAni.update();
-        int xa = 0;
-        int ya = 0;
+        double xa = 0;
+        double ya = 0;
+        
         if (firerate > 0) {
             firerate--;
         }
@@ -98,6 +100,7 @@ public class Player extends Mob {
             ///////////////////////////
 
             shoot(x, y, Accu);
+            
             firerate = WizardProjectile.FireRate;
         }
     }
@@ -110,6 +113,6 @@ public class Player extends Mob {
             sprite = Sprite.playerStop;
         }
 
-        screen.renderMob(x - 16, y - 16, sprite);
+        screen.renderMob((int)(x - 16),(int)(y - 16), sprite);
     }
 }

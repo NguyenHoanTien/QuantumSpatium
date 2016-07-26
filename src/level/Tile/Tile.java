@@ -6,7 +6,6 @@ import Graphics.Sprite;
 
 public class Tile {
     
-    public int x, y;
     public Sprite sprite;
     
     public static Tile plat = new PlatTile(Sprite.plat);
