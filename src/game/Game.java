@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -22,7 +23,7 @@ import level.TileCoordinate;
 
 public class Game extends Canvas implements Runnable{
     private static final long serialVersionUID = 1L;
-    
+    public static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     public static int width = 500;
     public static int height = 268;
     public static int scale = 3;          
@@ -54,7 +55,7 @@ public class Game extends Canvas implements Runnable{
 
     
     public Game() {
-        Dimension size = new Dimension (width * scale, height * scale);
+        Dimension size = new Dimension (screenSize.width, screenSize.height);
         setPreferredSize(size);
         
         screen = new Screen(width, height);
@@ -73,11 +74,11 @@ public class Game extends Canvas implements Runnable{
     }
     
     public static int getWindowWidth (){
-        return width * scale;
+        return screenSize.width;
     }
     
       public static int getWindowHeight (){
-        return height * scale;
+        return screenSize.height;
     }
     
     
@@ -157,9 +158,11 @@ public class Game extends Canvas implements Runnable{
         
         double xScroll = player.getX() - screen.width / 2;
         double yScroll = player.getY() - screen.height / 2;
-        
-        level.render((int) xScroll, (int)yScroll, screen);
- 
+        if (State ==STATE.MENU)
+            level.render(screenSize.width/2,screenSize.height/2 - 45,screen);
+        else
+            level.render((int) xScroll, (int)yScroll, screen);
+           
         for (int i = 0; i < pixels.length; i++) {
             pixels [i] = screen.pixels[i];
         }
@@ -174,6 +177,7 @@ public class Game extends Canvas implements Runnable{
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
         } else {
             if (State == STATE.MENU) {
+                g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
                 menu.mainRender(g);
             } else if (State == State.PLAY) {
                 g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
