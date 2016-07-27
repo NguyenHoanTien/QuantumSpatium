@@ -23,9 +23,9 @@ import level.TileCoordinate;
 public class Game extends Canvas implements Runnable{
     private static final long serialVersionUID = 1L;
     
-    private static int width = 500;
-    private static int height = 268;
-    private static int scale = 3;          
+    public static int width = 500;
+    public static int height = 268;
+    public static int scale = 3;          
     public static String title = "Infinity War";
 
     private JFrame frame;

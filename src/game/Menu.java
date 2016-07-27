@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package game;
 
 import java.awt.Color;
@@ -10,14 +6,11 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-/**
- *
- * @author kronos
- */
+
 public class Menu {
     private int button_extraX1 = 60, button_extraX2 = 85;
     private int button_extraY = 65;
-    public static int width = 1364/2 -75*2;
+    public static int width = (Game.width * Game.scale / 2) - 150;
     public Rectangle MenuBox = new Rectangle(width-65,50,400, 500);
     public Rectangle Button1 = new Rectangle(width ,150,250,100);
     public Rectangle Button2 = new Rectangle(width ,300,250,100);
@@ -76,7 +69,9 @@ public class Menu {
         g.setFont(font2);
         g.setColor(Color.red);
         g.drawString("HOW TO PLAY",width + 55,150);
+        ////////
         
+        ////////
         g2d.draw(Back);
         g.setColor(Color.darkGray);
         g.fillRect(BackX,BackY,BackW,BackH);
