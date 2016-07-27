@@ -7,10 +7,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+
 public class Menu {
     private int button_extraX1 = 60, button_extraX2 = 85;
     private int button_extraY = 65;
-    public static int width = (Game.width * Game.scale / 2) - 150;
+    public static int width = (Game.screenSize.width / 2) - 150;
     public Rectangle MenuBox = new Rectangle(width-65,50,400, 500);
     public Rectangle Button1 = new Rectangle(width ,150,250,100);
     public Rectangle Button2 = new Rectangle(width ,300,250,100);
@@ -37,18 +38,20 @@ public class Menu {
         //basic setting for font
         Font font1 = new Font("arial",Font.BOLD, 50);
         g.setFont(font1);
-        g.setColor(Color.black);
+        g.setColor(Color.white);
         
         //draw the title
         g.drawString(Game.title,width,100);
         //draw buttons
         Font font2 = new Font("calibri",Font.BOLD,35);
         g.setFont(font2);
+        g.setColor(Color.yellow);
         g.drawString("PLAY",Button1.x + button_extraX2 , Button1.y + button_extraY);
-        g2d.draw(Button1);
         g.drawString("SETTING",Button2.x + button_extraX1, Button2.y + button_extraY);
-        g2d.draw(Button2);
         g.drawString("QUIT",Button3.x + button_extraX2, Button3.y + button_extraY);
+        g.setColor(Color.blue);
+        g2d.draw(Button1);
+        g2d.draw(Button2);
         g2d.draw(Button3);
     }
     
