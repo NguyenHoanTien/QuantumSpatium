@@ -3,6 +3,7 @@ package Entity.mob;
 import Entity.Entity;
 import Entity.projectile.Projectile;
 import Entity.projectile.WizardProjectile;
+import Entity.spawner.ParticleSpawner;
 import Graphics.AnimateSprite;
 import Graphics.Screen;
 import Graphics.Sprite;
@@ -17,8 +18,10 @@ public class Player extends Mob {
 
     private Keyboard input;
     private Sprite sprite;
+
+    public int heal = 11;
     
-    private int firerate = 0;
+    public int firerate = 0;
     private double speed = 4;
     private AnimateSprite playerAni = new AnimateSprite(SpriteSheet.playermove, 32, 32, 3);
 
@@ -31,14 +34,13 @@ public class Player extends Mob {
         this.y = y;
         this.input = input;
         firerate = WizardProjectile.FireRate;
-
     }
 
     public void update() {
         playerAni.update();
         double xa = 0;
         double ya = 0;
-        
+
         if (firerate > 0) {
             firerate--;
         }
@@ -62,10 +64,41 @@ public class Player extends Mob {
         } else {
             moving = false;
         }
-
+        
         clear();
         updateShooting();
 
+        
+        updateMobCollision(level.entities);  // mob collision, player will destroy when collision with mob
+        System.out.println ("player heal: " + heal); // check heal of player
+
+    }
+    
+    public void updateMobCollision(List<Entity> entities) {
+        for (int i = 0; i < entities.size(); i++) { // check the list of entities.
+            if (entities.get(i) instanceof Dummy ||     // these kind of mob will do the action
+                    entities.get(i) instanceof Chaser ||
+                    entities.get(i) instanceof Star ) {
+                if (x < entities.get(i).getX() + 15         // range that will do the collision when hit the mob
+                        && x > entities.get(i).getX() - 15
+                        && y < entities.get(i).getY() + 15
+                        && y > entities.get(i).getY() - 15) {
+                    
+                    heal = 0;               // when player hit the mob, heal = 0, mean die directly
+                    
+                    level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));    // display partical effect
+                    
+                    if (heal == 0) {        // condition.
+                        entities.get(i).remove();       // remove the mob that hit player
+                        System.out.println(" Died");  // checking...
+                        remove();                       // remove player.
+                    }
+                    /* the reason why we have to remove mob and player: if we don't remove mob
+                    system won't understand the syntax and display error null exception
+                    => have to delete both */
+                }
+            }
+        }
     }
 
     private void clear() {
@@ -100,7 +133,7 @@ public class Player extends Mob {
             ///////////////////////////
 
             shoot(x, y, Accu);
-            
+
             firerate = WizardProjectile.FireRate;
         }
     }
@@ -113,6 +146,6 @@ public class Player extends Mob {
             sprite = Sprite.playerStop;
         }
 
-        screen.renderMob((int)(x - 16),(int)(y - 16), sprite);
+        screen.renderMob((int) (x - 16), (int) (y - 16), sprite);
     }
 }
