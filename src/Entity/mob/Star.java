@@ -32,12 +32,12 @@ public class Star extends Mob {
     }
     
     private void move() {
-        double speed = 1;
+        double speed = 4;
         xa = 0;
         ya = 0;
         
-        int px = level.getPlayerAt(0).getX();
-        int py = level.getPlayerAt(0).getY();
+        int px = level.getPlayerAt(0).getX() + 10;
+        int py = level.getPlayerAt(0).getY() + 10;
         
         Vector2i start = new Vector2i(getX()>> 4, getY() >> 4);
         Vector2i destination = new Vector2i(px >> 4, py >> 4);
