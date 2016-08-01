@@ -32,10 +32,9 @@ public class Mouse implements MouseListener, MouseMotionListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-          if (Game.State == Game.STATE.MENU) {
-            int mx = e.getX();
-            int my = e.getY();
-
+        int mx = e.getX();
+        int my = e.getY();
+        if (Game.State == Game.STATE.MENU) {
             //handle menu clicking
             if (Game.State == Game.STATE.MENU) {
                 //Click on Play Button
@@ -53,10 +52,8 @@ public class Mouse implements MouseListener, MouseMotionListener {
             }
         }
 
-        //handle clicking Difficulties buttons 
+        //handle clicking PLAY MENU buttons 
         else if (Game.State == Game.STATE.PLAY) {
-            int mx = e.getX();
-            int my = e.getY();
             //Click on Back Button
             if (mx >= Menu.BackX && mx <= Menu.BackX+ Menu.BackW) {
                 if (my >= Menu.BackY && my <= Menu.BackY+Menu.BackH) {
@@ -70,7 +67,23 @@ public class Mouse implements MouseListener, MouseMotionListener {
                 }
             }
            
-        } else {
+        }
+        //handle clicking GAME OVER MENU buttons
+        else if (Game.State == Game.STATE.OVER || Game.State == Game.STATE.PAUSE){
+            //Click on BACK button
+            if (mx >= Menu.BackX && mx <= Menu.BackX+ Menu.BackW) {
+                if (my >= Menu.OverY && my <= Menu.OverY+Menu.BackH) {
+                    Game.State = Game.STATE.MENU;
+                }
+            }
+            //CLick on Restart Button
+            if (mx >= Menu.StartX && mx <= Menu.StartX+ Menu.StartW) {
+                if (my >= Menu.OverY && my <= Menu.OverY+Menu.StartH) {
+                    Game.State = Game.STATE.PLAY;
+                }
+            }
+        } 
+        else {
             mouseB = e.getButton();
         }
     }

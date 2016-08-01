@@ -31,7 +31,7 @@ public class Keyboard implements KeyListener{
     public void keyReleased(KeyEvent e) {
         if(Game.State == Game.STATE.GAME && e.getKeyCode() == KeyEvent.VK_ESCAPE)
     {
-        Game.State = Game.STATE.PLAY;
+        Game.State = Game.STATE.PAUSE;
     }else
         keys[e.getKeyCode()] = false;
     }

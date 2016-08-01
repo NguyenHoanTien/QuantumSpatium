@@ -90,6 +90,7 @@ public class Player extends Mob {
                     
                     if (heal == 0) {        // condition.
                         entities.get(i).remove();       // remove the mob that hit player
+                        Game.State = Game.STATE.OVER;
                         System.out.println(" Died");  // checking...
                         remove();                       // remove player.
                     }
