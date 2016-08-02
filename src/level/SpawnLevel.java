@@ -34,24 +34,24 @@ public class SpawnLevel extends Level {
 
         int a = 50;
         int b = 5;
-
-        for (int i = 0; i < 5; i++) {           // spawn the following of AI   
+/*
+        for (int i = 0; i < 1; i++) {           // spawn the following of AI   
             add(new Star(a, b));
             a += 10;
             b += 10; 
             //respawn();
         }
 
-        for (int i = 0; i < 10; i++) {           // spawn the following of AI   
+        for (int i = 0; i < 1; i++) {           // spawn the following of AI   
             add(new Chaser(20, 5));
         }
 
-        for (int i = 0; i < 10; i++) {            // spawn the NPC of AI
+        for (int i = 0; i < 1; i++) {            // spawn the NPC of AI
             add(new Dummy(20, 5));
         }
 
         //respawn();
-        
+        */
     }
 /*
 /// cai nay ko xai
