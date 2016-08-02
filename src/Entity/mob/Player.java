@@ -26,7 +26,10 @@ public class Player extends Mob {
     private AnimateSprite playerAni = new AnimateSprite(SpriteSheet.playermove, 32, 32, 3);
 
     protected boolean alive = true;
-
+    private double dir_player = 0;
+    private double dir;
+    private double nx, ny;
+    
     private int timer = 0;
 
     public Player(Keyboard input) {
@@ -41,28 +44,32 @@ public class Player extends Mob {
     }
 
     public void update() {
-
-        System.out.println(timer);
         playerAni.update();
         double xa = 0;
         double ya = 0;
-        
+
         if (alive) {
             if (firerate > 0) {
                 firerate--;
             }
 
             if (input.up) {
-                ya -= speed;
+            //ya -= speed;
+                ya += ny;
+                xa += nx;
             }
             if (input.down) {
-                ya += speed;
+                //ya += speed;
+                ya -= ny;
+                xa -= nx;
             }
             if (input.left) {
-                xa -= speed;
+                //xa -= speed;
+                dir_player -= 0.1;
             }
             if (input.right) {
-                xa += speed;
+                //xa += speed;
+                dir_player += 0.1;
             }
 
             if (xa != 0 || ya != 0) {
@@ -71,6 +78,15 @@ public class Player extends Mob {
             } else {
                 moving = false;
             }
+
+            updateRotating();
+            clear();
+            updateShooting();
+
+            List<Entity> entities = level.entities;
+            updateMobCollision(entities);  // mob collision, player will destroy when collision with mob
+            //System.out.println ("player heal: " + heal); // check heal of player
+
         } else {
             Game.State = Game.STATE.DEAD;
             timer++;
@@ -79,15 +95,6 @@ public class Player extends Mob {
             }
         }
 
-
-        clear();
-        updateShooting();
-
-        List<Entity> entities = level.entities;
-        updateMobCollision(entities);  // mob collision, player will destroy when collision with mob
-        //System.out.println ("player heal: " + heal); // check heal of player
-
-        
     }
 
     public void updateMobCollision(List<Entity> entities) {
@@ -155,6 +162,13 @@ public class Player extends Mob {
         }
     }
 
+    private void updateRotating() {
+        nx = speed * Math.cos(dir_player);
+        ny = speed * Math.sin(dir_player);
+        //System.out.println(dir_player);
+        System.out.println(nx + " | " + ny);
+    }
+
     public void render(Screen screen) {
 
         if (moving == true) {
@@ -162,6 +176,8 @@ public class Player extends Mob {
         } else {
             sprite = Sprite.playerStop;
         }
+
+        sprite = Sprite.rotate(sprite, dir_player);
         if (alive) {
             screen.renderMob((int) (x - 16), (int) (y - 16), sprite);
         }
