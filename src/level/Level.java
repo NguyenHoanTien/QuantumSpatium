@@ -33,7 +33,7 @@ public class Level {
       }  
     };
 
-    public static Level spawn = new SpawnLevel("/textures/testL.png");
+    public static Level spawn = new SpawnLevel("/textures/level.png");
 
     public Level(int width, int height) {
         this.width = width;

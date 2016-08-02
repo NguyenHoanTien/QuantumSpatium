@@ -1,14 +1,19 @@
 
 package game;
 
+import java.applet.Applet;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.net.URL;
 
 
-public class Menu {
+public class Menu extends Applet {
+    private Image space = null;
     private int button_extraX1 = 60, button_extraX2 = 85;
     private int button_extraY = 65;
     public static int width = (Game.screenSize.width / 2) - 150;
@@ -43,9 +48,23 @@ public class Menu {
     private Rectangle OverBack = new Rectangle(BackX,OverY,BackW,BackH);
     private Rectangle Restart = new Rectangle(StartX,OverY,StartW,StartH);
     
+    public Image getImage(String path){
+        Image tempImage = null;
+        try{
+            URL imageURL = Menu.class.getResource(path);
+            tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
+        }
+        catch (Exception e){
+        }
+        return tempImage;
+    }
     //main menu Reder method
     public void mainRender(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
+        if (space == null){
+            space = getImage("/textures/space.jpg");
+        }
+        g2d.drawImage(space,0,0,Game.screenSize.width,Game.screenSize.height,this);
         //basic setting for font
         Font font1 = new Font("arial",Font.BOLD, 50);
         g.setFont(font1);
