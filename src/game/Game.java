@@ -156,6 +156,9 @@ public class Game extends Canvas implements Runnable {
             key.update();
             level.update();
         }
+        else if (State == STATE.DEAD)
+            level.update();
+                
     }
 
     public void render() {
@@ -171,7 +174,7 @@ public class Game extends Canvas implements Runnable {
         double xScroll = player.getX() - screen.width / 2;
         double yScroll = player.getY() - screen.height / 2;
         if (State == STATE.MENU) {
-            level.render(screenSize.width / 2, screenSize.height / 2 - 45, screen);
+            //level.render(screenSize.width / 2, screenSize.height / 2 - 45, screen);
         } else {
             level.render((int) xScroll, (int) yScroll, screen);
         }
@@ -186,7 +189,7 @@ public class Game extends Canvas implements Runnable {
         g.clearRect(0, 0, getWidth(), getHeight());
         // draw hear !
 
-        if (State == STATE.GAME) {
+        if (State == STATE.GAME || State == STATE.DEAD) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
         } else if (State == STATE.MENU) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);

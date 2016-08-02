@@ -5,6 +5,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import game.Game;
 import game.Menu;
+
 public class Mouse implements MouseListener, MouseMotionListener {
 
     private static int mouseX = -1;
@@ -50,42 +51,43 @@ public class Mouse implements MouseListener, MouseMotionListener {
                     }
                 }
             }
-        }
-
-        //handle clicking PLAY MENU buttons 
+        } //handle clicking PLAY MENU buttons 
         else if (Game.State == Game.STATE.PLAY) {
             //Click on Back Button
-            if (mx >= Menu.BackX && mx <= Menu.BackX+ Menu.BackW) {
-                if (my >= Menu.BackY && my <= Menu.BackY+Menu.BackH) {
+            if (mx >= Menu.BackX && mx <= Menu.BackX + Menu.BackW) {
+                if (my >= Menu.BackY && my <= Menu.BackY + Menu.BackH) {
                     Game.State = Game.STATE.MENU;
                 }
             }
             //CLick on Start Button
-            if (mx >= Menu.StartX && mx <= Menu.StartX+ Menu.StartW) {
-                if (my >= Menu.StartY && my <= Menu.StartY+Menu.StartH) {
+            if (mx >= Menu.StartX && mx <= Menu.StartX + Menu.StartW) {
+                if (my >= Menu.StartY && my <= Menu.StartY + Menu.StartH) {
                     Game.State = Game.STATE.GAME;
                 }
             }
-           
-        }
-        //handle clicking GAME OVER MENU buttons
-        else if (Game.State == Game.STATE.OVER || Game.State == Game.STATE.PAUSE){
+
+        } //handle clicking GAME OVER MENU buttons
+        else if (Game.State == Game.STATE.OVER || Game.State == Game.STATE.PAUSE) {
             //Click on BACK button
-            if (mx >= Menu.BackX && mx <= Menu.BackX+ Menu.BackW) {
-                if (my >= Menu.OverY && my <= Menu.OverY+Menu.BackH) {
+            if (mx >= Menu.BackX && mx <= Menu.BackX + Menu.BackW) {
+                if (my >= Menu.OverY && my <= Menu.OverY + Menu.BackH) {
                     Game.State = Game.STATE.MENU;
                 }
             }
             //CLick on Restart Button
-            if (mx >= Menu.StartX && mx <= Menu.StartX+ Menu.StartW) {
-                if (my >= Menu.OverY && my <= Menu.OverY+Menu.StartH) {
-                    Game.State = Game.STATE.PLAY;
+            if (mx >= Menu.StartX && mx <= Menu.StartX + Menu.StartW) {
+                if (my >= Menu.OverY && my <= Menu.OverY + Menu.StartH) {
+                    if (Game.State == Game.STATE.OVER)
+                        Game.State = Game.STATE.PLAY;
+                    else
+                        Game.State = Game.STATE.GAME;
                 }
             }
-        } 
-        else {
+        } else if (Game.State == Game.STATE.DEAD) {
+        } else {
             mouseB = e.getButton();
         }
+
     }
 
     @Override

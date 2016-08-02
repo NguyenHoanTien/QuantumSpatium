@@ -52,7 +52,7 @@ public class Menu {
         g.setColor(Color.white);
         
         //draw the title
-        g.drawString(Game.title,width,100);
+        g.drawString(Game.title,width - 125,100);
         //draw buttons
         Font font2 = new Font("calibri",Font.BOLD,35);
         g.setFont(font2);
@@ -135,7 +135,7 @@ public class Menu {
         g.setColor(Color.darkGray);
         g.fillRect(StartX,OverY,StartW,StartH);
         g.setColor(Color.white);
-        g.drawString("RESTART",StartX + 20,OverY + 45);
+        g.drawString("RESUME",StartX + 25,OverY + 45);
     }
     
     public void overRender(Graphics g){

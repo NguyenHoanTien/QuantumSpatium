@@ -25,7 +25,7 @@ public class Player extends Mob {
     private double speed = 4;
     private AnimateSprite playerAni = new AnimateSprite(SpriteSheet.playermove, 32, 32, 3);
 
-    private boolean alive = true;
+    protected boolean alive = true;
 
     private int timer = 0;
 
@@ -46,30 +46,39 @@ public class Player extends Mob {
         playerAni.update();
         double xa = 0;
         double ya = 0;
+        
+        if (alive) {
+            if (firerate > 0) {
+                firerate--;
+            }
 
-        if (firerate > 0) {
-            firerate--;
-        }
+            if (input.up) {
+                ya -= speed;
+            }
+            if (input.down) {
+                ya += speed;
+            }
+            if (input.left) {
+                xa -= speed;
+            }
+            if (input.right) {
+                xa += speed;
+            }
 
-        if (input.up) {
-            ya -= speed;
-        }
-        if (input.down) {
-            ya += speed;
-        }
-        if (input.left) {
-            xa -= speed;
-        }
-        if (input.right) {
-            xa += speed;
-        }
-
-        if (xa != 0 || ya != 0) {
-            move(xa, ya);
-            moving = true;
+            if (xa != 0 || ya != 0) {
+                move(xa, ya);
+                moving = true;
+            } else {
+                moving = false;
+            }
         } else {
-            moving = false;
+            Game.State = Game.STATE.DEAD;
+            timer++;
+            if (timer > 70) {
+                Game.State = Game.STATE.OVER;
+            }
         }
+
 
         clear();
         updateShooting();
@@ -78,14 +87,7 @@ public class Player extends Mob {
         updateMobCollision(entities);  // mob collision, player will destroy when collision with mob
         //System.out.println ("player heal: " + heal); // check heal of player
 
-        if (alive == false) {
-            Game.State = Game.STATE.DEAD;
-            timer++;
-            if (timer > 20) {
-                Game.State = Game.STATE.OVER;
-            }
-        }
-
+        
     }
 
     public void updateMobCollision(List<Entity> entities) {
