@@ -28,7 +28,7 @@ public class Game extends Canvas implements Runnable {
     public static int width = 500;
     public static int height = 268;
     public static int scale = 3;
-    public static String title = "Infinity War";
+    public static String title = "QUANTUM SPATIUM";
 
     private JFrame frame;
     private Keyboard key;
@@ -42,6 +42,7 @@ public class Game extends Canvas implements Runnable {
         GAME,
         MENU,
         PLAY,
+        DEAD,
         OVER,
         PAUSE,
     }

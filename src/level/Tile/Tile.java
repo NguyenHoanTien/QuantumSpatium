@@ -24,7 +24,7 @@ public class Tile {
     public static final int col_plat2 = 0xff00ffff;
     public static final int col_wall = 0xffffff00;
     public static final int col_block = 0xff7f7f00;
-    
+
     public Tile (Sprite sprite) {
         this.sprite = sprite;
     }

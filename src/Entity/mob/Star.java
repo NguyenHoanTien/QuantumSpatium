@@ -67,7 +67,7 @@ public class Star extends Mob {
             moving = true;
         } else {
             moving = false;
-        }
+        }   
     }
 
     public void update() {

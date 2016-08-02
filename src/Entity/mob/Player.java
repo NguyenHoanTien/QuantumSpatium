@@ -19,11 +19,15 @@ public class Player extends Mob {
     private Keyboard input;
     private Sprite sprite;
 
-    public int heal = 11;
-    
+    public int heal = 10;
+
     public int firerate = 0;
     private double speed = 4;
     private AnimateSprite playerAni = new AnimateSprite(SpriteSheet.playermove, 32, 32, 3);
+
+    private boolean alive = true;
+
+    private int timer = 0;
 
     public Player(Keyboard input) {
         this.input = input;
@@ -37,6 +41,8 @@ public class Player extends Mob {
     }
 
     public void update() {
+
+        System.out.println(timer);
         playerAni.update();
         double xa = 0;
         double ya = 0;
@@ -64,39 +70,47 @@ public class Player extends Mob {
         } else {
             moving = false;
         }
-        
+
         clear();
         updateShooting();
 
-        
-        updateMobCollision(level.entities);  // mob collision, player will destroy when collision with mob
-        System.out.println ("player heal: " + heal); // check heal of player
+        List<Entity> entities = level.entities;
+        updateMobCollision(entities);  // mob collision, player will destroy when collision with mob
+        //System.out.println ("player heal: " + heal); // check heal of player
+
+        if (alive == false) {
+            Game.State = Game.STATE.DEAD;
+            timer++;
+            if (timer > 20) {
+                Game.State = Game.STATE.OVER;
+            }
+        }
 
     }
-    
+
     public void updateMobCollision(List<Entity> entities) {
         for (int i = 0; i < entities.size(); i++) { // check the list of entities.
-            if (entities.get(i) instanceof Dummy ||     // these kind of mob will do the action
-                    entities.get(i) instanceof Chaser ||
-                    entities.get(i) instanceof Star ) {
-                if (x < entities.get(i).getX() + 15         // range that will do the collision when hit the mob
+            if (entities.get(i) != null && entities.get(i) instanceof Dummy || // these kind of mob will do the action
+                    entities.get(i) instanceof Chaser
+                    || entities.get(i) instanceof Star) {
+                if (x < entities.get(i).getX() + 15 // range that will do the collision when hit the mob
                         && x > entities.get(i).getX() - 15
                         && y < entities.get(i).getY() + 15
                         && y > entities.get(i).getY() - 15) {
-                    
+
                     heal = 0;               // when player hit the mob, heal = 0, mean die directly
-                    
+
                     level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));    // display partical effect
-                    
+
                     if (heal == 0) {        // condition.
                         entities.get(i).remove();       // remove the mob that hit player
-                        Game.State = Game.STATE.OVER;
-                        System.out.println(" Died");  // checking...
-                        remove();                       // remove player.
+                        //System.out.println(" Died");  // checking...
+                        //remove();                       // remove player.
+                        alive = false;
                     }
                     /* the reason why we have to remove mob and player: if we don't remove mob
-                    system won't understand the syntax and display error null exception
-                    => have to delete both */
+                     system won't understand the syntax and display error null exception
+                     => have to delete both */
                 }
             }
         }
@@ -146,7 +160,8 @@ public class Player extends Mob {
         } else {
             sprite = Sprite.playerStop;
         }
-
-        screen.renderMob((int) (x - 16), (int) (y - 16), sprite);
+        if (alive) {
+            screen.renderMob((int) (x - 16), (int) (y - 16), sprite);
+        }
     }
 }
