@@ -29,6 +29,8 @@ public class Game extends Canvas implements Runnable {
     public static int height = 268;
     public static int scale = 3;
     public static String title = "QUANTUM SPATIUM";
+    //for display
+    private int Playcounter = 0;
 
     private JFrame frame;
     private Keyboard key;
@@ -123,18 +125,23 @@ public class Game extends Canvas implements Runnable {
                 delta--;
             }
             if (State == STATE.MENU) {
-                spawn = new SpawnLevel("/textures/level.png");
+                spawn = new SpawnLevel("/textures/testL.png");
                 level = spawn;
                 TileCoordinate playerSpawn = new TileCoordinate(1210, 629);   // player spawn location
                 player = new Player(playerSpawn.x(), playerSpawn.y(), key);
             } else if (State == STATE.PLAY) {
                 player.remove();
                 level.remove();
-                spawn = new SpawnLevel("/textures/level.png");
-                level = spawn;
+                spawn = new SpawnLevel("/textures/testL.png");
+                if (Playcounter == 0) {
+                    level = spawn;
+                }
+                Playcounter++;
                 TileCoordinate playerSpawn = new TileCoordinate(1210, 629);   // player spawn location
                 player = new Player(playerSpawn.x(), playerSpawn.y(), key);
                 level.add(player);
+            } else if (State == STATE.OVER) {
+                Playcounter = 0;
             }
 
             render();
@@ -142,7 +149,7 @@ public class Game extends Canvas implements Runnable {
 
             if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
-                System.out.println(updates + " ups, " + frames + " fps");
+                //System.out.println(updates + " ups, " + frames + " fps");
                 frame.setTitle(title + "  |  " + updates + " ups, " + frames + " fps");
                 updates = 0;
                 frames = 0;
@@ -155,10 +162,10 @@ public class Game extends Canvas implements Runnable {
         if (State == STATE.GAME) {
             key.update();
             level.update();
-        }
-        else if (State == STATE.DEAD)
+        } else if (State == STATE.DEAD) {
             level.update();
-                
+        }
+
     }
 
     public void render() {
