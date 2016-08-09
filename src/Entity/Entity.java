@@ -1,20 +1,24 @@
 
 package Entity;
 
+import Entity.spawner.ParticleSpawner;
 import Graphics.Screen;
 import Graphics.Sprite;
+import game.Game;
 import java.util.Random;
 import level.Level;
+import level.SpawnLevel;
 
 
 public class Entity {
-
+    
     protected int x, y;
     private boolean removed = false;
     protected Level level;
     protected final Random random = new Random();
     protected Sprite sprite;
-
+    protected int health; 
+    
     public Entity () {
         
     }
@@ -40,7 +44,7 @@ public class Entity {
     public int getY() {
         return y;
     }
-    
+
     public void remove () { // remove from level
         removed = true;
     }
@@ -57,4 +61,23 @@ public class Entity {
         this.level = level;
         
     }
+
+    public int getHealth() {
+        return health;
+    }
+    
+    int count = 0;
+    public void damageHealth(int damage){
+        health -= damage;
+        if(health <= 0){
+            this.remove();
+            count++;
+            System.out.println("Count: " + count);
+            level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));   
+            if(level.get_level_num() > 0){
+                level.spawnMob();
+            }
+        }
+    }
+
 }

@@ -21,13 +21,13 @@ public class Player extends Mob {
 
     public int heal = 10;
 
-    public int firerate = 0;
+    public static int firerate = 0;
     private double speed = 4;
     private AnimateSprite playerAni = new AnimateSprite(SpriteSheet.playermove, 32, 32, 3);
 
-    protected boolean alive = true;
+    public boolean alive = true;
+    
     private double dir_player = 0;
-    private double dir;
     private double nx, ny;
     
     private int timer = 0;
@@ -60,8 +60,8 @@ public class Player extends Mob {
             }
             if (input.down) {
                 //ya += speed;
-                ya -= ny;
-                xa -= nx;
+                ya -= ny/2;
+                xa -= nx/2;
             }
             if (input.left) {
                 //xa -= speed;
@@ -143,8 +143,8 @@ public class Player extends Mob {
             ///////////////Shooting Accuray/////////////////
             Random random = new Random();
 
-            double max = 0.2;
-            double min = 0;
+            double max = 0.1;
+            double min = -0.1;
             double range = max - min;
 
             double dir1 = random.nextDouble() * range;
@@ -156,7 +156,7 @@ public class Player extends Mob {
             double Accu = shifted + dir;
             ///////////////////////////
 
-            shoot(x, y, Accu);
+            shoot(x, y, dir);
 
             firerate = WizardProjectile.FireRate;
         }
@@ -166,7 +166,7 @@ public class Player extends Mob {
         nx = speed * Math.cos(dir_player);
         ny = speed * Math.sin(dir_player);
         //System.out.println(dir_player);
-        System.out.println(nx + " | " + ny);
+        //System.out.println(nx + " | " + ny);
     }
 
     public void render(Screen screen) {

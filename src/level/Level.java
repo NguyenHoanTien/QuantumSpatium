@@ -1,16 +1,20 @@
 package level;
 
 import Entity.Entity;
+import Entity.mob.Chaser;
+import Entity.mob.Dummy;
 import Entity.mob.Player;
-import Entity.spawner.Spawner;
+import Entity.mob.Star;
 import Entity.partical.Particle;
 import Entity.projectile.Projectile;
 import Graphics.Screen;
 import Util.Vector2i;
+import game.Game;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 import level.Tile.Tile;
 
 public class Level {
@@ -24,17 +28,20 @@ public class Level {
     private List<Projectile> projectiles = new ArrayList<Projectile>();
     private List<Particle> particles = new ArrayList<Particle>();
     public List<Player> players = new ArrayList<Player>();
-    
-    private Comparator<Node> nodeSorter = new Comparator<Node>(){
-      public int compare (Node n0, Node n1) {
-          if (n1.fCost < n0.fCost) return +1;
-          if (n1.fCost > n0.fCost) return -1;
-          return 0;
-      }  
+
+    private Comparator<Node> nodeSorter = new Comparator<Node>() {
+        public int compare(Node n0, Node n1) {
+            if (n1.fCost < n0.fCost) {
+                return +1;
+            }
+            if (n1.fCost > n0.fCost) {
+                return -1;
+            }
+            return 0;
+        }
     };
 
-    public static Level spawn = new SpawnLevel("/textures/level.png");
-
+//    public static Level spawn = new SpawnLevel("/textures/testL.png");
     public Level(int width, int height) {
         this.width = width;
         this.height = height;
@@ -45,7 +52,6 @@ public class Level {
     public Level(String path) {
         LoadLevel(path);
         generateLevel();
-
     }
 
     protected void generateLevel() {
@@ -74,13 +80,46 @@ public class Level {
         for (int i = 0; i < players.size(); i++) {
             players.get(i).update();
         }
-        remove();
+        System.out.println("Mobs :" + entities.size());
+        this.remove();
+    }
+    public int level_num = 60;
+
+    public int get_level_num() {
+        return level_num;
+    }
+    public void decerement_level_num() {
+        level_num--;
+    }
+
+    public void spawnMob() {
+        Random rand = new Random();
+        int x = rand.nextInt(127) + 1;
+        int y = rand.nextInt(127) + 1;
+        int type = rand.nextInt(101);
+        if (type <= 60) {
+            add(new Chaser(x, y));
+        } else if (type > 60 && type < 90) {
+            add(new Dummy(x, y));
+        } else {
+            add(new Star(x, y));
+        }
+        decerement_level_num();
+
+    }
+    
+    public int level_present = 10;
+    public void spawnStart(){
+        for (int i = 0; i < level_present; i++) {
+            spawnMob();
+        }
     }
 
     public void remove() {
         for (int i = 0; i < entities.size(); i++) {
             if (entities.get(i).isRemoved()) {
                 entities.remove(i);
+                System.out.println("REMOVE");
             }
         }
         for (int i = 0; i < projectiles.size(); i++) {
@@ -119,7 +158,7 @@ public class Level {
         }
         return solid;
     }
-    
+
     public void render(int xScroll, int yScroll, Screen screen) {
         screen.setOffset(xScroll, yScroll);
         int x0 = xScroll >> 4;    // mean /16
@@ -174,7 +213,7 @@ public class Level {
         return players.get(0);
     }
 
-    public List<Node> findpath(Vector2i start, Vector2i goal){
+    public List<Node> findpath(Vector2i start, Vector2i goal) {
         List<Node> openList = new ArrayList<Node>();
         List<Node> closeList = new ArrayList<Node>();
         Node current = new Node(start, null, 0, getDistance(start, goal));
@@ -182,7 +221,7 @@ public class Level {
         while (openList.size() > 0) {
             Collections.sort(openList, nodeSorter);
             current = openList.get(0);
-            
+
             if (current.tile.equals(goal)) {
                 List<Node> path = new ArrayList<Node>();
                 while (current.parent != null) {
@@ -195,46 +234,58 @@ public class Level {
             }
             openList.remove(current);
             closeList.add(current);
-            for (int i = 0; i < 9; i ++) {
-                if (i == 4 ) continue;
+            for (int i = 0; i < 9; i++) {
+                if (i == 4) {
+                    continue;
+                }
                 int x = current.tile.getX();
                 int y = current.tile.getY();
                 int xi = (i % 3) - 1;
                 int yi = (i / 3) - 1;
-                Tile at = getTile (x + xi, y + yi);
-                if (at == null ) continue;
-                if (at.solid()) continue;
-                Vector2i a = new Vector2i (x + xi, y + yi);
-                double gCost = current.gCost + (getDistance(current.tile, a) == 1 ? 1 : 0.95) ;
-                double hCost = getDistance(a,goal);
-                Node node = new Node (a, current, gCost, hCost);
-                if (vecInList(closeList, a) && gCost >= node.gCost) continue; 
-                if (!vecInList(openList, a) || gCost < node.gCost) openList.add(node);
+                Tile at = getTile(x + xi, y + yi);
+                if (at == null) {
+                    continue;
+                }
+                if (at.solid()) {
+                    continue;
+                }
+                Vector2i a = new Vector2i(x + xi, y + yi);
+                double gCost = current.gCost + (getDistance(current.tile, a) == 1 ? 1 : 0.95);
+                double hCost = getDistance(a, goal);
+                Node node = new Node(a, current, gCost, hCost);
+                if (vecInList(closeList, a) && gCost >= node.gCost) {
+                    continue;
+                }
+                if (!vecInList(openList, a) || gCost < node.gCost) {
+                    openList.add(node);
+                }
                 ////////////////////
             }
-        } 
+        }
         closeList.clear();
         return null;
     }
-    
-    private boolean vecInList (List<Node> list, Vector2i vector) {
-        for (Node n : list){    // for every single node
-            if (n.tile.equals(vector)) return true;
+
+    private boolean vecInList(List<Node> list, Vector2i vector) {
+        for (Node n : list) {    // for every single node
+            if (n.tile.equals(vector)) {
+                return true;
+            }
         }
         return false;
     }
-    
+
     private double getDistance(Vector2i tile, Vector2i goal) {
         double dx = tile.getX() - goal.getX();
         double dy = tile.getY() - goal.getY();
         double distance = Math.sqrt(dx * dx + dy * dy);
-        return distance; 
+        return distance;
     }
-    
+
     public List<Entity> getEntities(Entity e, int radius) {
         List<Entity> result = new ArrayList<Entity>();
         int ex = (int) e.getX();
-        int ey = (int )e.getY();
+        int ey = (int) e.getY();
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);
             int x = (int) entity.getX();
@@ -251,8 +302,8 @@ public class Level {
 
     public List<Player> getPlayers(Entity e, int radius) {
         List<Player> result = new ArrayList<Player>();
-        int ex = (int)e.getX();
-        int ey = (int)e.getY();
+        int ex = (int) e.getX();
+        int ey = (int) e.getY();
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
             int x = (int) player.getX();
@@ -262,7 +313,7 @@ public class Level {
             double distance = Math.sqrt((dx * dx) + (dy * dy));
             if (distance <= radius) {
                 result.add(player);
-            }  
+            }
         }
         return result;
     }

@@ -1,25 +1,18 @@
 package Entity.mob;
 
 import Entity.Entity;
-import Entity.partical.Particle;
+import Entity.projectile.MobWizardProjectile;
 import Entity.projectile.Projectile;
 import Entity.projectile.WizardProjectile;
+import Entity.spawner.ParticleSpawner;
 import Graphics.Screen;
-import Graphics.Sprite;
-import java.util.ArrayList;
-import java.util.List;
+import game.Game;
+
 
 public abstract class Mob extends Entity {
 
     protected boolean moving = false;
-
-    protected enum Direction {
-
-        UP, DOWN, LEFT, RIGHT
-    }
-
-    protected Direction dir;
-
+         
     public void move(double xa, double ya) {
 
         if (xa != 0 && ya != 0) {
@@ -56,7 +49,8 @@ public abstract class Mob extends Entity {
             }
         }
     }
-
+    
+    
     private int abs(double value) {
         if (value < 0) {
             return -1;
@@ -69,10 +63,13 @@ public abstract class Mob extends Entity {
     public abstract void render(Screen screen);
 
     protected void shoot(double x, double y, double dir) {
-        //dir *= 180 / Math.PI;
         Projectile p = new WizardProjectile(x, y, dir);
         level.add(p);
-
+    }
+    
+    protected void Mobshoot(double x, double y, double dir) {
+        Projectile p = new MobWizardProjectile(x, y, dir);
+        level.add(p);
     }
 
     private boolean collision(double xa, double ya) {

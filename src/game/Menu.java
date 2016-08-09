@@ -62,7 +62,7 @@ public class Menu extends Applet {
     public void mainRender(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
         if (space == null){
-            space = getImage("/textures/space.jpg");
+            space = getImage("/textures/space1.jpg");
         }
         g2d.drawImage(space,0,0,Game.screenSize.width,Game.screenSize.height,this);
         //basic setting for font

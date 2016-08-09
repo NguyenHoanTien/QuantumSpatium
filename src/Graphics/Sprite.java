@@ -17,8 +17,9 @@ public class Sprite {
     public static Sprite plat1 = new Sprite (16, 0, 1, SpriteSheet.tiles);
     public static Sprite plat2 = new Sprite (16, 0, 2, SpriteSheet.tiles);
     
-    public static Sprite dummy = new Sprite (32,0 ,0, SpriteSheet.Enemy);
-    public static Sprite chaser = new Sprite (32,1 ,0, SpriteSheet.Enemy);
+    public static Sprite dummy = new Sprite (32,0 ,0, SpriteSheet.EnemyT);
+    public static Sprite chaser = new Sprite (32,1,0, SpriteSheet.EnemyT);
+    
     public static Sprite star = new Sprite (32,2 ,0, SpriteSheet.Enemy);
     
     public static Sprite wall = new Sprite (16, 2, 0, SpriteSheet.tiles);

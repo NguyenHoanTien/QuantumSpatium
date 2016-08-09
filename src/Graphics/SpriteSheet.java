@@ -19,9 +19,15 @@ public class SpriteSheet {
     public static SpriteSheet playermove = new SpriteSheet(playerIcon, 1, 0, 1, 3, 32);
 
     public static SpriteSheet Enemy = new SpriteSheet("/textures/Enemy.png", 128);
-    public static SpriteSheet dummymove = new SpriteSheet(Enemy, 0, 1, 1, 3, 32);
-    public static SpriteSheet chasermove = new SpriteSheet(Enemy, 1, 1, 1, 3, 32);
-    public static SpriteSheet starmove = new SpriteSheet(Enemy, 2, 1, 1, 3, 32);
+    public static SpriteSheet EnemyT = new SpriteSheet("/textures/EnemyT.png", 128);
+    
+    public static SpriteSheet dummymove = new SpriteSheet(EnemyT, 0, 1, 1, 3, 32);
+    public static SpriteSheet chasermove = new SpriteSheet(EnemyT, 1, 1, 1, 3, 32);
+    
+    public static SpriteSheet starmoveU = new SpriteSheet(Enemy, 0, 1, 1, 3, 32);
+    public static SpriteSheet starmoveD = new SpriteSheet(Enemy, 2, 1, 1, 3, 32);
+    public static SpriteSheet starmoveL = new SpriteSheet(Enemy, 1, 1, 1, 3, 32);
+    public static SpriteSheet starmoveR = new SpriteSheet(Enemy, 3, 1, 1, 3, 32);
     
     private Sprite[] sprites;
 
