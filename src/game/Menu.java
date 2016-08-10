@@ -20,11 +20,9 @@ public class Menu extends Applet {
     public static int height = (Game.screenSize.height / 2);
     
       //Main menu buttons
-    public Rectangle Button1 = new Rectangle(width ,150,250,100);
-    public Rectangle Button2 = new Rectangle(width ,300,250,100);
-    public Rectangle Button3 = new Rectangle(width ,450,250,100);
-    public Rectangle Button4 = new Rectangle(width ,600,250,100);
-    
+    public static Rectangle Button1 = new Rectangle(Game.screenSize.width - 210 ,Game.screenSize.height/2 - 90,120,50);
+    public static Rectangle Button2 = new Rectangle(Game.screenSize.width - 235 ,Game.screenSize.height/2 + 30,160,50);
+    public static Rectangle Button3 = new Rectangle(Game.screenSize.width - 210 ,Game.screenSize.height/2 + 150,120,50);
    
     //play menu
     public Rectangle MenuBox = new Rectangle(width-65,50,400, 500);
@@ -66,54 +64,59 @@ public class Menu extends Applet {
         }
         g2d.drawImage(space,0,0,Game.screenSize.width,Game.screenSize.height,this);
         //basic setting for font
-        Font font1 = new Font("arial",Font.BOLD, 50);
+        Font font1 = new Font(".VnBahamasBH",Font.BOLD, 100);
         g.setFont(font1);
         g.setColor(Color.white);
         
         //draw the title
-        g.drawString(Game.title,width - 125,100);
+        g.drawString(Game.title,width - 75,Game.screenSize.height/2 - 200);
         //draw buttons
-        Font font2 = new Font("calibri",Font.BOLD,35);
+        Font font2 = new Font(".VnRevueH",Font.BOLD,35);
         g.setFont(font2);
         g.setColor(Color.yellow);
-        g.drawString("PLAY",Button1.x + button_extraX2 , Button1.y + button_extraY);
-        g.drawString("SETTING",Button2.x + button_extraX1, Button2.y + button_extraY);
-        g.drawString("QUIT",Button3.x + button_extraX2, Button3.y + button_extraY);
+        g.drawString("PLAY",Game.screenSize.width - 200, Game.screenSize.height/2 - 50);
+        g.drawString("ABOUT",Game.screenSize.width - 225, Game.screenSize.height/2 + 70 );
+        g.drawString("QUIT",Game.screenSize.width - 200, Game.screenSize.height/2 + 190);
         g.setColor(Color.blue);
-        g2d.draw(Button1);
-        g2d.draw(Button2);
-        g2d.draw(Button3);
+//        g2d.draw(Button1);
+//        g2d.draw(Button2);
+//        g2d.draw(Button3);
     }
     
     //render difficulty menu after click PLAY
-    public void playRender(Graphics g){
+    public void playRender(Graphics g, int counter ){
         Graphics2D g2d = (Graphics2D) g;
+        counter = 5 - counter;
+        String counterStr = Integer.toString(counter);
         //basic setting for font
-        
-        g2d.draw(MenuBox);
-        g.setColor(Color.gray);
-        g.fillRect(width-65,50,400, 500);
-        Font font1 = new Font("arial",Font.BOLD, 50);
-        Font font2 = new Font("calibri",Font.BOLD,25);
+        Font font1 = new Font("calibri",Font.BOLD, 150);
         g.setFont(font1);
-        g.setColor(Color.red);
-        g.drawString("HOW TO PLAY",width - 45,100);
-        g.setFont(font2);
-        
-        ////////
-        g.setColor(Color.blue);
-        g2d.draw(Back);
-        g.setColor(Color.darkGray);
-        g.fillRect(BackX,BackY,BackW,BackH);
-        g.setColor(Color.red);
-        g.drawString("BACK",BackX + 35,BackY + 45);
-        
-        g.setColor(Color.blue);
-        g2d.draw(Start);
-        g.setColor(Color.red);
-        g.fillRect(StartX,StartY,StartW,StartH);
-        g.setColor(Color.black);
-        g.drawString("START",StartX + 30,StartY + 45);
+        g.setColor(Color.white);
+        g.drawString(counterStr,Game.screenSize.width/2 - 45,Game.screenSize.height/2);
+//        g2d.draw(MenuBox);
+//        g.setColor(Color.gray);
+//        g.fillRect(width-65,50,400, 500);
+//        Font font1 = new Font("arial",Font.BOLD, 50);
+//        Font font2 = new Font("calibri",Font.BOLD,25);
+//        g.setFont(font1);
+//        g.setColor(Color.red);
+//        g.drawString("HOW TO PLAY",width - 45,100);
+//        g.setFont(font2);
+//        
+//        ////////
+//        g.setColor(Color.blue);
+//        g2d.draw(Back);
+//        g.setColor(Color.darkGray);
+//        g.fillRect(BackX,BackY,BackW,BackH);
+//        g.setColor(Color.red);
+//        g.drawString("BACK",BackX + 35,BackY + 45);
+//        
+//        g.setColor(Color.blue);
+//        g2d.draw(Start);
+//        g.setColor(Color.red);
+//        g.fillRect(StartX,StartY,StartW,StartH);
+//        g.setColor(Color.black);
+//        g.drawString("START",StartX + 30,StartY + 45);
         
         //draw buttons
 //        Font font2 = new Font("calibri",Font.BOLD,35);
@@ -138,7 +141,7 @@ public class Menu extends Applet {
         Font font2 = new Font("calibri",Font.BOLD,25);
         g.setFont(font1);
         g.setColor(Color.red);
-        g.drawString("PAUSED",width + 35,height - 75);
+        g.drawString("PAUSED",width + 35,height - 35);
         g.setFont(font2);
         
         ////////
@@ -161,13 +164,13 @@ public class Menu extends Applet {
         Graphics2D g2d = (Graphics2D) g;
         g.setColor(Color.blue);
         g2d.draw(Box);
-        g.setColor(Color.red);
+        g.setColor(Color.lightGray);
         g.fillRect(width-65,height - 125,400,250);
         Font font1 = new Font("arial",Font.BOLD, 50);
         Font font2 = new Font("calibri",Font.BOLD,25);
         g.setFont(font1);
-        g.setColor(Color.black);
-        g.drawString("GAME OVER",width - 25,height - 75);
+        g.setColor(Color.red);
+        g.drawString("GAME OVER",width - 20,height - 35);
         g.setFont(font2);
         
         ////////
@@ -177,12 +180,12 @@ public class Menu extends Applet {
         
         g.setColor(Color.darkGray);
         g.fillRect(BackX,OverY,BackW,BackH);
-        g.setColor(Color.red);
+        g.setColor(Color.white);
         g.drawString("QUIT",BackX + 35,OverY + 45);
         
         g.setColor(Color.darkGray);
         g.fillRect(StartX,OverY,StartW,StartH);
-        g.setColor(Color.red);
-        g.drawString("RESTART",StartX + 20,OverY + 45);
+        g.setColor(Color.white);
+        g.drawString("RESTART",StartX + 18,OverY + 45);
     }
 }

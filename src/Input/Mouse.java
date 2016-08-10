@@ -39,14 +39,14 @@ public class Mouse implements MouseListener, MouseMotionListener {
             //handle menu clicking
             if (Game.State == Game.STATE.MENU) {
                 //Click on Play Button
-                if (mx >= Menu.width && mx <= Menu.width + 250) {
-                    if (my >= 150 && my <= 250) {
+                if (mx >= Menu.Button1.x && mx <= Menu.Button1.x + 120) {
+                    if (my >= Menu.Button1.y && my <= Menu.Button1.y + 50) {
                         Game.State = Game.STATE.PLAY;
                     }
                 }
                 //Click on Quit Button
-                if (mx >= Menu.width && mx <= Menu.width + 250) {
-                    if (my >= 450 && my <= 550) {
+                if (mx >= Menu.Button3.x && mx <= Menu.Button3.x + 120) {
+                    if (my >= Menu.Button3.y && my <= Menu.Button3.y + 50) {
                         System.exit(0);
                     }
                 }

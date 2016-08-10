@@ -203,7 +203,10 @@ public class Game extends Canvas implements Runnable {
             menu.mainRender(g);
         } else if (State == State.PLAY) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-            menu.playRender(g);
+            if (Playcounter / 100 < 5)
+                menu.playRender(g,Playcounter/100);
+            else if (Playcounter / 100 > 5) 
+                State = State.GAME;
         } else if (State == State.PAUSE) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             menu.pauseRender(g);
