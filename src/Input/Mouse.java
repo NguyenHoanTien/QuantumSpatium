@@ -52,21 +52,21 @@ public class Mouse implements MouseListener, MouseMotionListener {
                 }
             }
         } //handle clicking PLAY MENU buttons 
-        else if (Game.State == Game.STATE.PLAY) {
-            //Click on Back Button
-            if (mx >= Menu.BackX && mx <= Menu.BackX + Menu.BackW) {
-                if (my >= Menu.BackY && my <= Menu.BackY + Menu.BackH) {
-                    Game.State = Game.STATE.MENU;
-                }
-            }
-            //CLick on Start Button
-            if (mx >= Menu.StartX && mx <= Menu.StartX + Menu.StartW) {
-                if (my >= Menu.StartY && my <= Menu.StartY + Menu.StartH) {
-                    Game.State = Game.STATE.GAME;
-                }
-            }
-
-        } //handle clicking GAME OVER MENU buttons
+//        else if (Game.State == Game.STATE.PLAY) {
+//            //Click on Back Button
+//            if (mx >= Menu.BackX && mx <= Menu.BackX + Menu.BackW) {
+//                if (my >= Menu.BackY && my <= Menu.BackY + Menu.BackH) {
+//                    Game.State = Game.STATE.MENU;
+//                }
+//            }
+//            //CLick on Start Button
+//            if (mx >= Menu.StartX && mx <= Menu.StartX + Menu.StartW) {
+//                if (my >= Menu.StartY && my <= Menu.StartY + Menu.StartH) {
+//                    Game.State = Game.STATE.GAME;
+//                }
+//            }
+//
+//        } //handle clicking GAME OVER MENU buttons
         else if (Game.State == Game.STATE.OVER || Game.State == Game.STATE.PAUSE) {
             //Click on BACK button
             if (mx >= Menu.BackX && mx <= Menu.BackX + Menu.BackW) {
