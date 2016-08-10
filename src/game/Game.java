@@ -125,14 +125,14 @@ public class Game extends Canvas implements Runnable {
                 delta--;
             }
             if (State == STATE.MENU) {
-                spawn = new SpawnLevel("/textures/level.png");
+                spawn = new SpawnLevel("/textures/testL.png");
                 level = spawn;
                 TileCoordinate playerSpawn = new TileCoordinate(1210, 629);   // player spawn location
                 player = new Player(playerSpawn.x(), playerSpawn.y(), key);
             } else if (State == STATE.PLAY) {
                 player.remove();
                 level.remove();
-                spawn = new SpawnLevel("/textures/level.png");
+                spawn = new SpawnLevel("/textures/testL.png");
                 if (Playcounter == 0) {
                     level = spawn;
                 }
