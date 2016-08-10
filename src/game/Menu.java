@@ -86,13 +86,13 @@ public class Menu extends Applet {
     //render difficulty menu after click PLAY
     public void playRender(Graphics g, int counter ){
         Graphics2D g2d = (Graphics2D) g;
-        counter = 5 - counter;
+        counter = 3 - counter;
         String counterStr = Integer.toString(counter);
         //basic setting for font
-        Font font1 = new Font("calibri",Font.BOLD, 150);
+        Font font1 = new Font("calibri",Font.BOLD, 300);
         g.setFont(font1);
         g.setColor(Color.white);
-        g.drawString(counterStr,Game.screenSize.width/2 - 45,Game.screenSize.height/2);
+        g.drawString(counterStr,Game.screenSize.width/2 - 75,Game.screenSize.height/2 + 85);
 //        g2d.draw(MenuBox);
 //        g.setColor(Color.gray);
 //        g.fillRect(width-65,50,400, 500);
