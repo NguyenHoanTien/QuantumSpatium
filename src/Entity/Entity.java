@@ -4,10 +4,8 @@ package Entity;
 import Entity.spawner.ParticleSpawner;
 import Graphics.Screen;
 import Graphics.Sprite;
-import game.Game;
 import java.util.Random;
 import level.Level;
-import level.SpawnLevel;
 
 
 public class Entity {

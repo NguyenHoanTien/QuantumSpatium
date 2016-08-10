@@ -90,7 +90,7 @@ public class Player extends Mob {
         } else {
             Game.State = Game.STATE.DEAD;
             timer++;
-            if (timer > 70) {
+            if (timer > 50) {
                 Game.State = Game.STATE.OVER;
             }
         }
