@@ -46,7 +46,7 @@ public class Menu extends Applet {
     private Rectangle OverBack = new Rectangle(BackX,OverY,BackW,BackH);
     private Rectangle Restart = new Rectangle(StartX,OverY,StartW,StartH);
     
-    public Image getImage(String path){
+    private Image getImage(String path){
         Image tempImage = null;
         try{
             URL imageURL = Menu.class.getResource(path);
@@ -69,7 +69,7 @@ public class Menu extends Applet {
         g.setColor(Color.white);
         
         //draw the title
-        g.drawString(Game.title,width - 75,Game.screenSize.height/2 - 200);
+        g.drawString(Game.title,Game.screenSize.width/2 - 250,Game.screenSize.height/2 - 200);
         //draw buttons
         Font font2 = new Font(".VnRevueH",Font.BOLD,35);
         g.setFont(font2);
