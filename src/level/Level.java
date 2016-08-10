@@ -9,7 +9,6 @@ import Entity.partical.Particle;
 import Entity.projectile.Projectile;
 import Graphics.Screen;
 import Util.Vector2i;
-import game.Game;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -80,15 +79,15 @@ public class Level {
         for (int i = 0; i < players.size(); i++) {
             players.get(i).update();
         }
-        System.out.println("Mobs :" + entities.size());
+        //System.out.println("Mobs :" + entities.size());
         this.remove();
     }
-    public int level_num = 60;
+    public int level_num = 30;
 
     public int get_level_num() {
         return level_num;
     }
-    public void decerement_level_num() {
+    public void decrement_level_num() {
         level_num--;
     }
 
@@ -104,14 +103,16 @@ public class Level {
         } else {
             add(new Star(x, y));
         }
-        decerement_level_num();
+        decrement_level_num();
 
     }
     
     public int level_present = 10;
+    
     public void spawnStart(){
         for (int i = 0; i < level_present; i++) {
             spawnMob();
+            System.out.println(level_num);
         }
     }
 
@@ -119,7 +120,6 @@ public class Level {
         for (int i = 0; i < entities.size(); i++) {
             if (entities.get(i).isRemoved()) {
                 entities.remove(i);
-                System.out.println("REMOVE");
             }
         }
         for (int i = 0; i < projectiles.size(); i++) {

@@ -17,10 +17,10 @@ public class WizardProjectile extends Projectile {
         super(x, y, dir);
         range = random.nextInt(100) + 350;
         damage = 1;
-        speed = 8;
+        bulletspeed = 8;
         sprite = Sprite.shoot;
-        nx = speed * Math.cos(angle);
-        ny = speed * Math.sin(angle);
+        nx = bulletspeed * Math.cos(angle);
+        ny = bulletspeed * Math.sin(angle);
     }
 
     public void update() {
@@ -51,7 +51,7 @@ public class WizardProjectile extends Projectile {
                     
                     entities.get(i).damageHealth(damage);
                   
-                    System.out.println(entities.get(i) + " Died");
+                    //System.out.println(entities.get(i) + " Died");
                     //level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));
 
                     remove();

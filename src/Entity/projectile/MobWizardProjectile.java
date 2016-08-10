@@ -13,12 +13,12 @@ import java.util.List;
 
 public class MobWizardProjectile extends Projectile {
     public static int FireRate = 35;      // Higher is slower! Minimum is 1
-
-    public MobWizardProjectile(double x, double y, double dir) {
+    public static int FireRateD = 30;
+    
+    public MobWizardProjectile(double x, double y, double dir, int speed) {
         super(x, y, dir);
         range = random.nextInt(100) + 150;
         //damage = 20;
-        speed = 3;
         sprite = Sprite.shoot;
         nx = speed * Math.cos(angle);
         ny = speed * Math.sin(angle);

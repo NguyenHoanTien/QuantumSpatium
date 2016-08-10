@@ -140,24 +140,8 @@ public class Player extends Mob {
             double dy = Mouse.getY() - Game.getWindowHeight() / 2;
             double dir = Math.atan2(dy, dx);
 
-            ///////////////Shooting Accuray/////////////////
-            Random random = new Random();
-
-            double max = 0.1;
-            double min = -0.1;
-            double range = max - min;
-
-            double dir1 = random.nextDouble() * range;
-            double shifted = dir1 + min;
-
-            if (dir < 0) {
-                shifted = -shifted;
-            }
-            double Accu = shifted + dir;
-            ///////////////////////////
-
             shoot(x, y, dir);
-
+            
             firerate = WizardProjectile.FireRate;
         }
     }

@@ -70,7 +70,7 @@ public class Entity {
     public void damageHealth(int damage){
         health -= damage;
         if(health <= 0){
-            this.remove();
+            removed = true;
             count++;
             System.out.println("Count: " + count);
             level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));   

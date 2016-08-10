@@ -3,7 +3,6 @@ package Entity.projectile;
 
 import Entity.Entity;
 import Graphics.Sprite;
-import game.Game;
 import java.util.Random;
 
 public abstract class Projectile extends Entity{
@@ -12,7 +11,8 @@ public abstract class Projectile extends Entity{
     protected double angle;
     protected Sprite sprite;
     protected double nx, ny;
-    protected double speed, range;
+    protected double range;
+    protected int bulletspeed;
     protected int damage;
     protected double x, y;
     protected double distance;

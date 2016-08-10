@@ -16,7 +16,7 @@ public class Chaser extends Mob {
     private double xa = 0, ya = 0;
     private double xp = 0, yp = 0;
     private int time = 0;
-    private double speed = 1.5;
+    private double speed = 2.5;
     private double dir;
 
     public int Firerate = 0;  
@@ -42,7 +42,7 @@ public class Chaser extends Mob {
     private void move() {
         xa = 0;
         ya = 0;
-        List<Player> players = level.getPlayers(this, 300); // range to follow player
+        List<Player> players = level.getPlayers(this, 400); // range to follow player
 
         if (players.size() > 0) {
             Player player = players.get(0);
@@ -126,8 +126,8 @@ public class Chaser extends Mob {
                 double Accu = shifted + dir;
             ///////////////////////////
 
-                Mobshoot(x, y, Accu);
-                Mobshoot(x, y, dir);
+                Mobshoot(x, y, Accu, 3);
+                Mobshoot(x, y, dir, 3);
                 Firerate = MobWizardProjectile.FireRate;
                 /////////////////////////
             }

@@ -67,8 +67,8 @@ public abstract class Mob extends Entity {
         level.add(p);
     }
     
-    protected void Mobshoot(double x, double y, double dir) {
-        Projectile p = new MobWizardProjectile(x, y, dir);
+    protected void Mobshoot(double x, double y, double dir, int butspeed) {
+        Projectile p = new MobWizardProjectile(x, y, dir, butspeed);
         level.add(p);
     }
 

@@ -1,11 +1,13 @@
 package Entity.mob;
 
+import Entity.projectile.MobWizardProjectile;
 import Graphics.AnimateSprite;
 import Graphics.Screen;
 import Graphics.Sprite;
 import Graphics.SpriteSheet;
 import Util.Vector2i;
 import java.util.List;
+import java.util.Random;
 import level.Node;
 
 public class Dummy extends Mob {
@@ -19,7 +21,10 @@ public class Dummy extends Mob {
     private int time = 0;
     private Player player;
     private double speed = 2;
-    
+
+    private double dir;
+    public int Firerate = 0;
+
     public Dummy(int x, int y) {
         this.x = x << 4;
         this.y = y << 4;
@@ -34,15 +39,15 @@ public class Dummy extends Mob {
     public int getY() {
         return y;
     }
-    
+
     private void move() {
-        
+
         xa = 0;
         ya = 0;
-        
+
         int px = level.getPlayerAt(0).getX() + 10;
         int py = level.getPlayerAt(0).getY() + 10;
-        
+
         Vector2i start = new Vector2i(getX() >> 4, getY() >> 4);
         Vector2i destination = new Vector2i(px >> 4, py >> 4);
 
@@ -67,12 +72,12 @@ public class Dummy extends Mob {
                 }
             }
         }
-            if (xa != 0 || ya != 0) {
-                move(xa, ya);
-                moving = true;
-            } else {
-                moving = false;
-            }
+        if (xa != 0 || ya != 0) {
+            move(xa, ya);
+            moving = true;
+        } else {
+            moving = false;
+        }
 
     }
 
@@ -82,7 +87,37 @@ public class Dummy extends Mob {
         if (moving) {
             aniSprite.update();
         }
-       
+
+        if (Firerate > 0) {
+            Firerate--;
+        }
+
+        /////// shooting ////////
+        Player p = level.getClientPlayer();
+        if (Firerate <= 0) {
+            double dx = p.getX() - x;
+            double dy = p.getY() - y;
+            dir = Math.atan2(dy, dx);
+            ///////////////Shooting Accuray/////////////////
+            Random random = new Random();
+
+            double max = 0.4;
+            double min = -0.4;
+            double range = max - min;
+
+            double dir1 = random.nextDouble() * range;
+            double shifted = dir1 + min;
+
+            if (dir < 0) {
+                shifted = -shifted;
+            }
+            double Accu = shifted + dir;
+            ///////////////////////////
+
+            Mobshoot(x, y, Accu, 3);
+            Firerate = MobWizardProjectile.FireRateD;
+            /////////////////////////
+        }
     }
 
     public void render(Screen screen) {
@@ -92,6 +127,6 @@ public class Dummy extends Mob {
             sprite = Sprite.dummy;
         }
 
-        screen.renderAI((int)(x - 16),(int)(y - 16), this);
+        screen.renderAI((int) (x - 16), (int) (y - 16), this);
     }
 }
