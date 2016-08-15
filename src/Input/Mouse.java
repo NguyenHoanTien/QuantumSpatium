@@ -111,8 +111,13 @@ public class Mouse implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        mouseX = e.getX();
-        mouseY = e.getY();
+        int mx = e.getX();
+        int my = e.getY();
+        if (mx >= Menu.Button1.x && mx <= Menu.Button1.x + 120) {
+                    if (my >= Menu.Button1.y && my <= Menu.Button1.y + 50) {
+                        Game.Hover = Game.HOVER.PLAY;
+                    }
+                }
     }
 
 }

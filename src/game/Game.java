@@ -49,6 +49,14 @@ public class Game extends Canvas implements Runnable {
         PAUSE,
     }
 
+    public static enum HOVER {
+
+        PLAY,
+        ABOUT,
+        QUIT
+    }
+
+    public static HOVER Hover;
     public static STATE State = STATE.MENU;
     private Menu menu = new Menu();
     public Level spawn;
@@ -200,13 +208,18 @@ public class Game extends Canvas implements Runnable {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
         } else if (State == STATE.MENU) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-            menu.mainRender(g);
+            if (Hover == HOVER.PLAY) {
+               menu.hoverPlay(g);
+            } else {
+                menu.mainRender(g);
+            }
         } else if (State == STATE.PLAY) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-            if (Playcounter / 100 < 3)
-                menu.playRender(g,Playcounter/100);
-            else if (Playcounter / 100 >= 3) 
+            if (Playcounter / 100 < 3) {
+                menu.playRender(g, Playcounter / 100);
+            } else if (Playcounter / 100 >= 3) {
                 State = STATE.GAME;
+            }
         } else if (State == STATE.PAUSE) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             menu.pauseRender(g);
