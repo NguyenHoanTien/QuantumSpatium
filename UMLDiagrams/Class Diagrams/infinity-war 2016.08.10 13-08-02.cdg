@@ -1,0 +1,1086 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="infinity-war">
+  <ClassDiagramComponents>
+    <Class name="Entity" package="Entity" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="x" type="int" visibility="protected"/>
+        <Field name="removed" type="boolean" visibility="private"/>
+        <Field name="level" type="Level" visibility="protected"/>
+        <Field name="random" type="Random" visibility="protected" isFinal="true"/>
+        <Field name="sprite" type="Sprite" visibility="protected"/>
+        <Field name="health" type="int" visibility="protected"/>
+        <Field name="count" type="int" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+          <Argument type="Sprite" name="sprite"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="update" returnType="void" visibility="public"/>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="Screen" name="screen"/>
+        </Method>
+        <Method name="getX" returnType="int" visibility="public"/>
+        <Method name="getY" returnType="int" visibility="public"/>
+        <Method name="remove" returnType="void" visibility="public"/>
+        <Method name="getSprite" returnType="Sprite" visibility="public"/>
+        <Method name="isRemoved" returnType="boolean" visibility="public"/>
+        <Method name="init" returnType="void" visibility="public">
+          <Argument type="Level" name="level"/>
+        </Method>
+        <Method name="getHealth" returnType="int" visibility="public"/>
+        <Method name="damageHealth" returnType="void" visibility="public">
+          <Argument type="int" name="damage"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Chaser" package="Entity.mob" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields>
+        <Field name="chaserAni" type="AnimateSprite" visibility="private"/>
+        <Field name="aniSprite" type="AnimateSprite" visibility="private"/>
+        <Field name="xa" type="double" visibility="private"/>
+        <Field name="xp" type="double" visibility="private"/>
+        <Field name="time" type="int" visibility="private"/>
+        <Field name="speed" type="double" visibility="private"/>
+        <Field name="dir" type="double" visibility="private"/>
+        <Field name="Firerate" type="int" visibility="public"/>
+        <Field name="checkMove" type="boolean" visibility="private"/>
+        <Field name="countcheck" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getX" returnType="int" visibility="public"/>
+        <Method name="getY" returnType="int" visibility="public"/>
+        <Method name="move" returnType="void" visibility="private"/>
+        <Method name="update" returnType="void" visibility="public"/>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="Screen" name="screen"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Dummy" package="Entity.mob" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Fields>
+        <Field name="dummyAni" type="AnimateSprite" visibility="private"/>
+        <Field name="aniSprite" type="AnimateSprite" visibility="private"/>
+        <Field name="xa" type="int" visibility="private"/>
+        <Field name="path" type="List&lt;Node&gt;" visibility="private"/>
+        <Field name="time" type="int" visibility="private"/>
+        <Field name="player" type="Player" visibility="private"/>
+        <Field name="speed" type="double" visibility="private"/>
+        <Field name="dir" type="double" visibility="private"/>
+        <Field name="Firerate" type="int" visibility="public"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getX" returnType="int" visibility="public"/>
+        <Method name="getY" returnType="int" visibility="public"/>
+        <Method name="move" returnType="void" visibility="private"/>
+        <Method name="update" returnType="void" visibility="public"/>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="Screen" name="screen"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Mob" package="Entity.mob" visibility="public" isAbstract="true" xPosition="920.0" yPosition="20.0">
+      <Fields>
+        <Field name="moving" type="boolean" visibility="protected"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="move" returnType="void" visibility="public">
+          <Argument type="double" name="xa"/>
+          <Argument type="double" name="ya"/>
+        </Method>
+        <Method name="abs" returnType="int" visibility="private">
+          <Argument type="double" name="value"/>
+        </Method>
+        <Method name="update" returnType="void" visibility="public" isAbstract="true"/>
+        <Method name="render" returnType="void" visibility="public" isAbstract="true">
+          <Argument type="Screen" name="screen"/>
+        </Method>
+        <Method name="shoot" returnType="void" visibility="protected">
+          <Argument type="double" name="x"/>
+          <Argument type="double" name="y"/>
+          <Argument type="double" name="dir"/>
+        </Method>
+        <Method name="Mobshoot" returnType="void" visibility="protected">
+          <Argument type="double" name="x"/>
+          <Argument type="double" name="y"/>
+          <Argument type="double" name="dir"/>
+          <Argument type="int" name="butspeed"/>
+        </Method>
+        <Method name="collision" returnType="boolean" visibility="private">
+          <Argument type="double" name="xa"/>
+          <Argument type="double" name="ya"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Player" package="Entity.mob" visibility="public" xPosition="1220.0" yPosition="20.0">
+      <Fields>
+        <Field name="input" type="Keyboard" visibility="private"/>
+        <Field name="sprite" type="Sprite" visibility="private"/>
+        <Field name="heal" type="int" visibility="public"/>
+        <Field name="firerate" type="int" visibility="public" isStatic="true"/>
+        <Field name="speed" type="double" visibility="private"/>
+        <Field name="playerAni" type="AnimateSprite" visibility="private"/>
+        <Field name="alive" type="boolean" visibility="public"/>
+        <Field name="dir_player" type="double" visibility="private"/>
+        <Field name="nx" type="double" visibility="private"/>
+        <Field name="timer" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Keyboard" name="input"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+          <Argument type="Keyboard" name="input"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="update" returnType="void" visibility="public"/>
+        <Method name="updateMobCollision" returnType="void" visibility="public">
+          <Argument type="List&lt;Entity&gt;" name="entities"/>
+        </Method>
+        <Method name="clear" returnType="void" visibility="private"/>
+        <Method name="updateShooting" returnType="void" visibility="private"/>
+        <Method name="updateRotating" returnType="void" visibility="private"/>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="Screen" name="screen"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Star" package="Entity.mob" visibility="public" xPosition="1520.0" yPosition="20.0">
+      <Fields>
+        <Field name="starAniU" type="AnimateSprite" visibility="private"/>
+        <Field name="starAniD" type="AnimateSprite" visibility="private"/>
+        <Field name="starAniL" type="AnimateSprite" visibility="private"/>
+        <Field name="starAniR" type="AnimateSprite" visibility="private"/>
+        <Field name="aniSprite" type="AnimateSprite" visibility="private"/>
+        <Field name="xa" type="int" visibility="private"/>
+        <Field name="path" type="List&lt;Node&gt;" visibility="private"/>
+        <Field name="time" type="int" visibility="private"/>
+        <Field name="player" type="Player" visibility="private"/>
+        <Field name="speed" type="double" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getX" returnType="int" visibility="public"/>
+        <Method name="getY" returnType="int" visibility="public"/>
+        <Method name="move" returnType="void" visibility="private"/>
+        <Method name="update" returnType="void" visibility="public"/>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="Screen" name="screen"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Particle" package="Entity.partical" visibility="public" xPosition="1820.0" yPosition="20.0">
+      <Fields>
+        <Field name="sprite" type="Sprite" visibility="private"/>
+        <Field name="time" type="int" visibility="private"/>
+        <Field name="life" type="int" visibility="private"/>
+        <Field name="xx" type="double" visibility="protected"/>
+        <Field name="xa" type="double" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+          <Argument type="int" name="life"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="update" returnType="void" visibility="public"/>
+        <Method name="move" returnType="void" visibility="private">
+          <Argument type="double" name="x"/>
+          <Argument type="double" name="y"/>
+        </Method>
+        <Method name="collision" returnType="boolean" visibility="public">
+          <Argument type="double" name="x"/>
+          <Argument type="double" name="y"/>
+        </Method>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="Screen" name="screen"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="MobWizardProjectile" package="Entity.projectile" visibility="public" xPosition="2120.0" yPosition="20.0">
+      <Fields>
+        <Field name="FireRate" type="int" visibility="public" isStatic="true"/>
+        <Field name="FireRateD" type="int" visibility="public" isStatic="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="double" name="x"/>
+          <Argument type="double" name="y"/>
+          <Argument type="double" name="dir"/>
+          <Argument type="int" name="speed"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="update" returnType="void" visibility="public"/>
+        <Method name="updateCollision" returnType="void" visibility="public">
+          <Argument type="List&lt;Player&gt;" name="players"/>
+        </Method>
+        <Method name="move" returnType="void" visibility="protected"/>
+        <Method name="distance" returnType="double" visibility="private"/>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="Screen" name="screen"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Projectile" package="Entity.projectile" visibility="public" isAbstract="true" xPosition="20.0" yPosition="420.0">
+      <Fields>
+        <Field name="xOrigin" type="double" visibility="protected" isFinal="true"/>
+        <Field name="angle" type="double" visibility="protected"/>
+        <Field name="sprite" type="Sprite" visibility="protected"/>
+        <Field name="nx" type="double" visibility="protected"/>
+        <Field name="range" type="double" visibility="protected"/>
+        <Field name="bulletspeed" type="int" visibility="protected"/>
+        <Field name="damage" type="int" visibility="protected"/>
+        <Field name="x" type="double" visibility="protected"/>
+        <Field name="distance" type="double" visibility="protected"/>
+        <Field name="random" type="Random" visibility="protected" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="double" name="x"/>
+          <Argument type="double" name="y"/>
+          <Argument type="double" name="dir"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getSprite" returnType="Sprite" visibility="public"/>
+        <Method name="getSpriteSize" returnType="int" visibility="public"/>
+        <Method name="move" returnType="void" visibility="protected"/>
+      </Methods>
+    </Class>
+    <Class name="WizardProjectile" package="Entity.projectile" visibility="public" xPosition="320.0" yPosition="420.0">
+      <Fields>
+        <Field name="FireRate" type="int" visibility="public" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="double" name="x"/>
+          <Argument type="double" name="y"/>
+          <Argument type="double" name="dir"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="update" returnType="void" visibility="public"/>
+        <Method name="updateMobCollision" returnType="void" visibility="public">
+          <Argument type="List&lt;Entity&gt;" name="entities"/>
+        </Method>
+        <Method name="move" returnType="void" visibility="protected"/>
+        <Method name="distance" returnType="double" visibility="private"/>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="Screen" name="screen"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ParticleSpawner" package="Entity.spawner" visibility="public" xPosition="620.0" yPosition="420.0">
+      <Fields>
+        <Field name="life" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+          <Argument type="int" name="life"/>
+          <Argument type="int" name="amount"/>
+          <Argument type="Level" name="level"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Spawner" package="Entity.spawner" visibility="public" isAbstract="true" xPosition="920.0" yPosition="420.0">
+      <Fields>
+        <Field name="type" type="Type" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+          <Argument type="Type" name="type"/>
+          <Argument type="int" name="amount"/>
+          <Argument type="Level" name="level"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Game" package="game" visibility="public" xPosition="1220.0" yPosition="420.0">
+      <Fields>
+        <Field name="serialVersionUID" type="long" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="screenSize" type="Dimension" visibility="public" isStatic="true"/>
+        <Field name="width" type="int" visibility="public" isStatic="true"/>
+        <Field name="height" type="int" visibility="public" isStatic="true"/>
+        <Field name="scale" type="int" visibility="public" isStatic="true"/>
+        <Field name="title" type="String" visibility="public" isStatic="true"/>
+        <Field name="Playcounter" type="int" visibility="private"/>
+        <Field name="frame" type="JFrame" visibility="private"/>
+        <Field name="key" type="Keyboard" visibility="private"/>
+        <Field name="level" type="Level" visibility="private"/>
+        <Field name="player" type="Player" visibility="private"/>
+        <Field name="running" type="boolean" visibility="private"/>
+        <Field name="State" type="STATE" visibility="public" isStatic="true"/>
+        <Field name="menu" type="Menu" visibility="private"/>
+        <Field name="spawn" type="Level" visibility="public"/>
+        <Field name="screen" type="Screen" visibility="private"/>
+        <Field name="thread" type="Thread" visibility="private"/>
+        <Field name="image" type="BufferedImage" visibility="private"/>
+        <Field name="pixels" type="int[]" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getWindowWidth" returnType="int" visibility="public" isStatic="true"/>
+        <Method name="getWindowHeight" returnType="int" visibility="public" isStatic="true"/>
+        <Method name="start" returnType="void" visibility="public" isSynchronized="true"/>
+        <Method name="stop" returnType="void" visibility="public" isSynchronized="true"/>
+        <Method name="run" returnType="void" visibility="public"/>
+        <Method name="update" returnType="void" visibility="public"/>
+        <Method name="render" returnType="void" visibility="public"/>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Menu" package="game" visibility="public" xPosition="1520.0" yPosition="420.0">
+      <Fields>
+        <Field name="space" type="Image" visibility="private"/>
+        <Field name="button_extraX1" type="int" visibility="private"/>
+        <Field name="button_extraY" type="int" visibility="private"/>
+        <Field name="width" type="int" visibility="public" isStatic="true"/>
+        <Field name="height" type="int" visibility="public" isStatic="true"/>
+        <Field name="Button1" type="Rectangle" visibility="public" isStatic="true"/>
+        <Field name="Button2" type="Rectangle" visibility="public" isStatic="true"/>
+        <Field name="Button3" type="Rectangle" visibility="public" isStatic="true"/>
+        <Field name="MenuBox" type="Rectangle" visibility="public"/>
+        <Field name="BackX" type="int" visibility="public" isStatic="true"/>
+        <Field name="BackY" type="int" visibility="public" isStatic="true"/>
+        <Field name="BackW" type="int" visibility="public" isStatic="true"/>
+        <Field name="BackH" type="int" visibility="public" isStatic="true"/>
+        <Field name="Back" type="Rectangle" visibility="private"/>
+        <Field name="StartX" type="int" visibility="public" isStatic="true"/>
+        <Field name="StartY" type="int" visibility="public" isStatic="true"/>
+        <Field name="StartW" type="int" visibility="public" isStatic="true"/>
+        <Field name="StartH" type="int" visibility="public" isStatic="true"/>
+        <Field name="Start" type="Rectangle" visibility="private"/>
+        <Field name="Box" type="Rectangle" visibility="public"/>
+        <Field name="OverY" type="int" visibility="public" isStatic="true"/>
+        <Field name="OverBack" type="Rectangle" visibility="private"/>
+        <Field name="Restart" type="Rectangle" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getImage" returnType="Image" visibility="private">
+          <Argument type="String" name="path"/>
+        </Method>
+        <Method name="mainRender" returnType="void" visibility="public">
+          <Argument type="Graphics" name="g"/>
+        </Method>
+        <Method name="playRender" returnType="void" visibility="public">
+          <Argument type="Graphics" name="g"/>
+          <Argument type="int" name="counter"/>
+        </Method>
+        <Method name="pauseRender" returnType="void" visibility="public">
+          <Argument type="Graphics" name="g"/>
+        </Method>
+        <Method name="overRender" returnType="void" visibility="public">
+          <Argument type="Graphics" name="g"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="AnimateSprite" package="Graphics" visibility="public" xPosition="1820.0" yPosition="420.0">
+      <Fields>
+        <Field name="frame" type="int" visibility="private"/>
+        <Field name="sprite" type="Sprite" visibility="private"/>
+        <Field name="rate" type="int" visibility="private"/>
+        <Field name="time" type="int" visibility="private"/>
+        <Field name="length" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="SpriteSheet" name="sheet"/>
+          <Argument type="int" name="width"/>
+          <Argument type="int" name="height"/>
+          <Argument type="int" name="length"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="update" returnType="void" visibility="public"/>
+        <Method name="getSprite" returnType="Sprite" visibility="public"/>
+        <Method name="setFrameRate" returnType="void" visibility="public">
+          <Argument type="int" name="frames"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Screen" package="Graphics" visibility="public" xPosition="2120.0" yPosition="420.0">
+      <Fields>
+        <Field name="width" type="int" visibility="public"/>
+        <Field name="pixels" type="int[]" visibility="public"/>
+        <Field name="MAP_SIZE" type="int" visibility="public" isFinal="true"/>
+        <Field name="MAP_SIZE_MASK" type="int" visibility="public" isFinal="true"/>
+        <Field name="xOffset" type="int" visibility="public"/>
+        <Field name="random" type="Random" visibility="private"/>
+        <Field name="tiles" type="int[]" visibility="public"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="width"/>
+          <Argument type="int" name="height"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="clear" returnType="void" visibility="public"/>
+        <Method name="renderSprite" returnType="void" visibility="public">
+          <Argument type="int" name="xp"/>
+          <Argument type="int" name="yp"/>
+          <Argument type="Sprite" name="sprite"/>
+          <Argument type="boolean" name="fixed"/>
+        </Method>
+        <Method name="renderSheet" returnType="void" visibility="public">
+          <Argument type="int" name="xp"/>
+          <Argument type="int" name="yp"/>
+          <Argument type="SpriteSheet" name="sheet"/>
+          <Argument type="boolean" name="fixed"/>
+        </Method>
+        <Method name="renderTile" returnType="void" visibility="public">
+          <Argument type="int" name="xp"/>
+          <Argument type="int" name="yp"/>
+          <Argument type="Tile" name="tile"/>
+        </Method>
+        <Method name="renderProjectile" returnType="void" visibility="public">
+          <Argument type="int" name="xp"/>
+          <Argument type="int" name="yp"/>
+          <Argument type="Projectile" name="p"/>
+        </Method>
+        <Method name="renderAI" returnType="void" visibility="public">
+          <Argument type="int" name="xp"/>
+          <Argument type="int" name="yp"/>
+          <Argument type="Mob" name="mob"/>
+        </Method>
+        <Method name="renderMob" returnType="void" visibility="public">
+          <Argument type="int" name="xp"/>
+          <Argument type="int" name="yp"/>
+          <Argument type="Sprite" name="sprite"/>
+        </Method>
+        <Method name="setOffset" returnType="void" visibility="public">
+          <Argument type="int" name="xOffset"/>
+          <Argument type="int" name="yOffset"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Sprite" package="Graphics" visibility="public" xPosition="20.0" yPosition="820.0">
+      <Fields>
+        <Field name="SIZE" type="int" visibility="public" isFinal="true"/>
+        <Field name="x" type="int" visibility="private"/>
+        <Field name="pixels" type="int[]" visibility="public"/>
+        <Field name="sheet" type="SpriteSheet" visibility="protected"/>
+        <Field name="width" type="int" visibility="private"/>
+        <Field name="plat" type="Sprite" visibility="public" isStatic="true"/>
+        <Field name="plat1" type="Sprite" visibility="public" isStatic="true"/>
+        <Field name="plat2" type="Sprite" visibility="public" isStatic="true"/>
+        <Field name="dummy" type="Sprite" visibility="public" isStatic="true"/>
+        <Field name="chaser" type="Sprite" visibility="public" isStatic="true"/>
+        <Field name="star" type="Sprite" visibility="public" isStatic="true"/>
+        <Field name="wall" type="Sprite" visibility="public" isStatic="true"/>
+        <Field name="block" type="Sprite" visibility="public" isStatic="true"/>
+        <Field name="playerStop" type="Sprite" visibility="public" isStatic="true"/>
+        <Field name="voidSprite" type="Sprite" visibility="public" isStatic="true"/>
+        <Field name="bullet" type="Sprite" visibility="public" isStatic="true"/>
+        <Field name="shoot" type="Sprite" visibility="public" isStatic="true"/>
+        <Field name="particle_normal" type="Sprite" visibility="public" isStatic="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="protected">
+          <Argument type="SpriteSheet" name="sheet"/>
+          <Argument type="int" name="width"/>
+          <Argument type="int" name="height"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="int" name="size"/>
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+          <Argument type="SpriteSheet" name="sheet"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="int" name="width"/>
+          <Argument type="int" name="height"/>
+          <Argument type="int" name="colour"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="int" name="size"/>
+          <Argument type="int" name="colour"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="int[]" name="pixels"/>
+          <Argument type="int" name="width"/>
+          <Argument type="int" name="height"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="rotate" returnType="Sprite" visibility="public" isStatic="true">
+          <Argument type="Sprite" name="sprite"/>
+          <Argument type="double" name="angle"/>
+        </Method>
+        <Method name="rotate" returnType="int[]" visibility="private" isStatic="true">
+          <Argument type="int[]" name="pixels"/>
+          <Argument type="int" name="width"/>
+          <Argument type="int" name="height"/>
+          <Argument type="double" name="angle"/>
+        </Method>
+        <Method name="rot_x" returnType="double" visibility="private" isStatic="true">
+          <Argument type="double" name="angle"/>
+          <Argument type="double" name="x"/>
+          <Argument type="double" name="y"/>
+        </Method>
+        <Method name="rot_y" returnType="double" visibility="private" isStatic="true">
+          <Argument type="double" name="angle"/>
+          <Argument type="double" name="x"/>
+          <Argument type="double" name="y"/>
+        </Method>
+        <Method name="setColour" returnType="void" visibility="private">
+          <Argument type="int" name="colour"/>
+        </Method>
+        <Method name="getWidth" returnType="int" visibility="public"/>
+        <Method name="getHeight" returnType="int" visibility="public"/>
+        <Method name="load" returnType="void" visibility="private"/>
+      </Methods>
+    </Class>
+    <Class name="SpriteSheet" package="Graphics" visibility="public" xPosition="320.0" yPosition="820.0">
+      <Fields>
+        <Field name="path" type="String" visibility="private"/>
+        <Field name="SIZE" type="int" visibility="public" isFinal="true"/>
+        <Field name="pixels" type="int[]" visibility="public"/>
+        <Field name="WIDTH" type="int" visibility="public" isFinal="true"/>
+        <Field name="tiles" type="SpriteSheet" visibility="public" isStatic="true"/>
+        <Field name="playerIcon" type="SpriteSheet" visibility="public" isStatic="true"/>
+        <Field name="playermove" type="SpriteSheet" visibility="public" isStatic="true"/>
+        <Field name="Enemy" type="SpriteSheet" visibility="public" isStatic="true"/>
+        <Field name="EnemyT" type="SpriteSheet" visibility="public" isStatic="true"/>
+        <Field name="dummymove" type="SpriteSheet" visibility="public" isStatic="true"/>
+        <Field name="chasermove" type="SpriteSheet" visibility="public" isStatic="true"/>
+        <Field name="starmoveU" type="SpriteSheet" visibility="public" isStatic="true"/>
+        <Field name="starmoveD" type="SpriteSheet" visibility="public" isStatic="true"/>
+        <Field name="starmoveL" type="SpriteSheet" visibility="public" isStatic="true"/>
+        <Field name="starmoveR" type="SpriteSheet" visibility="public" isStatic="true"/>
+        <Field name="sprites" type="Sprite[]" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="SpriteSheet" name="sheet"/>
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+          <Argument type="int" name="width"/>
+          <Argument type="int" name="height"/>
+          <Argument type="int" name="spriteSize"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="path"/>
+          <Argument type="int" name="size"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="path"/>
+          <Argument type="int" name="width"/>
+          <Argument type="int" name="height"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getSprites" returnType="Sprite[]" visibility="public"/>
+        <Method name="load" returnType="void" visibility="private"/>
+      </Methods>
+    </Class>
+    <Class name="Keyboard" package="Input" visibility="public" xPosition="620.0" yPosition="820.0">
+      <Fields>
+        <Field name="keys" type="boolean[]" visibility="private"/>
+        <Field name="up" type="boolean" visibility="public"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="update" returnType="void" visibility="public"/>
+        <Method name="keyPressed" returnType="void" visibility="public">
+          <Argument type="KeyEvent" name="e"/>
+        </Method>
+        <Method name="keyReleased" returnType="void" visibility="public">
+          <Argument type="KeyEvent" name="e"/>
+        </Method>
+        <Method name="keyTyped" returnType="void" visibility="public">
+          <Argument type="KeyEvent" name="e"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Mouse" package="Input" visibility="public" xPosition="920.0" yPosition="820.0">
+      <Fields>
+        <Field name="mouseX" type="int" visibility="private" isStatic="true"/>
+        <Field name="mouseY" type="int" visibility="private" isStatic="true"/>
+        <Field name="mouseB" type="int" visibility="private" isStatic="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getX" returnType="int" visibility="public" isStatic="true"/>
+        <Method name="getY" returnType="int" visibility="public" isStatic="true"/>
+        <Method name="getButton" returnType="int" visibility="public" isStatic="true"/>
+        <Method name="mouseClicked" returnType="void" visibility="public">
+          <Argument type="MouseEvent" name="e"/>
+        </Method>
+        <Method name="mousePressed" returnType="void" visibility="public">
+          <Argument type="MouseEvent" name="e"/>
+        </Method>
+        <Method name="mouseReleased" returnType="void" visibility="public">
+          <Argument type="MouseEvent" name="e"/>
+        </Method>
+        <Method name="mouseEntered" returnType="void" visibility="public">
+          <Argument type="MouseEvent" name="e"/>
+        </Method>
+        <Method name="mouseExited" returnType="void" visibility="public">
+          <Argument type="MouseEvent" name="e"/>
+        </Method>
+        <Method name="mouseDragged" returnType="void" visibility="public">
+          <Argument type="MouseEvent" name="e"/>
+        </Method>
+        <Method name="mouseMoved" returnType="void" visibility="public">
+          <Argument type="MouseEvent" name="e"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Level" package="level" visibility="public" xPosition="1220.0" yPosition="820.0">
+      <Fields>
+        <Field name="width" type="int" visibility="protected"/>
+        <Field name="tilesInt" type="int[]" visibility="protected"/>
+        <Field name="tiles" type="int[]" visibility="protected"/>
+        <Field name="tile_size" type="int" visibility="protected"/>
+        <Field name="entities" type="List&lt;Entity&gt;" visibility="public"/>
+        <Field name="projectiles" type="List&lt;Projectile&gt;" visibility="private"/>
+        <Field name="particles" type="List&lt;Particle&gt;" visibility="private"/>
+        <Field name="players" type="List&lt;Player&gt;" visibility="public"/>
+        <Field name="nodeSorter" type="Comparator&lt;Node&gt;" visibility="private"/>
+        <Field name="level_num" type="int" visibility="public"/>
+        <Field name="level_present" type="int" visibility="public"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="width"/>
+          <Argument type="int" name="height"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="path"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="generateLevel" returnType="void" visibility="protected"/>
+        <Method name="LoadLevel" returnType="void" visibility="protected">
+          <Argument type="String" name="path"/>
+        </Method>
+        <Method name="update" returnType="void" visibility="public"/>
+        <Method name="get_level_num" returnType="int" visibility="public"/>
+        <Method name="decrement_level_num" returnType="void" visibility="public"/>
+        <Method name="spawnMob" returnType="void" visibility="public"/>
+        <Method name="spawnStart" returnType="void" visibility="public"/>
+        <Method name="remove" returnType="void" visibility="public"/>
+        <Method name="getProjectiles" returnType="List&lt;Projectile&gt;" visibility="public"/>
+        <Method name="time" returnType="void" visibility="private"/>
+        <Method name="tileCollision" returnType="boolean" visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+          <Argument type="int" name="size"/>
+          <Argument type="int" name="xOffset"/>
+          <Argument type="int" name="yOffset"/>
+        </Method>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="int" name="xScroll"/>
+          <Argument type="int" name="yScroll"/>
+          <Argument type="Screen" name="screen"/>
+        </Method>
+        <Method name="add" returnType="void" visibility="public">
+          <Argument type="Entity" name="e"/>
+        </Method>
+        <Method name="getPlayers" returnType="List&lt;Player&gt;" visibility="public"/>
+        <Method name="getPlayerAt" returnType="Player" visibility="public">
+          <Argument type="int" name="index"/>
+        </Method>
+        <Method name="getClientPlayer" returnType="Player" visibility="public"/>
+        <Method name="findpath" returnType="List&lt;Node&gt;" visibility="public">
+          <Argument type="Vector2i" name="start"/>
+          <Argument type="Vector2i" name="goal"/>
+        </Method>
+        <Method name="vecInList" returnType="boolean" visibility="private">
+          <Argument type="List&lt;Node&gt;" name="list"/>
+          <Argument type="Vector2i" name="vector"/>
+        </Method>
+        <Method name="getDistance" returnType="double" visibility="private">
+          <Argument type="Vector2i" name="tile"/>
+          <Argument type="Vector2i" name="goal"/>
+        </Method>
+        <Method name="getEntities" returnType="List&lt;Entity&gt;" visibility="public">
+          <Argument type="Entity" name="e"/>
+          <Argument type="int" name="radius"/>
+        </Method>
+        <Method name="getPlayers" returnType="List&lt;Player&gt;" visibility="public">
+          <Argument type="Entity" name="e"/>
+          <Argument type="int" name="radius"/>
+        </Method>
+        <Method name="getTile" returnType="Tile" visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Node" package="level" visibility="public" xPosition="1520.0" yPosition="820.0">
+      <Fields>
+        <Field name="tile" type="Vector2i" visibility="public"/>
+        <Field name="parent" type="Node" visibility="public"/>
+        <Field name="fCost" type="double" visibility="public"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Vector2i" name="tile"/>
+          <Argument type="Node" name="parent"/>
+          <Argument type="double" name="gCost"/>
+          <Argument type="double" name="hCost"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="SpawnLevel" package="level" visibility="public" xPosition="1820.0" yPosition="820.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="path"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="LoadLevel" returnType="void" visibility="protected">
+          <Argument type="String" name="path"/>
+        </Method>
+        <Method name="generateLevel" returnType="void" visibility="protected"/>
+      </Methods>
+    </Class>
+    <Class name="BlockTile" package="level.Tile" visibility="public" xPosition="2120.0" yPosition="820.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Sprite" name="sprite"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+          <Argument type="Screen" name="screen"/>
+        </Method>
+        <Method name="solid" returnType="boolean" visibility="public"/>
+        <Method name="breakable" returnType="boolean" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Plat1Tile" package="level.Tile" visibility="public" xPosition="20.0" yPosition="1220.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Sprite" name="sprite"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+          <Argument type="Screen" name="screen"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Plat2Tile" package="level.Tile" visibility="public" xPosition="320.0" yPosition="1220.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Sprite" name="sprite"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+          <Argument type="Screen" name="screen"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PlatTile" package="level.Tile" visibility="public" xPosition="620.0" yPosition="1220.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Sprite" name="sprite"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+          <Argument type="Screen" name="screen"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Tile" package="level.Tile" visibility="public" xPosition="920.0" yPosition="1220.0">
+      <Fields>
+        <Field name="sprite" type="Sprite" visibility="public"/>
+        <Field name="plat" type="Tile" visibility="public" isStatic="true"/>
+        <Field name="plat1" type="Tile" visibility="public" isStatic="true"/>
+        <Field name="plat2" type="Tile" visibility="public" isStatic="true"/>
+        <Field name="wall" type="Tile" visibility="public" isStatic="true"/>
+        <Field name="block" type="Tile" visibility="public" isStatic="true"/>
+        <Field name="voidTile" type="Tile" visibility="public" isStatic="true"/>
+        <Field name="col_plat" type="int" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="col_plat1" type="int" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="col_plat2" type="int" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="col_wall" type="int" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="col_block" type="int" visibility="public" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Sprite" name="sprite"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+          <Argument type="Screen" name="screen"/>
+        </Method>
+        <Method name="solid" returnType="boolean" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="VoidTile" package="level.Tile" visibility="public" xPosition="1220.0" yPosition="1220.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Sprite" name="sprite"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+          <Argument type="Screen" name="screen"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="WallTile" package="level.Tile" visibility="public" xPosition="1520.0" yPosition="1220.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Sprite" name="sprite"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+          <Argument type="Screen" name="screen"/>
+        </Method>
+        <Method name="solid" returnType="boolean" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="TileCoordinate" package="level" visibility="public" xPosition="1820.0" yPosition="1220.0">
+      <Fields>
+        <Field name="random" type="Random" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="x" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="x" returnType="int" visibility="public"/>
+        <Method name="y" returnType="int" visibility="public"/>
+        <Method name="xy" returnType="int[]" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Vector2i" package="Util" visibility="public" xPosition="2120.0" yPosition="1220.0">
+      <Fields>
+        <Field name="x" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="Vector2i" name="vector"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="object"/>
+        </Method>
+        <Method name="set" returnType="void" visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+        </Method>
+        <Method name="getX" returnType="int" visibility="public"/>
+        <Method name="getY" returnType="int" visibility="public"/>
+        <Method name="add" returnType="Vector2i" visibility="public">
+          <Argument type="Vector2i" name="vector"/>
+        </Method>
+        <Method name="subtract" returnType="Vector2i" visibility="public">
+          <Argument type="Vector2i" name="vector"/>
+        </Method>
+        <Method name="setX" returnType="Vector2i" visibility="public">
+          <Argument type="int" name="x"/>
+        </Method>
+        <Method name="setY" returnType="Vector2i" visibility="public">
+          <Argument type="int" name="y"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <IsRelation name="is" source="Entity.mob.Player" target="Entity.mob.Mob"/>
+    <IsRelation name="is" source="Entity.spawner.ParticleSpawner" target="Entity.spawner.Spawner"/>
+    <HasRelation name="sheet" source="Graphics.Sprite" target="Graphics.SpriteSheet" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="starmoveD" source="Graphics.SpriteSheet" target="Graphics.SpriteSheet" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="plat" source="level.Tile.Tile" target="level.Tile.Tile" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="dummy" source="Graphics.Sprite" target="Graphics.Sprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="level.Level" target="Util.Vector2i" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="block" source="Graphics.Sprite" target="Graphics.Sprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="level.Tile.WallTile" target="level.Tile.Tile"/>
+    <HasRelation name="player" source="Entity.mob.Dummy" target="Entity.mob.Player" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="voidTile" source="level.Tile.Tile" target="level.Tile.Tile" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="level.Tile.VoidTile" target="level.Tile.Tile"/>
+    <UseRelation source="Entity.Entity" target="level.Level" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Input.Mouse" target="Input.Mouse" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sprite" source="Entity.partical.Particle" target="Graphics.Sprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="block" source="level.Tile.Tile" target="level.Tile.Tile" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="chaserAni" source="Entity.mob.Chaser" target="Graphics.AnimateSprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="path" source="Entity.mob.Star" target="level.Node" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Node&gt;"/>
+    <HasRelation name="starAniD" source="Entity.mob.Star" target="Graphics.AnimateSprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Entity.mob.Dummy" target="Graphics.Screen" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="projectiles" source="level.Level" target="Entity.projectile.Projectile" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Projectile&gt;"/>
+    <HasRelation name="starAniL" source="Entity.mob.Star" target="Graphics.AnimateSprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="level.Tile.BlockTile" target="level.Tile.Tile"/>
+    <HasRelation name="starAniU" source="Entity.mob.Star" target="Graphics.AnimateSprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="starmoveU" source="Graphics.SpriteSheet" target="Graphics.SpriteSheet" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Graphics.Screen" target="Graphics.SpriteSheet" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="starAniR" source="Entity.mob.Star" target="Graphics.AnimateSprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="menu" source="game.Game" target="game.Menu" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="starmoveL" source="Graphics.SpriteSheet" target="Graphics.SpriteSheet" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="entities" source="level.Level" target="Entity.Entity" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Entity&gt;"/>
+    <UseRelation source="Graphics.AnimateSprite" target="Graphics.Sprite" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="aniSprite" source="Entity.mob.Dummy" target="Graphics.AnimateSprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="starmoveR" source="Graphics.SpriteSheet" target="Graphics.SpriteSheet" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Util.Vector2i" target="Util.Vector2i" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="bullet" source="Graphics.Sprite" target="Graphics.Sprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="path" source="Entity.mob.Dummy" target="level.Node" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Node&gt;"/>
+    <HasRelation name="players" source="level.Level" target="Entity.mob.Player" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Player&gt;"/>
+    <HasRelation name="screen" source="game.Game" target="Graphics.Screen" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Entity.spawner.Spawner" target="Entity.Entity"/>
+    <IsRelation name="is" source="Entity.mob.Dummy" target="Entity.mob.Mob"/>
+    <HasRelation name="sprite" source="Entity.projectile.Projectile" target="Graphics.Sprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Entity.Entity" target="Graphics.Screen" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="player" source="game.Game" target="Entity.mob.Player" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="level.SpawnLevel" target="level.Level"/>
+    <UseRelation source="Graphics.Screen" target="level.Tile.Tile" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="level.Tile.BlockTile" target="Graphics.Screen" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Entity.projectile.MobWizardProjectile" target="Entity.mob.Player" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Graphics.AnimateSprite" target="Graphics.Sprite"/>
+    <UseRelation source="Entity.projectile.Projectile" target="Graphics.Sprite" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="level.Tile.Plat2Tile" target="level.Tile.Tile"/>
+    <HasRelation name="sprite" source="Entity.Entity" target="Graphics.Sprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="level.Tile.Plat1Tile" target="Graphics.Screen" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="parent" source="level.Node" target="level.Node" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Entity.mob.Star" target="Graphics.Screen" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="plat2" source="level.Tile.Tile" target="level.Tile.Tile" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="plat1" source="level.Tile.Tile" target="level.Tile.Tile" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="aniSprite" source="Entity.mob.Chaser" target="Graphics.AnimateSprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="playerAni" source="Entity.mob.Player" target="Graphics.AnimateSprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Graphics.SpriteSheet" target="Graphics.Sprite" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="spawn" source="game.Game" target="level.Level" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Entity.projectile.MobWizardProjectile" target="Entity.projectile.Projectile"/>
+    <UseRelation source="Entity.projectile.WizardProjectile" target="Graphics.Screen" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="chaser" source="Graphics.Sprite" target="Graphics.Sprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sprite" source="Graphics.AnimateSprite" target="Graphics.Sprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="level.Level" target="Entity.mob.Player" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Graphics.Sprite" target="Graphics.Sprite" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Entity.mob.Mob" target="Entity.Entity"/>
+    <HasRelation name="particle_normal" source="Graphics.Sprite" target="Graphics.Sprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="player" source="Entity.mob.Star" target="Entity.mob.Player" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="playermove" source="Graphics.SpriteSheet" target="Graphics.SpriteSheet" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Entity.projectile.WizardProjectile" target="Entity.Entity" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="level.Level" target="Entity.projectile.Projectile" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="level.Level" target="level.Tile.Tile" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="Enemy" source="Graphics.SpriteSheet" target="Graphics.SpriteSheet" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="wall" source="Graphics.Sprite" target="Graphics.Sprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Entity.partical.Particle" target="Entity.Entity"/>
+    <UseRelation source="Graphics.Screen" target="Entity.mob.Mob" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="particles" source="level.Level" target="Entity.partical.Particle" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Particle&gt;"/>
+    <UseRelation source="level.Tile.Tile" target="Graphics.Screen" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="shoot" source="Graphics.Sprite" target="Graphics.Sprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="chasermove" source="Graphics.SpriteSheet" target="Graphics.SpriteSheet" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="level.Tile.PlatTile" target="level.Tile.Tile"/>
+    <HasRelation name="aniSprite" source="Entity.mob.Star" target="Graphics.AnimateSprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="wall" source="level.Tile.Tile" target="level.Tile.Tile" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Entity.mob.Player" target="Entity.Entity" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="voidSprite" source="Graphics.Sprite" target="Graphics.Sprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="level.Level" target="Entity.Entity" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="input" source="Entity.mob.Player" target="Input.Keyboard" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Entity.Entity" target="Graphics.Sprite" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="level.Tile.Plat2Tile" target="Graphics.Screen" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="level.Tile.Plat1Tile" target="level.Tile.Tile"/>
+    <IsRelation name="is" source="Entity.mob.Star" target="Entity.mob.Mob"/>
+    <HasRelation name="star" source="Graphics.Sprite" target="Graphics.Sprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Entity.mob.Mob" target="Graphics.Screen" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="playerIcon" source="Graphics.SpriteSheet" target="Graphics.SpriteSheet" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="level.Level" target="Graphics.Screen" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sprite" source="level.Tile.Tile" target="Graphics.Sprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="dummyAni" source="Entity.mob.Dummy" target="Graphics.AnimateSprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="EnemyT" source="Graphics.SpriteSheet" target="Graphics.SpriteSheet" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sprite" source="Entity.mob.Player" target="Graphics.Sprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="playerStop" source="Graphics.Sprite" target="Graphics.Sprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="level" source="Entity.Entity" target="level.Level" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="level.Tile.PlatTile" target="Graphics.Screen" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="level" source="game.Game" target="level.Level" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="level.Tile.VoidTile" target="Graphics.Screen" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Entity.mob.Player" target="Graphics.Screen" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="plat2" source="Graphics.Sprite" target="Graphics.Sprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="plat1" source="Graphics.Sprite" target="Graphics.Sprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Entity.mob.Chaser" target="Graphics.Screen" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tile" source="level.Node" target="Util.Vector2i" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Entity.projectile.Projectile" target="Entity.Entity"/>
+    <IsRelation name="is" source="Entity.projectile.WizardProjectile" target="Entity.projectile.Projectile"/>
+    <UseRelation source="Entity.partical.Particle" target="Graphics.Screen" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Entity.projectile.MobWizardProjectile" target="Graphics.Screen" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="plat" source="Graphics.Sprite" target="Graphics.Sprite" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="key" source="game.Game" target="Input.Keyboard" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tiles" source="Graphics.SpriteSheet" target="Graphics.SpriteSheet" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Graphics.Screen" target="Graphics.Sprite" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="dummymove" source="Graphics.SpriteSheet" target="Graphics.SpriteSheet" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="level.Tile.WallTile" target="Graphics.Screen" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Entity.mob.Chaser" target="Entity.mob.Mob"/>
+    <HasRelation name="nodeSorter" source="level.Level" target="level.Node" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Graphics.Screen" target="Entity.projectile.Projectile" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

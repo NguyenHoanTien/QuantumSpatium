@@ -56,7 +56,6 @@ public class Menu extends Applet {
     }
 
     //main menu Reder method
-
     public void mainRender(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         if (space == null) {
@@ -73,14 +72,32 @@ public class Menu extends Applet {
         //draw buttons
         Font font2 = new Font(".VnRevueH", Font.BOLD, 35);
         g.setFont(font2);
-        g.setColor(Color.yellow);
-        g.drawString("PLAY", Game.screenSize.width - 200, Game.screenSize.height / 2 - 50);
-        g.drawString("ABOUT", Game.screenSize.width - 225, Game.screenSize.height / 2 + 70);
-        g.drawString("QUIT", Game.screenSize.width - 200, Game.screenSize.height / 2 + 190);
-        g.setColor(Color.blue);
-//        g2d.draw(Button1);
-//        g2d.draw(Button2);
-//        g2d.draw(Button3);
+        g.setColor(Color.red);
+        if (Game.Hover == Game.HOVER.PLAY) {
+            g2d.draw(Button1);
+            g.drawString("PLAY", Game.screenSize.width - 200, Game.screenSize.height / 2 - 50);
+            g.setColor(Color.yellow);
+            g.drawString("ABOUT", Game.screenSize.width - 225, Game.screenSize.height / 2 + 70);
+            g.drawString("QUIT", Game.screenSize.width - 200, Game.screenSize.height / 2 + 190);
+        } else if (Game.Hover == Game.HOVER.ABOUT) {
+            g2d.draw(Button2);
+            g.drawString("ABOUT", Game.screenSize.width - 225, Game.screenSize.height / 2 + 70);
+            g.setColor(Color.yellow);
+            g.drawString("Play", Game.screenSize.width - 200, Game.screenSize.height / 2 - 50);
+            g.drawString("QUIT", Game.screenSize.width - 200, Game.screenSize.height / 2 + 190);
+        } else if (Game.Hover == Game.HOVER.QUIT) {
+            g2d.draw(Button3);
+            g.drawString("QUIT", Game.screenSize.width - 200, Game.screenSize.height / 2 + 190);
+            g.setColor(Color.yellow);
+            g.drawString("Play", Game.screenSize.width - 200, Game.screenSize.height / 2 - 50);
+            g.drawString("ABOUT", Game.screenSize.width - 225, Game.screenSize.height / 2 + 70);
+        } else {
+            g.setColor(Color.yellow);
+            g.drawString("PLAY", Game.screenSize.width - 200, Game.screenSize.height / 2 - 50);
+            g.drawString("ABOUT", Game.screenSize.width - 225, Game.screenSize.height / 2 + 70);
+            g.drawString("QUIT", Game.screenSize.width - 200, Game.screenSize.height / 2 + 190);
+        }
+
     }
 
     //render difficulty menu after click PLAY
@@ -93,43 +110,7 @@ public class Menu extends Applet {
         g.setFont(font1);
         g.setColor(Color.white);
         g.drawString(counterStr, Game.screenSize.width / 2 - 75, Game.screenSize.height / 2 + 85);
-//        g2d.draw(MenuBox);
-//        g.setColor(Color.gray);
-//        g.fillRect(width-65,50,400, 500);
-//        Font font1 = new Font("arial",Font.BOLD, 50);
-//        Font font2 = new Font("calibri",Font.BOLD,25);
-//        g.setFont(font1);
-//        g.setColor(Color.red);
-//        g.drawString("HOW TO PLAY",width - 45,100);
-//        g.setFont(font2);
-//        
-//        ////////
-//        g.setColor(Color.blue);
-//        g2d.draw(Back);
-//        g.setColor(Color.darkGray);
-//        g.fillRect(BackX,BackY,BackW,BackH);
-//        g.setColor(Color.red);
-//        g.drawString("BACK",BackX + 35,BackY + 45);
-//        
-//        g.setColor(Color.blue);
-//        g2d.draw(Start);
-//        g.setColor(Color.red);
-//        g.fillRect(StartX,StartY,StartW,StartH);
-//        g.setColor(Color.black);
-//        g.drawString("START",StartX + 30,StartY + 45);
 
-        //draw buttons
-//        Font font2 = new Font("calibri",Font.BOLD,35);
-//        g.setFont(font2);
-//        g.drawString("EASY",Button1.x + button_extraX2 , Button1.y + button_extraY);
-//        g2d.draw(Button1);
-//        g.drawString("NORMAL",Button2.x + button_extraX1, Button2.y + button_extraY);
-//        g2d.draw(Button2);
-//        g.drawString("HARD",Button3.x + button_extraX2, Button3.y + button_extraY);
-//        g2d.draw(Button3);
-//        g.setColor(Color.red);
-//        g.drawString("BACK",Button4.x + button_extraX2, Button4.y + button_extraY);
-//        g2d.draw(Button4);
     }
 
     public void pauseRender(Graphics g) {
@@ -146,26 +127,42 @@ public class Menu extends Applet {
         g.setFont(font2);
 
         ////////
-        g.setColor(Color.blue);
-        g2d.draw(Restart);
-        g2d.draw(OverBack);
-
         g.setColor(Color.darkGray);
         g.fillRect(BackX, OverY, BackW, BackH);
-        g.setColor(Color.white);
-        g.drawString("QUIT", BackX + 35, OverY + 45);
-
-        g.setColor(Color.darkGray);
         g.fillRect(StartX, OverY, StartW, StartH);
-        g.setColor(Color.white);
-        g.drawString("RESUME", StartX + 25, OverY + 45);
+        g2d.draw(OverBack);
+        g2d.draw(Restart);
+
+        if (Game.Hover == Game.HOVER.BUTTON1) {
+            g.setColor(Color.black);
+            g.fillRect(BackX, OverY, BackW, BackH);
+            g.setColor(Color.red);
+            g.drawString("QUIT", BackX + 35, OverY + 45);
+            g.setColor(Color.white);
+            g.drawString("RESUME", StartX + 20, OverY + 45);
+
+        } else if (Game.Hover == Game.HOVER.BUTTON2) {
+            g.setColor(Color.black);
+            g.fillRect(StartX, OverY, StartW, StartH);
+            g.setColor(Color.white);
+            g.drawString("QUIT", BackX + 35, OverY + 45);
+            g.setColor(Color.red);
+            g.drawString("RESUME", StartX + 20, OverY + 45);
+        } else {
+            g2d.draw(Restart);
+            g2d.draw(OverBack);
+            g.setColor(Color.white);
+            g.drawString("QUIT", BackX + 35, OverY + 45);
+            g.drawString("RESUME", StartX + 20, OverY + 45);
+        }
+
     }
 
     public void overRender(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g.setColor(Color.blue);
         g2d.draw(Box);
-        g.setColor(Color.lightGray);
+        g.setColor(Color.white);
         g.fillRect(width - 65, height - 125, 400, 250);
         Font font1 = new Font("arial", Font.BOLD, 50);
         Font font2 = new Font("calibri", Font.BOLD, 25);
@@ -175,41 +172,34 @@ public class Menu extends Applet {
         g.setFont(font2);
 
         ////////
-        g.setColor(Color.blue);
-        g2d.draw(Restart);
-        g2d.draw(OverBack);
-
-        g.setColor(Color.darkGray);
+        g.setColor(Color.lightGray);
         g.fillRect(BackX, OverY, BackW, BackH);
-        g.setColor(Color.white);
-        g.drawString("QUIT", BackX + 35, OverY + 45);
-
-        g.setColor(Color.darkGray);
         g.fillRect(StartX, OverY, StartW, StartH);
-        g.setColor(Color.white);
-        g.drawString("RESTART", StartX + 18, OverY + 45);
-    }
+        g2d.draw(OverBack);
+        g2d.draw(Restart);
 
-    public void hoverPlay(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-        if (space == null) {
-            space = getImage("/textures/space1.jpg");
+        if (Game.Hover == Game.HOVER.BUTTON1) {
+            g.setColor(Color.darkGray);
+            g.fillRect(BackX, OverY, BackW, BackH);
+            g.setColor(Color.red);
+            g.drawString("QUIT", BackX + 35, OverY + 45);
+            g.setColor(Color.white);
+            g.drawString("RESTART", StartX + 18, OverY + 45);
+
+        } else if (Game.Hover == Game.HOVER.BUTTON2) {
+            g.setColor(Color.darkGray);
+            g.fillRect(StartX, OverY, StartW, StartH);
+            g.setColor(Color.white);
+            g.drawString("QUIT", BackX + 35, OverY + 45);
+            g.setColor(Color.red);
+            g.drawString("RESTART", StartX + 18, OverY + 45);
+        } else {
+            g2d.draw(Restart);
+            g2d.draw(OverBack);
+            g.setColor(Color.white);
+            g.drawString("QUIT", BackX + 35, OverY + 45);
+            g.drawString("RESTART", StartX + 18, OverY + 45);
         }
-        g2d.drawImage(space, 0, 0, Game.screenSize.width, Game.screenSize.height, this);
-        //basic setting for font
-        Font font1 = new Font(".VnBahamasBH", Font.BOLD, 100);
-        g.setFont(font1);
-        g.setColor(Color.white);
-
-        //draw the title
-        g.drawString(Game.title, Game.screenSize.width / 2 - 350, Game.screenSize.height / 2 - 200);
-        //draw buttons
-        Font font2 = new Font(".VnRevueH", Font.BOLD, 35);
-        g.setFont(font2);
-        g.setColor(Color.yellow);
-        g.drawString("Play", Game.screenSize.width - 200, Game.screenSize.height / 2 - 50);
-        g.drawString("ABOUT", Game.screenSize.width - 225, Game.screenSize.height / 2 + 70);
-        g.drawString("QUIT", Game.screenSize.width - 200, Game.screenSize.height / 2 + 190);
     }
 
 }

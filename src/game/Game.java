@@ -53,7 +53,10 @@ public class Game extends Canvas implements Runnable {
 
         PLAY,
         ABOUT,
-        QUIT
+        QUIT,
+        BUTTON1,
+        BUTTON2,
+        NONE
     }
 
     public static HOVER Hover;
@@ -208,11 +211,7 @@ public class Game extends Canvas implements Runnable {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
         } else if (State == STATE.MENU) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-            if (Hover == HOVER.PLAY) {
-               menu.hoverPlay(g);
-            } else {
-                menu.mainRender(g);
-            }
+            menu.mainRender(g);
         } else if (State == STATE.PLAY) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             if (Playcounter / 100 < 3) {

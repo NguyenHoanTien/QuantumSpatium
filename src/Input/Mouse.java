@@ -51,22 +51,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
                     }
                 }
             }
-        } //handle clicking PLAY MENU buttons 
-//        else if (Game.State == Game.STATE.PLAY) {
-//            //Click on Back Button
-//            if (mx >= Menu.BackX && mx <= Menu.BackX + Menu.BackW) {
-//                if (my >= Menu.BackY && my <= Menu.BackY + Menu.BackH) {
-//                    Game.State = Game.STATE.MENU;
-//                }
-//            }
-//            //CLick on Start Button
-//            if (mx >= Menu.StartX && mx <= Menu.StartX + Menu.StartW) {
-//                if (my >= Menu.StartY && my <= Menu.StartY + Menu.StartH) {
-//                    Game.State = Game.STATE.GAME;
-//                }
-//            }
-//
-//        } //handle clicking GAME OVER MENU buttons
+        } //handle clicking GAME OVER MENU buttons
         else if (Game.State == Game.STATE.OVER || Game.State == Game.STATE.PAUSE) {
             //Click on BACK button
             if (mx >= Menu.BackX && mx <= Menu.BackX + Menu.BackW) {
@@ -77,10 +62,11 @@ public class Mouse implements MouseListener, MouseMotionListener {
             //CLick on Restart Button
             if (mx >= Menu.StartX && mx <= Menu.StartX + Menu.StartW) {
                 if (my >= Menu.OverY && my <= Menu.OverY + Menu.StartH) {
-                    if (Game.State == Game.STATE.OVER)
+                    if (Game.State == Game.STATE.OVER) {
                         Game.State = Game.STATE.PLAY;
-                    else
+                    } else {
                         Game.State = Game.STATE.GAME;
+                    }
                 }
             }
         } else if (Game.State == Game.STATE.DEAD) {
@@ -113,11 +99,48 @@ public class Mouse implements MouseListener, MouseMotionListener {
     public void mouseMoved(MouseEvent e) {
         int mx = e.getX();
         int my = e.getY();
-        if (mx >= Menu.Button1.x && mx <= Menu.Button1.x + 120) {
-                    if (my >= Menu.Button1.y && my <= Menu.Button1.y + 50) {
-                        Game.Hover = Game.HOVER.PLAY;
-                    }
+        //main menu
+        if (Game.State == Game.STATE.MENU) {
+            if (mx >= Menu.Button1.x && mx <= Menu.Button1.x + 120) {
+                if (my >= Menu.Button1.y && my <= Menu.Button1.y + 50) {
+                    Game.Hover = Game.HOVER.PLAY;
+                } else if (my >= Menu.Button2.y && my <= Menu.Button2.y + 50) {
+                    Game.Hover = Game.HOVER.ABOUT;
+                } else if (my >= Menu.Button3.y && my <= Menu.Button3.y + 50) {
+                    Game.Hover = Game.HOVER.QUIT;
+                } else {
+                    Game.Hover = Game.HOVER.NONE;
                 }
+
+            } else if (mx >= Menu.Button2.x && mx <= Menu.Button2.x + 160) {
+                if (my >= Menu.Button2.y && my <= Menu.Button2.y + 50) {
+                    Game.Hover = Game.HOVER.ABOUT;
+                } else {
+                    Game.Hover = Game.HOVER.NONE;
+                }
+            } else {
+                Game.Hover = Game.HOVER.NONE;
+            }
+        } else if (Game.State == Game.STATE.OVER || Game.State == Game.STATE.PAUSE) {
+            //HOVER on QUIT,BACK button
+            if (mx >= Menu.BackX && mx <= Menu.BackX + Menu.BackW) {
+                if (my >= Menu.OverY && my <= Menu.OverY + Menu.BackH) {
+                    Game.Hover = Game.HOVER.BUTTON1;
+                } else {
+                    Game.Hover = Game.HOVER.NONE;
+                }
+            } //HOVER on RESTART,RESUME Button
+            else if (mx >= Menu.StartX && mx <= Menu.StartX + Menu.StartW) {
+                if (my >= Menu.OverY && my <= Menu.OverY + Menu.StartH) {
+                    Game.Hover = Game.HOVER.BUTTON2;
+                } else {
+                    Game.Hover = Game.HOVER.NONE;
+                }
+            } else {
+                Game.Hover = Game.HOVER.NONE;
+            }
+
+        }
     }
 
 }
