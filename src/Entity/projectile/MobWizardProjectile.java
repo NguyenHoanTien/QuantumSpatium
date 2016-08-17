@@ -31,10 +31,8 @@ public class MobWizardProjectile extends Projectile {
 
         if (level.tileCollision((int) (x + nx), (int) (y + ny), 5, 6, 5)) {
             // 44 = time life, 50 = number of particle
-            if (sprite == Sprite.bullet) {
-                level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level, Sprite.particle_blue));
-            } else level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level, Sprite.particle_green));
-            
+            level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level, Sprite.particle_red));
+
             this.remove();
         }
     }
@@ -51,7 +49,7 @@ public class MobWizardProjectile extends Projectile {
                     players.get(i).alive = false;
                     
                     //System.out.println(players.get(i) + " Died");
-                    level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level, Sprite.particle_blue));
+                    level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level, Sprite.particle_purple));
                     remove();
                 }
             }
