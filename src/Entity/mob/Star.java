@@ -21,7 +21,7 @@ public class Star extends Mob {
     private List<Node> path = null;
     private int time = 0;
     private Player player;
-    private double speed = 4;
+    private double speed = 2;
     
     public Star(int x, int y) {
         this.x = x << 4;

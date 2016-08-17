@@ -35,13 +35,17 @@ public class Sprite {
     
     // bullet animation;
     public static Sprite bullet = new Sprite (16, 1, 1, SpriteSheet.tiles);
-    
+    public static Sprite bullet1 = new Sprite (16, 1, 2, SpriteSheet.tiles);
 
     // Projectile Sprite
-    public static Sprite shoot = new Sprite (16, 1, 1, SpriteSheet.tiles);
+    public static Sprite shoot = new Sprite (16, 2, 1, SpriteSheet.tiles);
     
     // particle Sprite
-    public static Sprite particle_normal = new Sprite (3, 0x0094FF);
+    public static Sprite particle_blue = new Sprite (3, 0x0094FF);
+    public static Sprite particle_gray = new Sprite (3, 0xEEEEEE);
+    public static Sprite particle_green = new Sprite (3, 0xB7E7B2);
+    public static Sprite particle_purple = new Sprite (3, 0x9FA7FF);
+    public static Sprite particle_orange = new Sprite (3, 0xFF4E44);
     
     protected Sprite (SpriteSheet sheet, int width, int height) {
         SIZE = (width == height) ? width : -1;

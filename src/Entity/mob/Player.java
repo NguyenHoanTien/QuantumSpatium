@@ -60,8 +60,8 @@ public class Player extends Mob {
             }
             if (input.down) {
                 //ya += speed;
-                ya -= ny/2;
-                xa -= nx/2;
+                ya -= ny/4;
+                xa -= nx/4;
             }
             if (input.left) {
                 //xa -= speed;
@@ -109,7 +109,7 @@ public class Player extends Mob {
 
                     heal = 0;               // when player hit the mob, heal = 0, mean die directly
 
-                    level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));    // display partical effect
+                    level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level,Sprite.particle_gray));    // display partical effect
 
                     if (heal == 0) {        // condition.
                         entities.get(i).remove();       // remove the mob that hit player

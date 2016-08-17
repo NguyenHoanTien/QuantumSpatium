@@ -12,14 +12,14 @@ import Graphics.Sprite;
 import java.util.List;
 
 public class MobWizardProjectile extends Projectile {
-    public static int FireRate = 35;      // Higher is slower! Minimum is 1
-    public static int FireRateD = 30;
+    public static int FireRate = 55;      // Higher is slower! Minimum is 1
+    public static int FireRateD = 35;
     
-    public MobWizardProjectile(double x, double y, double dir, int speed) {
+    public MobWizardProjectile(double x, double y, double dir, int speed, Sprite sprite) {
         super(x, y, dir);
         range = random.nextInt(100) + 150;
         //damage = 20;
-        sprite = Sprite.shoot;
+        this.sprite = sprite;
         nx = speed * Math.cos(angle);
         ny = speed * Math.sin(angle);
     }
@@ -31,7 +31,10 @@ public class MobWizardProjectile extends Projectile {
 
         if (level.tileCollision((int) (x + nx), (int) (y + ny), 5, 6, 5)) {
             // 44 = time life, 50 = number of particle
-            level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));
+            if (sprite == Sprite.bullet) {
+                level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level, Sprite.particle_blue));
+            } else level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level, Sprite.particle_green));
+            
             this.remove();
         }
     }
@@ -48,7 +51,7 @@ public class MobWizardProjectile extends Projectile {
                     players.get(i).alive = false;
                     
                     //System.out.println(players.get(i) + " Died");
-                    level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));
+                    level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level, Sprite.particle_blue));
                     remove();
                 }
             }

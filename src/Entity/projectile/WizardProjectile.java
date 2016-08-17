@@ -30,7 +30,7 @@ public class WizardProjectile extends Projectile {
 
         if (level.tileCollision((int) (x + nx), (int) (y + ny), 5, 6, 5)) {
             // 44 = time life, 50 = number of particle
-            level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));
+            level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level, Sprite.particle_purple));
             this.remove();
         }
     }

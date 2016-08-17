@@ -6,6 +6,7 @@ import Entity.projectile.Projectile;
 import Entity.projectile.WizardProjectile;
 import Entity.spawner.ParticleSpawner;
 import Graphics.Screen;
+import Graphics.Sprite;
 import game.Game;
 
 
@@ -67,8 +68,8 @@ public abstract class Mob extends Entity {
         level.add(p);
     }
     
-    protected void Mobshoot(double x, double y, double dir, int butspeed) {
-        Projectile p = new MobWizardProjectile(x, y, dir, butspeed);
+    protected void Mobshoot(double x, double y, double dir, int butspeed, Sprite sprite) {
+        Projectile p = new MobWizardProjectile(x, y, dir, butspeed, sprite);
         level.add(p);
     }
 
