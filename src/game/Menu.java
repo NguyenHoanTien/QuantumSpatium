@@ -19,9 +19,9 @@ public class Menu extends Applet {
     public static int height = (Game.screenSize.height / 2);
 
     //Main menu buttons
-    public static Rectangle Button1 = new Rectangle(Game.screenSize.width / 2 + 150, Game.screenSize.height / 2 - 90, 500, 75);
-    public static Rectangle Button2 = new Rectangle(Game.screenSize.width / 2 + 150, Game.screenSize.height / 2 + 30, 500, 75);
-    public static Rectangle Button3 = new Rectangle(Game.screenSize.width / 2 + 150, Game.screenSize.height / 2 + 150, 500, 75);
+    public static Rectangle Button1 = new Rectangle(Game.screenSize.width - 640, Game.screenSize.height / 2 - 90, 600, 75);
+    public static Rectangle Button2 = new Rectangle(Game.screenSize.width - 640, Game.screenSize.height / 2 + 30, 600, 75);
+    public static Rectangle Button3 = new Rectangle(Game.screenSize.width - 640, Game.screenSize.height / 2 + 150, 600, 75);
 
     //play menu
     public Rectangle MenuBox = new Rectangle(width - 65, 50, 400, 500);
@@ -75,7 +75,7 @@ public class Menu extends Applet {
         g.setColor(Color.white);
         if (Game.Hover == Game.HOVER.PLAY) {
             g2d.draw(Button1);
-            g.drawString("PLAY", Game.screenSize.width - 210, Game.screenSize.height / 2 - 35);
+            g.drawString("PLAY", Game.screenSize.width - 195, Game.screenSize.height / 2 - 35);
             g.setColor(Color.yellow);
             g.drawString("ABOUT", Game.screenSize.width - 250, Game.screenSize.height / 2 + 85);
             g.drawString("QUIT", Game.screenSize.width - 190, Game.screenSize.height / 2 + 205);
@@ -83,17 +83,17 @@ public class Menu extends Applet {
             g2d.draw(Button2);
             g.drawString("ABOUT", Game.screenSize.width - 255, Game.screenSize.height / 2 + 85);
             g.setColor(Color.yellow);
-            g.drawString("PLAY", Game.screenSize.width - 205, Game.screenSize.height / 2 - 35);
+            g.drawString("PLAY", Game.screenSize.width - 190, Game.screenSize.height / 2 - 35);
             g.drawString("QUIT", Game.screenSize.width - 190, Game.screenSize.height / 2 + 205);
         } else if (Game.Hover == Game.HOVER.QUIT) {
             g2d.draw(Button3);
-            g.drawString("QUIT", Game.screenSize.width - 200, Game.screenSize.height / 2 + 205);
+            g.drawString("QUIT", Game.screenSize.width - 195, Game.screenSize.height / 2 + 205);
             g.setColor(Color.yellow);
-            g.drawString("PLAY", Game.screenSize.width - 205, Game.screenSize.height / 2 - 35);
+            g.drawString("PLAY", Game.screenSize.width - 190, Game.screenSize.height / 2 - 35);
             g.drawString("ABOUT", Game.screenSize.width - 250, Game.screenSize.height / 2 + 85);
         } else {
             g.setColor(Color.yellow);
-            g.drawString("PLAY", Game.screenSize.width - 205, Game.screenSize.height / 2 - 35);
+            g.drawString("PLAY", Game.screenSize.width - 190, Game.screenSize.height / 2 - 35);
             g.drawString("ABOUT", Game.screenSize.width - 250, Game.screenSize.height / 2 + 85);
             g.drawString("QUIT", Game.screenSize.width - 190, Game.screenSize.height / 2 + 205);
         }
