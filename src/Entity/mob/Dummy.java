@@ -114,7 +114,7 @@ public class Dummy extends Mob {
             double Accu = shifted + dir;
             ///////////////////////////
 
-            Mobshoot(x, y, Accu, 3, Sprite.bullet);
+            Mobshoot(x, y, Accu, 2, Sprite.bullet);
             Firerate = MobWizardProjectile.FireRateD;
             /////////////////////////
         }
