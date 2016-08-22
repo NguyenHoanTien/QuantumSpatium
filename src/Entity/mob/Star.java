@@ -27,6 +27,7 @@ public class Star extends Mob {
         this.x = x << 4;
         this.y = y << 4;
         sprite = Sprite.star;
+        this.health = 2;
     }
 
     public int getX() {

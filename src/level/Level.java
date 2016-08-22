@@ -82,6 +82,7 @@ public class Level {
         //System.out.println("Mobs :" + entities.size());
         this.remove();
     }
+    
     public int level_num = 30;
 
     public int get_level_num() {
@@ -93,12 +94,12 @@ public class Level {
 
     public void spawnMob() {
         Random rand = new Random();
-        int x = rand.nextInt(127) + 1;
-        int y = rand.nextInt(127) + 1;
-        int type = rand.nextInt(101);
-        if (type <= 60) {
+        int x = rand.nextInt(125) + 2;
+        int y = rand.nextInt(125) + 2;
+        int type = rand.nextInt(99);
+        if (type <= 70) {
             add(new Chaser(x, y));
-        } else if (type > 60 && type < 90) {
+        } else if (type > 70 && type < 95) {
             add(new Dummy(x, y));
         } else {
             add(new Star(x, y));
@@ -107,12 +108,12 @@ public class Level {
 
     }
     
-    public int level_present = 10;
+    public int level_present = 5;
     
     public void spawnStart(){
         for (int i = 0; i < level_present; i++) {
             spawnMob();
-            System.out.println(level_num);
+            //System.out.println(level_num);
         }
     }
 

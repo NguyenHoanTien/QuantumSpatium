@@ -68,7 +68,7 @@ public class Menu extends Applet {
         g.setColor(Color.white);
 
         //draw the title
-        g.drawString(Game.title, Game.screenSize.width - 900, Game.screenSize.height / 2 - 200);
+        g.drawString(Game.title, Game.screenSize.width - 1000, Game.screenSize.height / 2 - 200);
         //draw buttons
         Font font2 = new Font(".VnRevueH", Font.BOLD, 50);
         g.setFont(font2);

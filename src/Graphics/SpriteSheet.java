@@ -17,7 +17,8 @@ public class SpriteSheet {
 
     public static SpriteSheet playerIcon = new SpriteSheet("/textures/player.png", 128, 96);
     public static SpriteSheet playermove = new SpriteSheet(playerIcon, 1, 0, 1, 3, 32);
-
+    public static SpriteSheet playermoveback = new SpriteSheet(playerIcon, 0, 0, 1, 3, 32);
+    
     public static SpriteSheet Enemy = new SpriteSheet("/textures/Enemy.png", 128);
     public static SpriteSheet EnemyT = new SpriteSheet("/textures/EnemyT.png", 128);
     

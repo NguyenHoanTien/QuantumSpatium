@@ -1,12 +1,7 @@
 package level;
 
-import Entity.mob.Chaser;
-import Entity.mob.Dummy;
-import Entity.mob.Star;
-import game.Game;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Random;
 import javax.imageio.ImageIO;
 
 public class SpawnLevel extends Level {
@@ -28,7 +23,7 @@ public class SpawnLevel extends Level {
             System.out.println("Exception! Could not load level file! ");
         }
         
-         spawnStart();
+        spawnStart();
     }
 
  

@@ -2,8 +2,6 @@ package game;
 
 import Entity.mob.Player;
 import Graphics.Screen;
-import Graphics.Sprite;
-import Graphics.SpriteSheet;
 import Input.Keyboard;
 import Input.Mouse;
 import java.awt.Canvas;
@@ -15,7 +13,6 @@ import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.util.Random;
 import javax.swing.JFrame;
 import level.Level;
 import level.SpawnLevel;

@@ -12,19 +12,21 @@ import Input.Keyboard;
 import Input.Mouse;
 import game.Game;
 import java.util.List;
-import java.util.Random;
 
 public class Player extends Mob {
 
     private Keyboard input;
     private Sprite sprite;
+    private Sprite sprite1;
 
     public int heal = 10;
 
     public static int firerate = 0;
+    
     private double speed = 4;
     private AnimateSprite playerAni = new AnimateSprite(SpriteSheet.playermove, 32, 32, 3);
-
+    private AnimateSprite playerAni1 = new AnimateSprite(SpriteSheet.playermoveback, 32, 32, 3);
+    
     public boolean alive = true;
     
     private double dir_player = 0;
@@ -57,11 +59,13 @@ public class Player extends Mob {
             //ya -= speed;
                 ya += ny;
                 xa += nx;
+                sprite1 = playerAni.getSprite();
             }
             if (input.down) {
                 //ya += speed;
-                ya -= ny/4;
-                xa -= nx/4;
+                ya -= ny/2;
+                xa -= nx/2;
+                sprite1 = playerAni1.getSprite();
             }
             if (input.left) {
                 //xa -= speed;
@@ -109,8 +113,8 @@ public class Player extends Mob {
 
                     heal = 0;               // when player hit the mob, heal = 0, mean die directly
 
-                    level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level,Sprite.particle_gray));    // display partical effect
-
+                    level.add(new ParticleSpawner((int) x, (int) y, 44, 25, level,Sprite.particle_gray));    // display partical effect
+                    level.add(new ParticleSpawner((int) x, (int) y, 44, 25, level,Sprite.particle_blue)); 
                     if (heal == 0) {        // condition.
                         entities.get(i).remove();       // remove the mob that hit player
                         //System.out.println(" Died");  // checking...
@@ -156,7 +160,7 @@ public class Player extends Mob {
     public void render(Screen screen) {
 
         if (moving == true) {
-            sprite = playerAni.getSprite();
+            sprite = sprite1;
         } else {
             sprite = Sprite.playerStop;
         }

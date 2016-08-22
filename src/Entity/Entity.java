@@ -6,7 +6,6 @@ import Entity.mob.Star;
 import Entity.spawner.ParticleSpawner;
 import Graphics.Screen;
 import Graphics.Sprite;
-import java.util.List;
 import java.util.Random;
 import level.Level;
 
@@ -76,20 +75,19 @@ public class Entity {
             removed = true;
             count++;
             //System.out.println("Count: " + count);
-            level.add(new ParticleSpawner((int) x, (int) y, 44, 25, level, Sprite.particle_gray));
-            
-//            List<Entity> entities = level.entities;
-//            for (int i = 0; i < entities.size(); i++) {
-//                if (entities.get(i) instanceof Dummy) {
-//                    level.add(new ParticleSpawner((int) x, (int) y, 44, 25, level, Sprite.particle_blue));
-//                } else if (entities.get(i) instanceof Chaser) {
-//                    level.add(new ParticleSpawner((int) x, (int) y, 44, 25, level, Sprite.particle_green));
-//                } else if (entities.get(i) instanceof Star) {
-//                    level.add(new ParticleSpawner((int) x, (int) y, 44, 25, level, Sprite.particle_orange));
-//                }
-                if (level.get_level_num() > 0) {
-                    level.spawnMob();
-                }
+            level.add(new ParticleSpawner((int) x, (int) y, 44, 15, level, Sprite.particle_gray));
+
+            if (this instanceof Dummy) {
+                level.add(new ParticleSpawner((int) x, (int) y, 44, 15, level, Sprite.particle_blue));
+            } else if (this instanceof Chaser) {
+                level.add(new ParticleSpawner((int) x, (int) y, 44, 15, level, Sprite.particle_green));
+            } else if (this instanceof Star) {
+                level.add(new ParticleSpawner((int) x, (int) y, 44, 15, level, Sprite.particle_yellow));
+            }
+            if (level.get_level_num() > 0) {
+                level.spawnMob();
+
             }
         }
     }
+}

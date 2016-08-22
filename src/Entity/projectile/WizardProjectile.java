@@ -11,7 +11,7 @@ import java.util.List;
 
 public class WizardProjectile extends Projectile {
 
-    public static final int FireRate = 15;      // Higher is slower! Minimum is 1
+    public static int FireRate = 15;      // Higher is slower! Minimum is 1
 
     public WizardProjectile(double x, double y, double dir) {
         super(x, y, dir);

@@ -126,8 +126,8 @@ public class Chaser extends Mob {
                 double Accu = shifted + dir;
             ///////////////////////////
 
-                Mobshoot(x, y, Accu, 3, Sprite.bullet1);
-                Mobshoot(x, y, dir, 3, Sprite.bullet1);
+                Mobshoot(x, y, Accu, 2, Sprite.bullet1);
+                Mobshoot(x, y, dir, 2, Sprite.bullet1);
                 Firerate = MobWizardProjectile.FireRate;
                 /////////////////////////
             }
