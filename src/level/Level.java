@@ -83,39 +83,39 @@ public class Level {
         this.remove();
     }
     
-    public int level_num = 30;
+//    public int level_num = 30;
+//
+//    public int get_level_num() {
+//        return level_num;
+//    }
+//    public void decrement_level_num() {
+//        level_num--;
+//    }
 
-    public int get_level_num() {
-        return level_num;
-    }
-    public void decrement_level_num() {
-        level_num--;
-    }
-
-    public void spawnMob() {
-        Random rand = new Random();
-        int x = rand.nextInt(125) + 2;
-        int y = rand.nextInt(125) + 2;
-        int type = rand.nextInt(99);
-        if (type <= 70) {
-            add(new Chaser(x, y));
-        } else if (type > 70 && type < 95) {
-            add(new Dummy(x, y));
-        } else {
-            add(new Star(x, y));
-        }
-        decrement_level_num();
-
-    }
-    
-    public int level_present = 5;
-    
-    public void spawnStart(){
-        for (int i = 0; i < level_present; i++) {
-            spawnMob();
-            //System.out.println(level_num);
-        }
-    }
+//    public void spawnMob() {
+//        Random rand = new Random();
+//        int x = rand.nextInt(125) + 2;
+//        int y = rand.nextInt(125) + 2;
+//        int type = rand.nextInt(99);
+//        if (type <= 70) {
+//            add(new Chaser(x, y));
+//        } else if (type > 70 && type < 95) {
+//            add(new Dummy(x, y));
+//        } else {
+//            add(new Star(x, y));
+//        }
+//        decrement_level_num();
+//
+//    }
+//    
+//    public int level_present = 5;
+//    
+//    public void spawnStart(){
+//        for (int i = 0; i < level_present; i++) {
+//            spawnMob();
+//            //System.out.println(level_num);
+//        }
+//    }
 
     public void remove() {
         for (int i = 0; i < entities.size(); i++) {

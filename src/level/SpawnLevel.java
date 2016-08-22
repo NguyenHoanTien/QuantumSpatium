@@ -3,9 +3,12 @@ package level;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import level.respawnMob;
 
 public class SpawnLevel extends Level {
 
+    private Thread threadrespawn;
+            
     public SpawnLevel(String path) {
         super(path);
 
@@ -23,7 +26,12 @@ public class SpawnLevel extends Level {
             System.out.println("Exception! Could not load level file! ");
         }
         
-        spawnStart();
+        //respawn.spawnStart();
+        threadrespawn = new Thread(new respawnMob());      // This mean the game class
+        threadrespawn.start();                 // Start up thread and call the run menthod
+        
+//        respawnMob threadrespawn = new respawnMob();
+//        threadrespawn.start();
     }
 
  

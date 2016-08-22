@@ -8,6 +8,7 @@ import Graphics.Screen;
 import Graphics.Sprite;
 import java.util.Random;
 import level.Level;
+import level.respawnMob;
 
 public class Entity {
 
@@ -68,6 +69,7 @@ public class Entity {
     }
 
     int count = 0;
+    private respawnMob respawn;
 
     public void damageHealth(int damage) {
         health -= damage;
@@ -84,8 +86,8 @@ public class Entity {
             } else if (this instanceof Star) {
                 level.add(new ParticleSpawner((int) x, (int) y, 44, 15, level, Sprite.particle_yellow));
             }
-            if (level.get_level_num() > 0) {
-                level.spawnMob();
+            if (respawn.get_level_num() > 0) {
+                respawn.spawnMob();
 
             }
         }
