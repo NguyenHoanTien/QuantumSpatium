@@ -132,21 +132,17 @@ public class Game extends Canvas implements Runnable {
                 updates++;
                 delta--;
             }
-            if (State == STATE.MENU) {
-                spawn = new SpawnLevel("/textures/testL.png");
+            if (State == STATE.PLAY) {
+ 
                 level = spawn;
                 TileCoordinate playerSpawn = new TileCoordinate(1210, 629);   // player spawn location
                 player = new Player(playerSpawn.x(), playerSpawn.y(), key);
-            } else if (State == STATE.PLAY) {
-                player.remove();
-                level.remove();
                 spawn = new SpawnLevel("/textures/testL.png");
                 if (Playcounter == 0) {
                     level = spawn;
                 }
                 Playcounter++;
-                TileCoordinate playerSpawn = new TileCoordinate(1210, 629);   // player spawn location
-                player = new Player(playerSpawn.x(), playerSpawn.y(), key);
+                
                 level.add(player);
             } else if (State == STATE.OVER) {
                 Playcounter = 0;
@@ -185,14 +181,14 @@ public class Game extends Canvas implements Runnable {
         }
 
         screen.clear();
-
-        double xScroll = player.getX() - screen.width / 2;
-        double yScroll = player.getY() - screen.height / 2;
-        if (State == STATE.MENU) {
-            //level.render(screenSize.width / 2, screenSize.height / 2 - 45, screen);
-        } else {
-            level.render((int) xScroll, (int) yScroll, screen);
+        double xScroll = 0, yScroll = 0;
+        if(State == STATE.PLAY || State == STATE.GAME){
+            xScroll = player.getX() - screen.width / 2;
+            yScroll = player.getY() - screen.height / 2;
         }
+        if (State != STATE.MENU) 
+            level.render((int) xScroll, (int) yScroll, screen);
+        
 
         for (int i = 0; i < pixels.length; i++) {
             pixels[i] = screen.pixels[i];
