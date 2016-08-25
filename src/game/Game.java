@@ -1,6 +1,7 @@
 package game;
 
 import Audio.Music;
+import Entity.Entity;
 import Entity.mob.Player;
 import Graphics.Screen;
 import Input.Keyboard;
@@ -27,14 +28,19 @@ public class Game extends Canvas implements Runnable {
     public static int width = 500;
     public static int height = 268;
     public static int scale = 3;
+    
+    
     public static String title = "QUANTUM SPATIUM";
 
-    private int score = 0;
     //for display
     private int Playcounter = 0;
-
+    private int a = 400;
+    private int b = 10;
+    
+    
     private JFrame frame;
     private Keyboard key;
+    private Entity entity;
     private Level level;
     private Player player;
     private boolean running = false;
@@ -261,7 +267,17 @@ public class Game extends Canvas implements Runnable {
             g.setFont(new Font("Verdana", 0, 60));
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             g.drawString("" + level.count_level, 0, 50);
-            g.drawString("Score: " + score, screenSize.width - 300, 50);
+
+            if (level.score == 0) {
+                b = 10;
+                a = 400;
+            }
+            if (level.score >= b) {
+                b = b*10;
+                a = a + 40;
+            }
+
+            g.drawString("Score: " + level.score, screenSize.width - a, 50);
         } else if (State == STATE.MENU) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             menu.mainRender(g);
@@ -294,7 +310,7 @@ public class Game extends Canvas implements Runnable {
             }
         } else if (State == STATE.PAUSE) {
             g.drawString("" + level.count_level, 0, 50);
-            g.drawString("Score: " + score, screenSize.width - 300, 50);
+            g.drawString("Score: " + level.score, screenSize.width - 400, 50);
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             menu.pauseRender(g);
         } else if (State == STATE.OVER) {

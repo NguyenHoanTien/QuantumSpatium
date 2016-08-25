@@ -7,18 +7,21 @@ import Entity.mob.Star;
 import Entity.spawner.ParticleSpawner;
 import Graphics.Screen;
 import Graphics.Sprite;
+import game.Game;
 import java.util.Random;
 import level.Level;
 
 public class Entity {
 
+
+    
     protected int x, y;
     private boolean removed = false;
     protected Level level;
     protected final Random random = new Random();
     protected Sprite sprite;
     protected int health;
-
+    
     public Entity() {
 
     }
@@ -79,13 +82,16 @@ public class Entity {
             count++;
             //System.out.println("Count: " + count);
             level.add(new ParticleSpawner((int) x, (int) y, 44, 15, level, Sprite.particle_gray));
-
+            
             if (this instanceof Dummy) {
                 level.add(new ParticleSpawner((int) x, (int) y, 44, 15, level, Sprite.particle_blue));
+                level.score += 10;
             } else if (this instanceof Chaser) {
                 level.add(new ParticleSpawner((int) x, (int) y, 44, 15, level, Sprite.particle_green));
+                level.score += 30;
             } else if (this instanceof Star) {
                 level.add(new ParticleSpawner((int) x, (int) y, 44, 15, level, Sprite.particle_yellow));
+                level.score += 20;
             }
             if (level.get_level_num() > 0) {
                 level.spawnMob();

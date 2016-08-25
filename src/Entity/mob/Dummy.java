@@ -48,10 +48,10 @@ public class Dummy extends Mob {
 
         int px = level.getPlayerAt(0).getX() + 10;
         int py = level.getPlayerAt(0).getY() + 10;
-
+        
         Vector2i start = new Vector2i(getX() >> 4, getY() >> 4);
         Vector2i destination = new Vector2i(px >> 4, py >> 4);
-
+        
         if (time % 2 == 0) {
             path = level.findpath(start, destination);
         }
@@ -71,6 +71,7 @@ public class Dummy extends Mob {
                 if (y > (vec.getY() << 4)) {
                     ya -= speed;
                 }
+                
             }
         }
         if (xa != 0 || ya != 0) {

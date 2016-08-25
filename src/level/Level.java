@@ -21,7 +21,8 @@ public class Level {
     public int level_present = 5;
     public int level_num = 20;
     public int count_level = level_num;
-    
+    public int score = 0;
+        
     protected int width, height;
     protected int[] tilesInt;
     protected int[] tiles;
@@ -104,9 +105,9 @@ public class Level {
         int x = rand.nextInt(125) + 2;
         int y = rand.nextInt(125) + 2;
         int type = rand.nextInt(99);
-        if (type <= 70) {
+        if (type <= 50) {
            add(new Dummy(x, y));
-        } else if (type > 70 && type < 93) {
+        } else if (type > 50 && type < 93) {
             add(new Chaser(x, y));
         } else {
             add(new Star(x, y));

@@ -13,8 +13,8 @@ import Graphics.Sprite;
 import java.util.List;
 
 public class MobWizardProjectile extends Projectile {
-    public static int FireRate = 75;      // Higher is slower! Minimum is 1
-    public static int FireRateD = 55;
+    public static int FireRate = 95;      // Higher is slower! Minimum is 1
+    public static int FireRateD = 75;
     
     public MobWizardProjectile(double x, double y, double dir, int speed, Sprite sprite) {
         super(x, y, dir);
