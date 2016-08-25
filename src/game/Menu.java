@@ -22,7 +22,7 @@ public class Menu extends Applet {
     public static Rectangle Button1 = new Rectangle(Game.screenSize.width - 640, Game.screenSize.height / 2 - 90, 600, 75);
     public static Rectangle Button2 = new Rectangle(Game.screenSize.width - 640, Game.screenSize.height / 2 + 30, 600, 75);
     public static Rectangle Button3 = new Rectangle(Game.screenSize.width - 640, Game.screenSize.height / 2 + 150, 600, 75);
-
+    public static Rectangle Button4 = new Rectangle(Game.screenSize.width - 640, Game.screenSize.height / 2 + 270, 600, 75);
     //play menu
     public Rectangle MenuBox = new Rectangle(width - 65, 50, 400, 500);
     //PLAY MENU Back Button input
@@ -73,29 +73,40 @@ public class Menu extends Applet {
         Font font2 = new Font(".VnRevueH", Font.BOLD, 50);
         g.setFont(font2);
         g.setColor(Color.white);
-        if (Game.Hover == Game.HOVER.PLAY) {
+        if (Game.Hover == Game.HOVER.TUTORIAL) {
             g2d.draw(Button1);
-            g.drawString("PLAY", Game.screenSize.width - 195, Game.screenSize.height / 2 - 35);
+            g.drawString("TUTORIAL", Game.screenSize.width - 340, Game.screenSize.height / 2 - 35);
             g.setColor(Color.yellow);
-            g.drawString("ABOUT", Game.screenSize.width - 250, Game.screenSize.height / 2 + 85);
-            g.drawString("QUIT", Game.screenSize.width - 190, Game.screenSize.height / 2 + 205);
-        } else if (Game.Hover == Game.HOVER.ABOUT) {
+            g.drawString("PLAY", Game.screenSize.width - 190, Game.screenSize.height / 2 + 85);
+            g.drawString("ABOUT", Game.screenSize.width - 250, Game.screenSize.height / 2 + 205);
+            g.drawString("QUIT", Game.screenSize.width - 190, Game.screenSize.height / 2 + 325);
+        } else if (Game.Hover == Game.HOVER.PLAY) {
             g2d.draw(Button2);
-            g.drawString("ABOUT", Game.screenSize.width - 255, Game.screenSize.height / 2 + 85);
+            g.drawString("PLAY", Game.screenSize.width - 195, Game.screenSize.height / 2 + 85);
             g.setColor(Color.yellow);
-            g.drawString("PLAY", Game.screenSize.width - 190, Game.screenSize.height / 2 - 35);
-            g.drawString("QUIT", Game.screenSize.width - 190, Game.screenSize.height / 2 + 205);
-        } else if (Game.Hover == Game.HOVER.QUIT) {
+            g.drawString("TUTORIAL", Game.screenSize.width - 335, Game.screenSize.height / 2 - 35);
+            g.drawString("ABOUT", Game.screenSize.width - 250, Game.screenSize.height / 2 + 205);
+            g.drawString("QUIT", Game.screenSize.width - 190, Game.screenSize.height / 2 + 325);
+        } else if (Game.Hover == Game.HOVER.ABOUT) {
             g2d.draw(Button3);
-            g.drawString("QUIT", Game.screenSize.width - 195, Game.screenSize.height / 2 + 205);
+            g.drawString("ABOUT", Game.screenSize.width - 255, Game.screenSize.height / 2 + 205);
             g.setColor(Color.yellow);
-            g.drawString("PLAY", Game.screenSize.width - 190, Game.screenSize.height / 2 - 35);
-            g.drawString("ABOUT", Game.screenSize.width - 250, Game.screenSize.height / 2 + 85);
+            g.drawString("TUTORIAL", Game.screenSize.width - 335, Game.screenSize.height / 2 - 35);
+            g.drawString("PLAY", Game.screenSize.width - 190, Game.screenSize.height / 2 + 85);
+            g.drawString("QUIT", Game.screenSize.width - 190, Game.screenSize.height / 2 + 325);
+        } else if (Game.Hover == Game.HOVER.QUIT) {
+            g2d.draw(Button4);
+            g.drawString("QUIT", Game.screenSize.width - 195, Game.screenSize.height / 2 + 325);
+            g.setColor(Color.yellow);
+            g.drawString("TUTORIAL", Game.screenSize.width - 335, Game.screenSize.height / 2 - 35);
+            g.drawString("PLAY", Game.screenSize.width - 190, Game.screenSize.height / 2 + 85);
+            g.drawString("ABOUT", Game.screenSize.width - 250, Game.screenSize.height / 2 + 205);
         } else {
             g.setColor(Color.yellow);
-            g.drawString("PLAY", Game.screenSize.width - 190, Game.screenSize.height / 2 - 35);
-            g.drawString("ABOUT", Game.screenSize.width - 250, Game.screenSize.height / 2 + 85);
-            g.drawString("QUIT", Game.screenSize.width - 190, Game.screenSize.height / 2 + 205);
+            g.drawString("TUTORIAL", Game.screenSize.width - 335, Game.screenSize.height / 2 - 35);
+            g.drawString("PLAY", Game.screenSize.width - 190, Game.screenSize.height / 2 + 85);
+            g.drawString("ABOUT", Game.screenSize.width - 250, Game.screenSize.height / 2 + 205);
+            g.drawString("QUIT", Game.screenSize.width - 190, Game.screenSize.height / 2 + 325);
         }
 
     }
@@ -202,4 +213,40 @@ public class Menu extends Applet {
         }
     }
 
+    public void tutRender(Graphics g) {
+        Font font = new Font("arial", Font.BOLD, 50);
+        g.setFont(font);
+        if (Game.tutStep == 0) {
+            g.setColor(Color.yellow);
+            g.drawString("WELCOME SOLDIER!", Game.screenSize.width / 2 - 200, 150);
+            g.drawString("THIS IS A BATTLESHIP TRAINING SECTION", Game.screenSize.width / 2 - 500, 200);
+        }else if (Game.tutStep == 1) {
+            g.setColor(Color.white);
+            g.drawString("First step:", Game.screenSize.width / 2 - 100, 150);
+            g.drawString("Use 'A' and 'D' key to change direction. ", Game.screenSize.width / 2 - 450, 190);
+        }else if (Game.tutStep == 2) {
+            g.setColor(Color.white);
+            g.drawString("Good work! Next step:", Game.screenSize.width / 2 - 250, 150);
+             g.drawString("Press 'W' key to move forward ", Game.screenSize.width / 2 - 350, 190);
+        }else if (Game.tutStep == 3) {
+            g.setColor(Color.white);
+            g.drawString("Great job! Next one:", Game.screenSize.width / 2 - 225, 150);
+            g.drawString("Press 'S' key to move backward ", Game.screenSize.width / 2 - 375, 190);
+        }
+        else if (Game.tutStep == 4) {
+            g.setColor(Color.yellow);
+            g.drawString("Be careful!", Game.screenSize.width / 2 - 100, 150);
+            g.setColor(Color.white);
+            g.drawString("Going backward is slower than going forward!", Game.screenSize.width / 2 - 550, 190);
+        } else if (Game.tutStep == 5) {
+            g.setColor(Color.white);
+            g.drawString("Well done soldier!", Game.screenSize.width / 2 - 200, 150);
+            g.drawString("Now use left-mouse to fire anywhere you want", Game.screenSize.width / 2 - 550, 190);
+        }else if (Game.tutStep == 6){
+            g.setColor(Color.yellow);
+            g.drawString("You are prepared!", Game.screenSize.width / 2 - 200, 150);
+             g.setColor(Color.white);
+            g.drawString("You can press Esc to exit and join the battle!", Game.screenSize.width / 2 - 550, 190);
+        }
+    }
 }

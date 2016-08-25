@@ -46,7 +46,6 @@ public class WizardProjectile extends Projectile {
                         && y < entities.get(i).getY() + 15
                         && y > entities.get(i).getY() - 15) {
                     remove();
-
                     //heal -= damage;
                     
                     entities.get(i).damageHealth(damage);

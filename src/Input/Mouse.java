@@ -38,14 +38,20 @@ public class Mouse implements MouseListener, MouseMotionListener {
         if (Game.State == Game.STATE.MENU) {
             //handle menu clicking
             if (Game.State == Game.STATE.MENU) {
-                //Click on Play Button
+                //Click on Tutorial Button
                 if (mx >= Menu.Button1.x && mx <= Menu.Button1.x + 600) {
                     if (my >= Menu.Button1.y && my <= Menu.Button1.y + 75) {
+                        Game.State = Game.STATE.TUTORIAL;
+                    }
+                }
+                //Click on Play Button
+                if (mx >= Menu.Button2.x && mx <= Menu.Button2.x + 600) {
+                    if (my >= Menu.Button2.y && my <= Menu.Button2.y + 75) {
                         Game.State = Game.STATE.PLAY;
                     }
                 }
                 //Click on Quit Button
-                if (mx >= Menu.Button3.x && mx <= Menu.Button3.x + 600) {
+                if (mx >= Menu.Button4.x && mx <= Menu.Button4.x + 600) {
                     if (my >= Menu.Button3.y && my <= Menu.Button3.y + 75) {
                         System.exit(0);
                     }
@@ -65,7 +71,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
                     if (Game.State == Game.STATE.OVER) {
                         Game.State = Game.STATE.PLAY;
                     } else {
-                        Game.State = Game.STATE.GAME;
+                        Game.State = Game.prevState;
                     }
                 }
             }
@@ -103,10 +109,12 @@ public class Mouse implements MouseListener, MouseMotionListener {
         if (Game.State == Game.STATE.MENU) {
             if (mx >= Menu.Button1.x && mx <= Menu.Button1.x + 600) {
                 if (my >= Menu.Button1.y && my <= Menu.Button1.y + 75) {
-                    Game.Hover = Game.HOVER.PLAY;
+                    Game.Hover = Game.HOVER.TUTORIAL;
                 } else if (my >= Menu.Button2.y && my <= Menu.Button2.y + 75) {
-                    Game.Hover = Game.HOVER.ABOUT;
+                    Game.Hover = Game.HOVER.PLAY;
                 } else if (my >= Menu.Button3.y && my <= Menu.Button3.y + 75) {
+                    Game.Hover = Game.HOVER.ABOUT;
+                } else if (my >= Menu.Button4.y && my <= Menu.Button4.y + 75) {
                     Game.Hover = Game.HOVER.QUIT;
                 } else {
                     Game.Hover = Game.HOVER.NONE;

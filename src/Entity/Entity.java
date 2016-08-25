@@ -73,6 +73,7 @@ public class Entity {
         health -= damage;
         if (health <= 0) {
             removed = true;
+            level.decrement_level_display();
             count++;
             //System.out.println("Count: " + count);
             level.add(new ParticleSpawner((int) x, (int) y, 44, 15, level, Sprite.particle_gray));

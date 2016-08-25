@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import level.Level;
 import level.SpawnLevel;
 import level.TileCoordinate;
+import level.TutorialLevel;
 
 public class Game extends Canvas implements Runnable {
 
@@ -26,6 +27,8 @@ public class Game extends Canvas implements Runnable {
     public static int height = 268;
     public static int scale = 3;
     public static String title = "QUANTUM SPATIUM";
+
+    private int score = 0;
     //for display
     private int Playcounter = 0;
 
@@ -38,6 +41,8 @@ public class Game extends Canvas implements Runnable {
     //create states for the game
     public static enum STATE {
 
+        TUTORIAL,
+        RUNTUT,
         GAME,
         MENU,
         PLAY,
@@ -48,6 +53,7 @@ public class Game extends Canvas implements Runnable {
 
     public static enum HOVER {
 
+        TUTORIAL,
         PLAY,
         ABOUT,
         QUIT,
@@ -59,7 +65,11 @@ public class Game extends Canvas implements Runnable {
     public static HOVER Hover;
     public static STATE State = STATE.MENU;
     private Menu menu = new Menu();
-    public Level spawn;
+    private Level spawn;
+    public static STATE prevState;
+    public static int tutStep;
+    public static boolean a_released = false, d_released = false;
+
     private Screen screen;
     private Thread thread;      /* thread is many program, it will run it own program. 
      (like sub program with many funtion in a big program and it run separately */
@@ -132,8 +142,22 @@ public class Game extends Canvas implements Runnable {
                 updates++;
                 delta--;
             }
+            if (State == STATE.TUTORIAL) {
+                if (player != null || level != null) {
+                    player.remove();
+                    level.remove();
+                }
+                spawn = new TutorialLevel("/textures/testL.png");
+                if (Playcounter == 0) {
+                    level = spawn;
+                    tutStep = 0;
+                }
+                Playcounter++;
+                TileCoordinate playerSpawn = new TileCoordinate(1210, 629);   // player spawn location
+                player = new Player(playerSpawn.x(), playerSpawn.y(), key);
+                level.add(player);
 
-            if (State == STATE.PLAY) {
+            } else if (State == STATE.PLAY) {
                 if (player != null || level != null) {
                     player.remove();
                     level.remove();
@@ -146,7 +170,7 @@ public class Game extends Canvas implements Runnable {
                 TileCoordinate playerSpawn = new TileCoordinate(1210, 629);   // player spawn location
                 player = new Player(playerSpawn.x(), playerSpawn.y(), key);
                 level.add(player);
-            } else if (State == STATE.OVER) {
+            } else if (State == STATE.OVER || State == STATE.MENU) {
                 Playcounter = 0;
             }
 
@@ -165,7 +189,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void update() {
-        if (State == STATE.GAME) {
+        if (State == STATE.GAME || State == STATE.RUNTUT) {
             key.update();
             level.update();
         } else if (State == STATE.DEAD) {
@@ -200,12 +224,37 @@ public class Game extends Canvas implements Runnable {
         //clear screen
         g.clearRect(0, 0, getWidth(), getHeight());
         // draw hear !
-
-        if (State == STATE.GAME || State == STATE.DEAD) {
+        if (State == STATE.TUTORIAL) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+            if (Playcounter / 100 < 2) {
+                menu.tutRender(g);
+            } else if (Playcounter / 100 >= 2) {
+                tutStep++;
+                State = STATE.RUNTUT;
+                Playcounter = 0;
+            }
+        }
+        if (State == STATE.RUNTUT) {
+            g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+            menu.tutRender(g);
+            if (tutStep == 5) {
+                Playcounter++;
+                if (Playcounter / 100 == 6) {
+                    tutStep++;
+                }
+            }
+        } else if (State == STATE.GAME || State == STATE.DEAD) {
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Verdana", 0, 60));
+            g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+            g.drawString("" + level.count_level, 0, 50);
+            g.drawString("Score: " + score, screenSize.width - 300, 50);
         } else if (State == STATE.MENU) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             menu.mainRender(g);
+            a_released = false;
+            d_released = false;
+            tutStep = 0;
         } else if (State == STATE.PLAY) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             if (Playcounter / 100 < 3) {
@@ -214,6 +263,8 @@ public class Game extends Canvas implements Runnable {
                 State = STATE.GAME;
             }
         } else if (State == STATE.PAUSE) {
+            g.drawString("" + level.count_level, 0, 50);
+            g.drawString("Score: " + score, screenSize.width - 300, 50);
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             menu.pauseRender(g);
         } else if (State == STATE.OVER) {

@@ -83,14 +83,19 @@ public class Level {
         this.remove();
     }
     
-    public int level_num = 30;
+    public int level_present = 5;
+    public int level_num = 6;
+    public int count_level = level_num;
 
     public int get_level_num() {
         return level_num;
    }
     public void decrement_level_num() {
-                level_num--;
-
+        level_num--;
+    }
+    
+    public void decrement_level_display () {
+        count_level --;
     }
 
     public void spawnMob() {
@@ -109,7 +114,7 @@ public class Level {
 
     }
     
-    public int level_present = 5;
+
     
     public void spawnStart(){
         for (int i = 0; i < level_present; i++) {
