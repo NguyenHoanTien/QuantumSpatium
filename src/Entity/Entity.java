@@ -1,5 +1,6 @@
 package Entity;
 
+import Audio.Music;
 import Entity.mob.Chaser;
 import Entity.mob.Dummy;
 import Entity.mob.Star;
@@ -72,6 +73,7 @@ public class Entity {
     public void damageHealth(int damage) {
         health -= damage;
         if (health <= 0) {
+            Music.exp.play();
             removed = true;
             level.decrement_level_display();
             count++;

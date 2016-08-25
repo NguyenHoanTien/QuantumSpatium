@@ -1,5 +1,6 @@
 package game;
 
+import Audio.Music;
 import java.applet.Applet;
 import java.awt.Color;
 import java.awt.Font;
@@ -45,6 +46,10 @@ public class Menu extends Applet {
     private Rectangle OverBack = new Rectangle(BackX, OverY, BackW, BackH);
     private Rectangle Restart = new Rectangle(StartX, OverY, StartW, StartH);
 
+    private boolean Hcheck = false;
+    private int Hc = 0;
+    private int Hcount = 0;
+
     private Image getImage(String path) {
         Image tempImage = null;
         try {
@@ -57,6 +62,16 @@ public class Menu extends Applet {
 
     //main menu Reder method
     public void mainRender(Graphics g) {
+        if (Music.tut1.isActive()) {
+            Game.Mcheck = false;
+            Music.tut1.stop();
+        }
+        if (!Game.Mcheck) {
+            Game.Mcheck = true;
+            Music.menu.play();
+            Music.menu.loop();
+        }
+
         Graphics2D g2d = (Graphics2D) g;
         if (space == null) {
             space = getImage("/textures/space1.jpg");
@@ -73,14 +88,42 @@ public class Menu extends Applet {
         Font font2 = new Font(".VnRevueH", Font.BOLD, 50);
         g.setFont(font2);
         g.setColor(Color.white);
+        Hcount++;
+        if (Hcount >= 5) {
+            Hc = 0;
+        }
         if (Game.Hover == Game.HOVER.TUTORIAL) {
+            Hcount = 0;
+            if (Hc == 1) {
+                Hcheck = true;
+            } else {
+                Hcheck = false;
+            }
+            Hc = 1;
+            if (!Hcheck && Hc == 1) {
+                Hcheck = true;
+                Music.hover.play();
+            }
             g2d.draw(Button1);
             g.drawString("TUTORIAL", Game.screenSize.width - 340, Game.screenSize.height / 2 - 35);
             g.setColor(Color.yellow);
+
             g.drawString("PLAY", Game.screenSize.width - 190, Game.screenSize.height / 2 + 85);
             g.drawString("ABOUT", Game.screenSize.width - 250, Game.screenSize.height / 2 + 205);
             g.drawString("QUIT", Game.screenSize.width - 190, Game.screenSize.height / 2 + 325);
+
         } else if (Game.Hover == Game.HOVER.PLAY) {
+            Hcount = 0;
+            if (Hc == 2) {
+                Hcheck = true;
+            } else {
+                Hcheck = false;
+            }
+            Hc = 2;
+            if (!Hcheck && Hc == 2) {
+                Hcheck = true;
+                Music.hover.play();
+            }
             g2d.draw(Button2);
             g.drawString("PLAY", Game.screenSize.width - 195, Game.screenSize.height / 2 + 85);
             g.setColor(Color.yellow);
@@ -88,6 +131,17 @@ public class Menu extends Applet {
             g.drawString("ABOUT", Game.screenSize.width - 250, Game.screenSize.height / 2 + 205);
             g.drawString("QUIT", Game.screenSize.width - 190, Game.screenSize.height / 2 + 325);
         } else if (Game.Hover == Game.HOVER.ABOUT) {
+            Hcount = 0;
+            if (Hc == 3) {
+                Hcheck = true;
+            } else {
+                Hcheck = false;
+            }
+            Hc = 3;
+            if (!Hcheck && Hc == 3) {
+                Hcheck = true;
+                Music.hover.play();
+            }
             g2d.draw(Button3);
             g.drawString("ABOUT", Game.screenSize.width - 255, Game.screenSize.height / 2 + 205);
             g.setColor(Color.yellow);
@@ -95,6 +149,17 @@ public class Menu extends Applet {
             g.drawString("PLAY", Game.screenSize.width - 190, Game.screenSize.height / 2 + 85);
             g.drawString("QUIT", Game.screenSize.width - 190, Game.screenSize.height / 2 + 325);
         } else if (Game.Hover == Game.HOVER.QUIT) {
+            Hcount = 0;
+            if (Hc == 4) {
+                Hcheck = true;
+            } else {
+                Hcheck = false;
+            }
+            Hc = 4;
+            if (!Hcheck && Hc == 4) {
+                Hcheck = true;
+                Music.hover.play();
+            }
             g2d.draw(Button4);
             g.drawString("QUIT", Game.screenSize.width - 195, Game.screenSize.height / 2 + 325);
             g.setColor(Color.yellow);
@@ -143,8 +208,24 @@ public class Menu extends Applet {
         g.fillRect(StartX, OverY, StartW, StartH);
         g2d.draw(OverBack);
         g2d.draw(Restart);
-
+        Hcount++;
+        if (Hcount >= 5) {
+            Hc = 0;
+        }
+        
         if (Game.Hover == Game.HOVER.BUTTON1) {
+            Hcount = 0;
+            if (Hc == 1) {
+                Hcheck = true;
+            } else {
+                Hcheck = false;
+            }
+            Hc = 1;
+            if (!Hcheck && Hc == 1) {
+                Hcheck = true;
+                Music.hover1.play();
+            }
+
             g.setColor(Color.black);
             g.fillRect(BackX, OverY, BackW, BackH);
             g.setColor(Color.red);
@@ -153,6 +234,18 @@ public class Menu extends Applet {
             g.drawString("RESUME", StartX + 20, OverY + 45);
 
         } else if (Game.Hover == Game.HOVER.BUTTON2) {
+            Hcount = 0;
+            if (Hc == 2) {
+                Hcheck = true;
+            } else {
+                Hcheck = false;
+            }
+            Hc = 2;
+            if (!Hcheck && Hc == 2) {
+                Hcheck = true;
+                Music.hover1.play();
+            }
+
             g.setColor(Color.black);
             g.fillRect(StartX, OverY, StartW, StartH);
             g.setColor(Color.white);
@@ -188,8 +281,22 @@ public class Menu extends Applet {
         g.fillRect(StartX, OverY, StartW, StartH);
         g2d.draw(OverBack);
         g2d.draw(Restart);
-
+        Hcount++;
+        if (Hcount >= 5) {
+            Hc = 0;
+        }
         if (Game.Hover == Game.HOVER.BUTTON1) {
+            Hcount = 0;
+            if (Hc == 1) {
+                Hcheck = true;
+            } else {
+                Hcheck = false;
+            }
+            Hc = 1;
+            if (!Hcheck && Hc == 1) {
+                Hcheck = true;
+                Music.hover1.play();
+            }
             g.setColor(Color.darkGray);
             g.fillRect(BackX, OverY, BackW, BackH);
             g.setColor(Color.red);
@@ -198,6 +305,18 @@ public class Menu extends Applet {
             g.drawString("RESTART", StartX + 18, OverY + 45);
 
         } else if (Game.Hover == Game.HOVER.BUTTON2) {
+            Hcount = 0;
+            if (Hc == 2) {
+                Hcheck = true;
+            } else {
+                Hcheck = false;
+            }
+            Hc = 2;
+            if (!Hcheck && Hc == 2) {
+                Hcheck = true;
+                Music.hover1.play();
+            }
+
             g.setColor(Color.darkGray);
             g.fillRect(StartX, OverY, StartW, StartH);
             g.setColor(Color.white);
@@ -220,20 +339,19 @@ public class Menu extends Applet {
             g.setColor(Color.yellow);
             g.drawString("WELCOME SOLDIER!", Game.screenSize.width / 2 - 200, 150);
             g.drawString("THIS IS A BATTLESHIP TRAINING SECTION", Game.screenSize.width / 2 - 500, 200);
-        }else if (Game.tutStep == 1) {
+        } else if (Game.tutStep == 1) {
             g.setColor(Color.white);
             g.drawString("First step:", Game.screenSize.width / 2 - 100, 150);
             g.drawString("Use 'A' and 'D' key to change direction. ", Game.screenSize.width / 2 - 450, 190);
-        }else if (Game.tutStep == 2) {
+        } else if (Game.tutStep == 2) {
             g.setColor(Color.white);
             g.drawString("Good work! Next step:", Game.screenSize.width / 2 - 250, 150);
-             g.drawString("Press 'W' key to move forward ", Game.screenSize.width / 2 - 350, 190);
-        }else if (Game.tutStep == 3) {
+            g.drawString("Press 'W' key to move forward ", Game.screenSize.width / 2 - 350, 190);
+        } else if (Game.tutStep == 3) {
             g.setColor(Color.white);
             g.drawString("Great job! Next one:", Game.screenSize.width / 2 - 225, 150);
             g.drawString("Press 'S' key to move backward ", Game.screenSize.width / 2 - 375, 190);
-        }
-        else if (Game.tutStep == 4) {
+        } else if (Game.tutStep == 4) {
             g.setColor(Color.yellow);
             g.drawString("Be careful!", Game.screenSize.width / 2 - 100, 150);
             g.setColor(Color.white);
@@ -242,10 +360,10 @@ public class Menu extends Applet {
             g.setColor(Color.white);
             g.drawString("Well done soldier!", Game.screenSize.width / 2 - 200, 150);
             g.drawString("Now use left-mouse to fire anywhere you want", Game.screenSize.width / 2 - 550, 190);
-        }else if (Game.tutStep == 6){
+        } else if (Game.tutStep == 6) {
             g.setColor(Color.yellow);
             g.drawString("You are prepared!", Game.screenSize.width / 2 - 200, 150);
-             g.setColor(Color.white);
+            g.setColor(Color.white);
             g.drawString("You can press Esc to exit and join the battle!", Game.screenSize.width / 2 - 550, 190);
         }
     }

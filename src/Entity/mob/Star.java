@@ -1,5 +1,6 @@
 package Entity.mob;
 
+import Audio.Music;
 import Graphics.AnimateSprite;
 import Graphics.Screen;
 import Graphics.Sprite;
@@ -14,7 +15,7 @@ public class Star extends Mob {
     private AnimateSprite starAniD = new AnimateSprite(SpriteSheet.starmoveD, 32, 32, 3);
     private AnimateSprite starAniL = new AnimateSprite(SpriteSheet.starmoveL, 32, 32, 3);
     private AnimateSprite starAniR = new AnimateSprite(SpriteSheet.starmoveR, 32, 32, 3);
-    
+
     private AnimateSprite aniSprite;
 
     private int xa = 0, ya = 0;
@@ -22,12 +23,12 @@ public class Star extends Mob {
     private int time = 0;
     private Player player;
     private double speed = 2;
-    
+
     public Star(int x, int y) {
         this.x = x << 4;
         this.y = y << 4;
         sprite = Sprite.star;
-        this.health = 2;
+        this.health = 1;
     }
 
     public int getX() {
@@ -39,13 +40,13 @@ public class Star extends Mob {
     }
 
     private void move() {
-        
+
         xa = 0;
         ya = 0;
-        
+
         int px = level.getPlayerAt(0).getX() + 15;
         int py = level.getPlayerAt(0).getY() + 15;
-        
+
         Vector2i start = new Vector2i(getX() >> 4, getY() >> 4);
         Vector2i destination = new Vector2i(px >> 4, py >> 4);
 
@@ -74,20 +75,26 @@ public class Star extends Mob {
                 }
             }
         }
-            if (xa != 0 || ya != 0) {
-                move(xa, ya);
-                moving = true;
-            } else {
-                moving = false;
-            }
+        if (xa != 0 || ya != 0) {
+            move(xa, ya);
+            moving = true;
+        } else {
+            moving = false;
+        }
 
     }
 
+    private int Hcount = 0;
     public void update() {
         time++;
         move();
         if (moving) {
             aniSprite.update();
+        }
+        Hcount++;
+        if (Hcount >= 30) {
+            Hcount = 0;
+            Music.bip.play();
         }
 
     }
@@ -98,7 +105,6 @@ public class Star extends Mob {
         } else {
             sprite = Sprite.star;
         }
-
         screen.renderAI((int) (x - 16), (int) (y - 16), this);
     }
 

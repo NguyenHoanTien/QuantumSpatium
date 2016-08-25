@@ -1,5 +1,6 @@
 package game;
 
+import Audio.Music;
 import Entity.mob.Player;
 import Graphics.Screen;
 import Input.Keyboard;
@@ -62,6 +63,8 @@ public class Game extends Canvas implements Runnable {
         NONE
     }
 
+    public static boolean Mcheck = false;
+//    
     public static HOVER Hover;
     public static STATE State = STATE.MENU;
     private Menu menu = new Menu();
@@ -172,6 +175,7 @@ public class Game extends Canvas implements Runnable {
                 level.add(player);
             } else if (State == STATE.OVER || State == STATE.MENU) {
                 Playcounter = 0;
+
             }
 
             render();
@@ -225,6 +229,15 @@ public class Game extends Canvas implements Runnable {
         g.clearRect(0, 0, getWidth(), getHeight());
         // draw hear !
         if (State == STATE.TUTORIAL) {
+            if (Music.menu.isActive()) {
+                Game.Mcheck = false;
+                Music.menu.stop();
+            }
+            if (!Mcheck) {
+                Mcheck = true;
+                Music.tut1.play();
+                Music.tut1.loop();
+            }
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             if (Playcounter / 100 < 2) {
                 menu.tutRender(g);
@@ -255,12 +268,29 @@ public class Game extends Canvas implements Runnable {
             a_released = false;
             d_released = false;
             tutStep = 0;
+
         } else if (State == STATE.PLAY) {
+            if (Music.menu.isActive()) {
+                Mcheck = false;
+                Music.menu.stop();
+            }
+            if (!Mcheck) {
+                Mcheck = true;
+                Music.count.play();
+            }
+
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-            if (Playcounter / 100 < 3) {
-                menu.playRender(g, Playcounter / 100);
+            if (Playcounter / 90 < 3) {
+                menu.playRender(g, Playcounter / 90);
             } else if (Playcounter / 100 >= 3) {
                 State = STATE.GAME;
+                if (Mcheck) {
+                    Mcheck = false;
+                }
+                if (!Mcheck) {
+                    Mcheck = true;
+                    Music.tut1.play();
+                }
             }
         } else if (State == STATE.PAUSE) {
             g.drawString("" + level.count_level, 0, 50);
@@ -268,8 +298,14 @@ public class Game extends Canvas implements Runnable {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             menu.pauseRender(g);
         } else if (State == STATE.OVER) {
+            if (Music.tut1.isActive()) {
+                Mcheck = false;
+                Music.tut1.stop();
+            }
+            
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             menu.overRender(g);
+            
         }
 
         g.setColor(Color.WHITE);

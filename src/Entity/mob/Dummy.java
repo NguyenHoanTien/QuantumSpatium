@@ -1,5 +1,6 @@
 package Entity.mob;
 
+import Audio.Music;
 import Entity.projectile.MobWizardProjectile;
 import Graphics.AnimateSprite;
 import Graphics.Screen;
@@ -115,6 +116,7 @@ public class Dummy extends Mob {
             ///////////////////////////
 
             Mobshoot(x, y, Accu, 2, Sprite.bullet);
+            //Music.shoot1.play();
             Firerate = MobWizardProjectile.FireRateD;
             /////////////////////////
         }

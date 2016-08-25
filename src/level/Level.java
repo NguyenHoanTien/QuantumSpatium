@@ -18,6 +18,10 @@ import level.Tile.Tile;
 
 public class Level {
 
+    public int level_present = 5;
+    public int level_num = 20;
+    public int count_level = level_num;
+    
     protected int width, height;
     protected int[] tilesInt;
     protected int[] tiles;
@@ -83,9 +87,6 @@ public class Level {
         this.remove();
     }
     
-    public int level_present = 5;
-    public int level_num = 6;
-    public int count_level = level_num;
 
     public int get_level_num() {
         return level_num;
@@ -104,9 +105,9 @@ public class Level {
         int y = rand.nextInt(125) + 2;
         int type = rand.nextInt(99);
         if (type <= 70) {
-           add(new Chaser(x, y));
-        } else if (type > 70 && type < 95) {
-            add(new Dummy(x, y));
+           add(new Dummy(x, y));
+        } else if (type > 70 && type < 93) {
+            add(new Chaser(x, y));
         } else {
             add(new Star(x, y));
         }

@@ -1,6 +1,7 @@
 
 package Entity.projectile;
 
+import Audio.Music;
 import Entity.Entity;
 import Entity.mob.Chaser;
 import Entity.mob.Dummy;
@@ -32,7 +33,7 @@ public class MobWizardProjectile extends Projectile {
         if (level.tileCollision((int) (x + nx), (int) (y + ny), 5, 6, 5)) {
             // 44 = time life, 50 = number of particle
             level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level, Sprite.particle_red));
-
+            Music.exp1.play();
             this.remove();
         }
     }
@@ -47,7 +48,7 @@ public class MobWizardProjectile extends Projectile {
                     remove();
                     
                     players.get(i).alive = false;
-                    
+                    Music.exp.play();
                     //System.out.println(players.get(i) + " Died");
                     level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level, Sprite.particle_purple));
                     remove();

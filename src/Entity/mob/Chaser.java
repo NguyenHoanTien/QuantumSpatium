@@ -1,5 +1,6 @@
 package Entity.mob;
 
+import Audio.Music;
 import Entity.projectile.MobWizardProjectile;
 import Graphics.AnimateSprite;
 import Graphics.Screen;
@@ -128,6 +129,7 @@ public class Chaser extends Mob {
 
                 Mobshoot(x, y, Accu, 2, Sprite.bullet1);
                 Mobshoot(x, y, dir, 2, Sprite.bullet1);
+                //Music.shoot1.play();
                 Firerate = MobWizardProjectile.FireRate;
                 /////////////////////////
             }

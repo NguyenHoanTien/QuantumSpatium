@@ -1,5 +1,6 @@
 package Entity.mob;
 
+import Audio.Music;
 import Entity.Entity;
 import Entity.projectile.Projectile;
 import Entity.projectile.WizardProjectile;
@@ -19,8 +20,8 @@ public class Player extends Mob {
     private Sprite sprite;
     private Sprite sprite1;
 
-    public int heal = 10;
-
+    public int heal = 1;
+    
     public static int firerate = 0;
     
     private double speed = 4;
@@ -75,7 +76,6 @@ public class Player extends Mob {
                 //xa += speed;
                 dir_player += 0.1;
             }
-
             if (xa != 0 || ya != 0) {
                 move(xa, ya);
                 moving = true;
@@ -86,7 +86,7 @@ public class Player extends Mob {
             updateRotating();
             clear();
             updateShooting();
-
+            
             List<Entity> entities = level.entities;
             updateMobCollision(entities);  // mob collision, player will destroy when collision with mob
             //System.out.println ("player heal: " + heal); // check heal of player
@@ -120,6 +120,7 @@ public class Player extends Mob {
                         //System.out.println(" Died");  // checking...
                         //remove();                       // remove player.
                         alive = false;
+                        Music.exp.play();
                     }
                     /* the reason why we have to remove mob and player: if we don't remove mob
                      system won't understand the syntax and display error null exception
@@ -145,7 +146,7 @@ public class Player extends Mob {
             double dir = Math.atan2(dy, dx);
 
             shoot(x, y, dir);
-            
+            Music.shoot.play();
             firerate = WizardProjectile.FireRate;
         }
     }
