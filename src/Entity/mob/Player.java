@@ -24,7 +24,7 @@ public class Player extends Mob {
     
     public static int firerate = 0;
     
-    private double speed = 4;
+    private double speed = 3;
     private AnimateSprite playerAni = new AnimateSprite(SpriteSheet.playermove, 32, 32, 3);
     private AnimateSprite playerAni1 = new AnimateSprite(SpriteSheet.playermoveback, 32, 32, 3);
     

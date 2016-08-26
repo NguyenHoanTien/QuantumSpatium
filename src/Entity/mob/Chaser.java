@@ -17,7 +17,7 @@ public class Chaser extends Mob {
     private double xa = 0, ya = 0;
     private double xp = 0, yp = 0;
     private int time = 0;
-    private double speed = 1;
+    private double speed = 0.5;
     private double dir;
 
     public int Firerate = 0;  
@@ -127,8 +127,8 @@ public class Chaser extends Mob {
                 double Accu = shifted + dir;
             ///////////////////////////
 
-                Mobshoot(x, y, Accu, 2, Sprite.bullet1);
-                Mobshoot(x, y, dir, 2, Sprite.bullet1);
+                Mobshoot(x, y, Accu, 1.5, Sprite.bullet1);
+                Mobshoot(x, y, dir, 1.5, Sprite.bullet1);
                 //Music.shoot1.play();
                 Firerate = MobWizardProjectile.FireRate;
                 /////////////////////////

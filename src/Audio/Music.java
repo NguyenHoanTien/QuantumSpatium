@@ -11,7 +11,6 @@ public class Music {
     public static Music menu = new Music("/audio/menu.wav");
     public static Music hover = new Music("/audio/Menuclick.wav");
     public static Music tut1 = new Music("/audio/tutorial.wav");
-    public static Music Game = new Music("/audio/Space-Cube.mp3");
     public static Music count = new Music("/audio/countdown.wav");
     public static Music hover1 = new Music("/audio/hover.wav");
     public static Music shoot = new Music("/audio/shooting.wav");

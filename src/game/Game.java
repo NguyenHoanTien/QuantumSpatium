@@ -306,6 +306,7 @@ public class Game extends Canvas implements Runnable {
                 if (!Mcheck) {
                     Mcheck = true;
                     Music.tut1.play();
+                    Music.tut1.loop();
                 }
             }
         } else if (State == STATE.PAUSE) {

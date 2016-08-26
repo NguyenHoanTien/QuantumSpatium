@@ -16,10 +16,9 @@ public class MobWizardProjectile extends Projectile {
     public static int FireRate = 95;      // Higher is slower! Minimum is 1
     public static int FireRateD = 75;
     
-    public MobWizardProjectile(double x, double y, double dir, int speed, Sprite sprite) {
+    public MobWizardProjectile(double x, double y, double dir, double speed, Sprite sprite) {
         super(x, y, dir);
         range = random.nextInt(100) + 150;
-        //damage = 20;
         this.sprite = sprite;
         nx = speed * Math.cos(angle);
         ny = speed * Math.sin(angle);
