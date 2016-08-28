@@ -40,10 +40,10 @@ public class MobWizardProjectile extends Projectile {
     public void updateCollision(List<Player> players) {
         
         for (int i = 0; i < players.size(); i++) {
-                if (x < players.get(i).getX() + 20
-                        && x > players.get(i).getX() - 20
-                        && y < players.get(i).getY() + 20
-                        && y > players.get(i).getY() - 20) {
+                if (x < players.get(i).getX() + 10
+                        && x > players.get(i).getX() - 10
+                        && y < players.get(i).getY() + 10
+                        && y > players.get(i).getY() - 10) {
                     remove();
                     
                     players.get(i).alive = false;

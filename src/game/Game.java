@@ -28,16 +28,14 @@ public class Game extends Canvas implements Runnable {
     public static int width = 500;
     public static int height = 268;
     public static int scale = 3;
-    
-    
+
     public static String title = "QUANTUM SPATIUM";
 
     //for display
     private int Playcounter = 0;
     private int a = 400;
     private int b = 10;
-    
-    
+
     private JFrame frame;
     private Keyboard key;
     private Entity entity;
@@ -202,8 +200,12 @@ public class Game extends Canvas implements Runnable {
         if (State == STATE.GAME || State == STATE.RUNTUT) {
             key.update();
             level.update();
+//            int a = level.getPlayerAt(0).getX();
+//            int b = level.getPlayerAt(0).getY();
+//            System.out.println("a : " + (a/16) + " | b: " + (b/16));
         } else if (State == STATE.DEAD) {
             level.update();
+
         }
 
     }
@@ -273,7 +275,7 @@ public class Game extends Canvas implements Runnable {
                 a = 400;
             }
             if (level.score >= b) {
-                b = b*10;
+                b = b * 10;
                 a = a + 40;
             }
 
@@ -319,10 +321,10 @@ public class Game extends Canvas implements Runnable {
                 Mcheck = false;
                 Music.tut1.stop();
             }
-            
+
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             menu.overRender(g);
-            
+
         }
 
         g.setColor(Color.WHITE);

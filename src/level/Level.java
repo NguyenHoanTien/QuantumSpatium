@@ -22,7 +22,7 @@ public class Level {
     public int level_num = 20;
     public int count_level = level_num;
     public int score = 0;
-        
+
     protected int width, height;
     protected int[] tilesInt;
     protected int[] tiles;
@@ -87,26 +87,31 @@ public class Level {
         //System.out.println("Mobs :" + entities.size());
         this.remove();
     }
-    
 
     public int get_level_num() {
         return level_num;
-   }
+    }
+
     public void decrement_level_num() {
         level_num--;
     }
-    
-    public void decrement_level_display () {
-        count_level --;
+
+    public void decrement_level_display() {
+        count_level--;
     }
+
+    private boolean firstcheck = false;
+    private int count = 0;
+    private int x, y;
 
     public void spawnMob() {
         Random rand = new Random();
-        int x = rand.nextInt(125) + 2;
-        int y = rand.nextInt(125) + 2;
+        x = rand.nextInt(125) + 2;
+        y = rand.nextInt(125) + 2;
+
         int type = rand.nextInt(99);
         if (type <= 50) {
-           add(new Dummy(x, y));
+            add(new Dummy(x, y));
         } else if (type > 50 && type < 93) {
             add(new Chaser(x, y));
         } else {
@@ -115,11 +120,10 @@ public class Level {
         decrement_level_num();
 
     }
-    
 
-    
-    public void spawnStart(){
+    public void spawnStart() {
         for (int i = 0; i < level_present; i++) {
+        
             spawnMob();
             //System.out.println(level_num);
         }
