@@ -18,6 +18,7 @@ public class Keyboard implements KeyListener {
         down = keys[KeyEvent.VK_S];
         left = keys[KeyEvent.VK_A];
         right = keys[KeyEvent.VK_D];
+        System.out.println(keycount);
     }
 
     @Override
@@ -26,9 +27,12 @@ public class Keyboard implements KeyListener {
                 Game.tutStep++;
             }
         keys[e.getKeyCode()] = true;            // if key code = true => press button
+        keycount++;
         // checking !
     }
-
+    
+    private int keycount = 0;
+    private int check = 30;
     @Override
     public void keyReleased(KeyEvent e) {
         if ((Game.State == Game.STATE.GAME || Game.State == Game.STATE.RUNTUT) && e.getKeyCode() == KeyEvent.VK_ESCAPE) {
@@ -37,18 +41,22 @@ public class Keyboard implements KeyListener {
         } else if (Game.State == Game.STATE.RUNTUT) {
             if (e.getKeyCode() == KeyEvent.VK_A && Game.tutStep == 1) {
                 Game.a_released = true;
-                if (Game.a_released && Game.d_released) {
+                if (Game.a_released && Game.d_released && keycount >= check) {
                     Game.tutStep++;
+                    keycount = 0;
                 }
             } else if (e.getKeyCode() == KeyEvent.VK_D && Game.tutStep == 1) {
                 Game.d_released = true;
-                if (Game.a_released && Game.d_released) {
+                if (Game.a_released && Game.d_released && keycount >= check) {
                     Game.tutStep++;
+                    keycount = 0;
                 }
-            } else if (e.getKeyCode() == KeyEvent.VK_W && Game.tutStep == 2) {
+            } else if (e.getKeyCode() == KeyEvent.VK_W && Game.tutStep == 2 && keycount >= check) {
                 Game.tutStep++;
-            } else if (e.getKeyCode() == KeyEvent.VK_S && Game.tutStep == 4) {
+                keycount = 0;
+            } else if (e.getKeyCode() == KeyEvent.VK_S && Game.tutStep == 4 && keycount >= check) {
                 Game.tutStep++;
+                keycount = 0;
             }
         }
         keys[e.getKeyCode()] = false;
