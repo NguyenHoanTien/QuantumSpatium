@@ -336,34 +336,34 @@ public class Menu extends Applet {
         g.setFont(font);
         if (Game.tutStep == 0) {
             g.setColor(Color.yellow);
-            g.drawString("WELCOME SOLDIER!", Game.screenSize.width / 2 - 200, 150);
+            g.drawString("WELCOME SOLDIER!", Game.screenSize.width / 2 - 200, 100);
             g.drawString("THIS IS A BATTLESHIP TRAINING SECTION", Game.screenSize.width / 2 - 500, 200);
         } else if (Game.tutStep == 1) {
             g.setColor(Color.white);
-            g.drawString("First step:", Game.screenSize.width / 2 - 100, 150);
-            g.drawString("Use 'A' and 'D' key to change direction. ", Game.screenSize.width / 2 - 450, 190);
+            g.drawString("First step:", Game.screenSize.width / 2 - 100, 100);
+            g.drawString("Use 'A' or 'D' key to change direction. ", Game.screenSize.width / 2 - 450, 200);
         } else if (Game.tutStep == 2) {
             g.setColor(Color.white);
-            g.drawString("Good work! Next step:", Game.screenSize.width / 2 - 250, 150);
-            g.drawString("Press 'W' key to move forward ", Game.screenSize.width / 2 - 350, 190);
+            g.drawString("Good work! Next step:", Game.screenSize.width / 2 - 250, 100);
+            g.drawString("Press 'W' key to move forward ", Game.screenSize.width / 2 - 350, 200);
         } else if (Game.tutStep == 3) {
             g.setColor(Color.white);
-            g.drawString("Great job! Next one:", Game.screenSize.width / 2 - 225, 150);
-            g.drawString("Press 'S' key to move backward ", Game.screenSize.width / 2 - 375, 190);
+            g.drawString("Great job! Next one:", Game.screenSize.width / 2 - 225, 100);
+            g.drawString("Press 'S' key to move backward ", Game.screenSize.width / 2 - 375, 200);
         } else if (Game.tutStep == 4) {
             g.setColor(Color.yellow);
-            g.drawString("Be careful!", Game.screenSize.width / 2 - 100, 150);
+            g.drawString("Be careful!", Game.screenSize.width / 2 - 100, 100);
             g.setColor(Color.white);
-            g.drawString("Going backward is slower than going forward!", Game.screenSize.width / 2 - 550, 190);
+            g.drawString("Going backward is slower than going forward!", Game.screenSize.width / 2 - 550, 200);
         } else if (Game.tutStep == 5) {
             g.setColor(Color.white);
-            g.drawString("Well done soldier!", Game.screenSize.width / 2 - 200, 150);
-            g.drawString("Now use left-mouse to fire anywhere you want", Game.screenSize.width / 2 - 550, 190);
+            g.drawString("Well done soldier!", Game.screenSize.width / 2 - 200, 100);
+            g.drawString("Now use left-mouse to fire anywhere you want", Game.screenSize.width / 2 - 550, 200);
         } else if (Game.tutStep == 6) {
             g.setColor(Color.yellow);
-            g.drawString("You are prepared!", Game.screenSize.width / 2 - 200, 150);
+            g.drawString("You are prepared!", Game.screenSize.width / 2 - 200, 100);
             g.setColor(Color.white);
-            g.drawString("You can press Esc to exit and join the battle!", Game.screenSize.width / 2 - 550, 190);
+            g.drawString("You can press Esc to exit and join the battle!", Game.screenSize.width / 2 - 550, 200);
         }
     }
 }
