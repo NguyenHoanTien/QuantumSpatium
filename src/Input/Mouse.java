@@ -52,7 +52,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
                 }
                 //Click on Quit Button
                 if (mx >= Menu.Button4.x && mx <= Menu.Button4.x + 600) {
-                    if (my >= Menu.Button3.y && my <= Menu.Button3.y + 75) {
+                    if (my >= Menu.Button4.y && my <= Menu.Button4.y + 75) {
                         System.exit(0);
                     }
                 }

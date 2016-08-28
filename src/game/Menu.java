@@ -78,14 +78,14 @@ public class Menu extends Applet {
         }
         g2d.drawImage(space, 0, 0, Game.screenSize.width, Game.screenSize.height, this);
         //basic setting for font
-        Font font1 = new Font(".VnBahamasBH", Font.BOLD, 100);
+        Font font1 = new Font("Arial", Font.BOLD, 100);
         g.setFont(font1);
         g.setColor(Color.white);
 
         //draw the title
         g.drawString(Game.title, Game.screenSize.width - 1000, Game.screenSize.height / 2 - 200);
         //draw buttons
-        Font font2 = new Font(".VnRevueH", Font.BOLD, 50);
+        Font font2 = new Font("Arial", Font.BOLD, 50);
         g.setFont(font2);
         g.setColor(Color.white);
         Hcount++;
@@ -105,12 +105,11 @@ public class Menu extends Applet {
                 Music.hover.play();
             }
             g2d.draw(Button1);
-            g.drawString("TUTORIAL", Game.screenSize.width - 340, Game.screenSize.height / 2 - 35);
+            g.drawString("TUTORIAL", Button1.x + 310, Game.screenSize.height / 2 - 35);
             g.setColor(Color.yellow);
-
-            g.drawString("PLAY", Game.screenSize.width - 190, Game.screenSize.height / 2 + 85);
-            g.drawString("ABOUT", Game.screenSize.width - 250, Game.screenSize.height / 2 + 205);
-            g.drawString("QUIT", Game.screenSize.width - 190, Game.screenSize.height / 2 + 325);
+            g.drawString("PLAY", Button2.x + 435, Game.screenSize.height / 2 + 85);
+            g.drawString("ABOUT", Button2.x + 390, Game.screenSize.height / 2 + 205);
+            g.drawString("QUIT", Button4.x + 447, Game.screenSize.height / 2 + 325);
 
         } else if (Game.Hover == Game.HOVER.PLAY) {
             Hcount = 0;
@@ -125,11 +124,11 @@ public class Menu extends Applet {
                 Music.hover.play();
             }
             g2d.draw(Button2);
-            g.drawString("PLAY", Game.screenSize.width - 195, Game.screenSize.height / 2 + 85);
+            g.drawString("PLAY", Button2.x + 430, Game.screenSize.height / 2 + 85);
             g.setColor(Color.yellow);
-            g.drawString("TUTORIAL", Game.screenSize.width - 335, Game.screenSize.height / 2 - 35);
-            g.drawString("ABOUT", Game.screenSize.width - 250, Game.screenSize.height / 2 + 205);
-            g.drawString("QUIT", Game.screenSize.width - 190, Game.screenSize.height / 2 + 325);
+            g.drawString("TUTORIAL", Button1.x + 315, Game.screenSize.height / 2 - 35);
+            g.drawString("ABOUT", Button2.x + 390, Game.screenSize.height / 2 + 205);
+            g.drawString("QUIT", Button4.x + 447, Game.screenSize.height / 2 + 325);
         } else if (Game.Hover == Game.HOVER.ABOUT) {
             Hcount = 0;
             if (Hc == 3) {
@@ -143,11 +142,11 @@ public class Menu extends Applet {
                 Music.hover.play();
             }
             g2d.draw(Button3);
-            g.drawString("ABOUT", Game.screenSize.width - 255, Game.screenSize.height / 2 + 205);
+            g.drawString("ABOUT", Button2.x + 385, Game.screenSize.height / 2 + 205);
             g.setColor(Color.yellow);
-            g.drawString("TUTORIAL", Game.screenSize.width - 335, Game.screenSize.height / 2 - 35);
-            g.drawString("PLAY", Game.screenSize.width - 190, Game.screenSize.height / 2 + 85);
-            g.drawString("QUIT", Game.screenSize.width - 190, Game.screenSize.height / 2 + 325);
+            g.drawString("TUTORIAL", Button1.x + 315, Game.screenSize.height / 2 - 35);
+            g.drawString("PLAY", Button2.x + 435, Game.screenSize.height / 2 + 85);
+            g.drawString("QUIT", Button4.x + 447, Game.screenSize.height / 2 + 325);
         } else if (Game.Hover == Game.HOVER.QUIT) {
             Hcount = 0;
             if (Hc == 4) {
@@ -161,17 +160,17 @@ public class Menu extends Applet {
                 Music.hover.play();
             }
             g2d.draw(Button4);
-            g.drawString("QUIT", Game.screenSize.width - 195, Game.screenSize.height / 2 + 325);
+            g.drawString("QUIT", Button4.x + 442, Game.screenSize.height / 2 + 325);
             g.setColor(Color.yellow);
-            g.drawString("TUTORIAL", Game.screenSize.width - 335, Game.screenSize.height / 2 - 35);
-            g.drawString("PLAY", Game.screenSize.width - 190, Game.screenSize.height / 2 + 85);
-            g.drawString("ABOUT", Game.screenSize.width - 250, Game.screenSize.height / 2 + 205);
+            g.drawString("TUTORIAL", Button1.x + 315, Game.screenSize.height / 2 - 35);
+            g.drawString("PLAY", Button2.x + 435, Game.screenSize.height / 2 + 85);
+            g.drawString("ABOUT", Button2.x + 390, Game.screenSize.height / 2 + 205);
         } else {
             g.setColor(Color.yellow);
-            g.drawString("TUTORIAL", Game.screenSize.width - 335, Game.screenSize.height / 2 - 35);
-            g.drawString("PLAY", Game.screenSize.width - 190, Game.screenSize.height / 2 + 85);
-            g.drawString("ABOUT", Game.screenSize.width - 250, Game.screenSize.height / 2 + 205);
-            g.drawString("QUIT", Game.screenSize.width - 190, Game.screenSize.height / 2 + 325);
+            g.drawString("TUTORIAL", Button1.x + 315, Game.screenSize.height / 2 - 35);
+            g.drawString("PLAY", Button2.x + 435, Game.screenSize.height / 2 + 85);
+            g.drawString("ABOUT", Button2.x + 390, Game.screenSize.height / 2 + 205);
+            g.drawString("QUIT", Button4.x + 447, Game.screenSize.height / 2 + 325);
         }
 
     }
@@ -212,7 +211,7 @@ public class Menu extends Applet {
         if (Hcount >= 5) {
             Hc = 0;
         }
-        
+
         if (Game.Hover == Game.HOVER.BUTTON1) {
             Hcount = 0;
             if (Hc == 1) {
