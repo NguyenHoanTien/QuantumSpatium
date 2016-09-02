@@ -279,7 +279,7 @@ public class Game extends Canvas implements Runnable {
                 b = b * 10;
                 a = a + 40;
             }
-
+            g.drawString("Level: " + level.level_state, screenSize.width /2  - 10, 50);
             g.drawString("Score: " + level.score, screenSize.width - a, 50);
         } else if (State == STATE.MENU) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);

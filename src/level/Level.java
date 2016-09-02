@@ -18,10 +18,11 @@ import level.Tile.Tile;
 
 public class Level {
 
-    public int level_present = 5;
+    public int level_present = 8;
     public int level_num = 20;
     public int count_level = level_num;
     public int score = 0;
+    public int level_state = 1;
 
     protected int width, height;
     protected int[] tilesInt;
@@ -33,6 +34,7 @@ public class Level {
     private List<Particle> particles = new ArrayList<Particle>();
     public List<Player> players = new ArrayList<Player>();
 
+    
     private Comparator<Node> nodeSorter = new Comparator<Node>() {
         public int compare(Node n0, Node n1) {
             if (n1.fCost < n0.fCost) {
@@ -100,6 +102,7 @@ public class Level {
         count_level--;
     }
 
+    
     private boolean firstcheck = false;
     private int count = 0;
     private int x, y;
@@ -112,7 +115,7 @@ public class Level {
         int type = rand.nextInt(99);
         if (type <= 50) {
             add(new Dummy(x, y));
-        } else if (type > 50 && type < 93) {
+        } else if (type > 50 && type < 100) {
             add(new Chaser(x, y));
         } else {
             add(new Star(x, y));
@@ -123,9 +126,22 @@ public class Level {
 
     public void spawnStart() {
         for (int i = 0; i < level_present; i++) {
-        
             spawnMob();
             //System.out.println(level_num);
+        }
+    }
+    
+    public int nextLevel() {
+        level_state++;
+        return level_state;
+    }
+    
+    public void currentLevel() {
+        System.out.println(level_num);
+        spawnStart();
+        if (level_num < 1) {
+               nextLevel();
+               System.out.println(level_state);
         }
     }
 

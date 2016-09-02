@@ -22,8 +22,7 @@ public class SpawnLevel extends Level {
             e.printStackTrace();
             System.out.println("Exception! Could not load level file! ");
         }
-        
-        spawnStart();
+        currentLevel();
     }
 
  
