@@ -51,6 +51,7 @@ public class Game extends Canvas implements Runnable {
         GAME,
         MENU,
         PLAY,
+        ABOUT,
         DEAD,
         OVER,
         PAUSE,
@@ -221,7 +222,7 @@ public class Game extends Canvas implements Runnable {
         screen.clear();
 
         double xScroll = 0, yScroll = 0;
-        if (State != STATE.MENU) {
+        if (State != STATE.MENU && State != STATE.ABOUT) {
             xScroll = player.getX() - screen.width / 2;
             yScroll = player.getY() - screen.height / 2;
             level.render((int) xScroll, (int) yScroll, screen);
@@ -325,6 +326,10 @@ public class Game extends Canvas implements Runnable {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             menu.overRender(g);
 
+        }
+        else if (State == STATE.ABOUT){
+            g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+            menu.aboutRender(g);
         }
 
         g.setColor(Color.WHITE);

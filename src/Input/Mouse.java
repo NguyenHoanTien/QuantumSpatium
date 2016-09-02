@@ -50,6 +50,12 @@ public class Mouse implements MouseListener, MouseMotionListener {
                         Game.State = Game.STATE.PLAY;
                     }
                 }
+                //Click on About Button
+                if (mx >= Menu.Button3.x && mx <= Menu.Button3.x + 600) {
+                    if (my >= Menu.Button3.y && my <= Menu.Button3.y + 75) {
+                        Game.State = Game.STATE.ABOUT;
+                    }
+                }
                 //Click on Quit Button
                 if (mx >= Menu.Button4.x && mx <= Menu.Button4.x + 600) {
                     if (my >= Menu.Button4.y && my <= Menu.Button4.y + 75) {

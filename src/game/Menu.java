@@ -366,4 +366,36 @@ public class Menu extends Applet {
             g.drawString("You can press Esc to exit and join the battle!", Game.screenSize.width / 2 - 550, 200);
         }
     }
+
+    public void aboutRender(Graphics g) {
+        if (Music.tut1.isActive()) {
+            Game.Mcheck = false;
+            Music.tut1.stop();
+        }
+        if (!Game.Mcheck) {
+            Game.Mcheck = true;
+            Music.menu.play();
+            Music.menu.loop();
+        }
+
+        Graphics2D g2d = (Graphics2D) g;
+        if (space == null) {
+            space = getImage("/textures/space1.jpg");
+        }
+        g2d.drawImage(space, 0, 0, Game.screenSize.width, Game.screenSize.height, this);
+        //basic setting for font
+        Font font1 = new Font("Arial", Font.BOLD, 50);
+        g.setFont(font1);
+        g.setColor(Color.lightGray);
+        g.drawString("COSC2440", Game.screenSize.width / 2 - 120, 50);
+        g.setColor(Color.yellow);
+        g.drawString("Developers", Game.screenSize.width / 2 - 130, 100);
+        g.drawString("Lecturer", Game.screenSize.width / 2 - 100, 400);
+        g.drawString("Advisor", Game.screenSize.width / 2 - 90, 600);
+        g.setColor(Color.white);
+        g.drawString("Nguyen Hoang Tien         s3515589", Game.screenSize.width / 2 - 410, 200);
+        g.drawString("Nguyen Quang Hai           s3517235", Game.screenSize.width / 2 - 410, 300);
+        g.drawString("Vladimir Mariano", Game.screenSize.width / 2 - 210, 500);
+        g.drawString("Nguyen Dang Tuan", Game.screenSize.width / 2 - 240, 700);
+    }
 }
