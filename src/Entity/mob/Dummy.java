@@ -21,7 +21,7 @@ public class Dummy extends Mob {
     private List<Node> path = null;
     private int time = 0;
     private Player player;
-    private double speed = 1;
+    private double speed = 1.5;
 
     private double dir;
     public int Firerate = 0;
@@ -116,7 +116,7 @@ public class Dummy extends Mob {
             double Accu = shifted + dir;
             ///////////////////////////
 
-            Mobshoot(x, y, Accu, 2, Sprite.bullet);
+            Mobshoot(x, y, Accu, 3, Sprite.bullet);
             //Music.shoot1.play();
             Firerate = MobWizardProjectile.FireRateD;
             /////////////////////////

@@ -17,7 +17,7 @@ public class Chaser extends Mob {
     private double xa = 0, ya = 0;
     private double xp = 0, yp = 0;
     private int time = 0;
-    private double speed = 0.5;
+    private double speed = 1;
     private double dir;
 
     public int Firerate = 0;  
@@ -48,19 +48,19 @@ public class Chaser extends Mob {
         if (players.size() > 0) {
             Player player = players.get(0);
 
-            if (x + 50 < player.getX()) {      // range for AI stop following player
+            if (x + 25 < player.getX()) {      // range for AI stop following player
                 xa += speed;
             }
 
-            if (x - 50 > player.getX()) {
+            if (x - 25 > player.getX()) {
                 xa -= speed;
             }
 
-            if (y + 50 < player.getY()) {
+            if (y + 25 < player.getY()) {
                 ya += speed;
             }
 
-            if (y - 50 > player.getY()) {
+            if (y - 25 > player.getY()) {
                 ya -= speed;
             }
         }
@@ -71,7 +71,7 @@ public class Chaser extends Mob {
             checkMove = true;
         } else {
             moving = false;
-            if (x > 50 || y > 50) {
+            if (x > 25 || y > 25) {
                 checkMove = false;
             }
         }
@@ -127,8 +127,8 @@ public class Chaser extends Mob {
                 double Accu = shifted + dir;
             ///////////////////////////
 
-                Mobshoot(x, y, Accu, 1.5, Sprite.bullet1);
-                Mobshoot(x, y, dir, 1.5, Sprite.bullet1);
+                Mobshoot(x, y, Accu, 2.5, Sprite.bullet1);
+                Mobshoot(x, y, dir, 2.5, Sprite.bullet1);
                 //Music.shoot1.play();
                 Firerate = MobWizardProjectile.FireRate;
                 /////////////////////////
