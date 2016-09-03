@@ -1,5 +1,6 @@
 package level;
 
+import Audio.Music;
 import Entity.Entity;
 import Entity.mob.Chaser;
 import Entity.mob.Dummy;
@@ -17,9 +18,8 @@ import java.util.Random;
 import level.Tile.Tile;
 
 public class Level {
-
-    public int level_present = 8;
-    public int level_num = 20;
+    public int level_present = 5;
+    public int level_num = 5;
     public int count_level = level_num;
     public int score = 0;
     public int level_state = 1;
@@ -52,25 +52,52 @@ public class Level {
         this.width = width;
         this.height = height;
         tilesInt = new int[width * height];
-        generateLevel();
+        // generateLevel();
     }
 
     public Level(String path) {
         LoadLevel(path);
-        generateLevel();
+        
+        // generateLevel();
     }
 
-    protected void generateLevel() {
-        for (int y = 0; y < 64; y++) {
-            for (int x = 0; x < 64; x++) {
-                getTile(x, y);
-            }
-        }
-        tile_size = 16;
-    }
+//    ArrayList solidTileX = new ArrayList();
+//    ArrayList solidTileY = new ArrayList();
 
+//    protected void generateLevel() {
+//        for (int y = 0; y < 64; y++) {
+//            for (int x = 0; x < 64; x++) {      
+//                if(getTile(x, y).isBlockade()){            
+//                    solidTileX.add(x);
+//                    solidTileY.add(y);
+//                    System.out.println("tao vao roi");
+//                }               
+//            }
+//        }         
+//        for (int i = 0; i < solidTileX.size(); i++) {
+//                    System.out.println("Solid tile: " + solidTileX.get(i) + " " + solidTileY.get(i));
+//                }
+//        tile_size = 16;
+//    }
+
+    public void levelUp() {
+        level_state++;
+        if(level_state % 3 == 0){
+            level_present += 4;
+        }        
+        level_num = 5 * level_state;
+        count_level = level_num;
+        spawnStart();
+        Music.levelup.play();
+    }
+    
+    public void currentLevel() {
+ //       System.out.println(level_num);
+        spawnStart();  
+    }
+    
     protected void LoadLevel(String path) {
-
+        // generateLevel();
     }
 
     public void update() {
@@ -88,6 +115,10 @@ public class Level {
         }
         //System.out.println("Mobs :" + entities.size());
         this.remove();
+        
+        if(count_level == 0){
+            levelUp();
+        }           
     }
 
     public int get_level_num() {
@@ -111,17 +142,26 @@ public class Level {
         Random rand = new Random();
         x = rand.nextInt(125) + 2;
         y = rand.nextInt(125) + 2;
-
-        int type = rand.nextInt(99);
+        
+        int type = 0;
+        if(level_state == 1){
+            type = 50;
+        }
+        else if(level_state == 2){
+            type = rand.nextInt(89);
+        }
+        else{
+            type = rand.nextInt(99);
+        }
+                
         if (type <= 50) {
             add(new Dummy(x, y));
-        } else if (type > 50 && type < 100) {
+        } else if (type > 50 && type < 89) {
             add(new Chaser(x, y));
         } else {
             add(new Star(x, y));
         }
         decrement_level_num();
-
     }
 
     public void spawnStart() {
@@ -129,21 +169,7 @@ public class Level {
             spawnMob();
             //System.out.println(level_num);
         }
-    }
-    
-    public int nextLevel() {
-        level_state++;
-        return level_state;
-    }
-    
-    public void currentLevel() {
-        System.out.println(level_num);
-        spawnStart();
-        if (level_num < 1) {
-               nextLevel();
-               System.out.println(level_state);
-        }
-    }
+    }           
 
     public void remove() {
         for (int i = 0; i < entities.size(); i++) {
@@ -351,10 +377,10 @@ public class Level {
         if (x < 0 || y < 0 || x >= width || y >= height) {
             return Tile.voidTile;
         }
-        if (tiles[x + y * width] == Tile.col_plat) {
+        if (tiles[x + y * width] == Tile.col_plat) {            
             return Tile.plat;
         }
-        if (tiles[x + y * width] == Tile.col_plat1) {
+        if (tiles[x + y * width] == Tile.col_plat1) {            
             return Tile.plat1;
         }
         if (tiles[x + y * width] == Tile.col_plat2) {
@@ -367,5 +393,9 @@ public class Level {
             return Tile.block;
         }
         return Tile.voidTile;
+    }
+    
+    public int getScore(){
+        return score;
     }
 }

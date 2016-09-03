@@ -7,7 +7,6 @@ import Graphics.Sprite;
 public class Tile {
     
     public Sprite sprite;
-    
     public static Tile plat = new PlatTile(Sprite.plat);
     public static Tile plat1 = new Plat1Tile(Sprite.plat1);
     public static Tile plat2 = new Plat2Tile(Sprite.plat2);
@@ -24,7 +23,7 @@ public class Tile {
     public static final int col_plat2 = 0xff00ffff;
     public static final int col_wall = 0xffffff00;
     public static final int col_block = 0xff7f7f00;
-
+    
     public Tile (Sprite sprite) {
         this.sprite = sprite;
     }

@@ -12,7 +12,10 @@ import Graphics.SpriteSheet;
 import Input.Keyboard;
 import Input.Mouse;
 import game.Game;
+import game.HighScore;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Player extends Mob {
 
@@ -34,7 +37,8 @@ public class Player extends Mob {
     private double nx, ny;
     
     private int timer = 0;
-
+    public HighScore abc;
+    
     public Player(Keyboard input) {
         this.input = input;
     }
@@ -96,6 +100,15 @@ public class Player extends Mob {
             timer++;
             if (timer > 50) {
                 Game.State = Game.STATE.OVER;
+                int score = level.score;
+            abc = new HighScore();
+            try {
+                abc.setScore(score);
+                abc.getHighScore();
+            } catch (IOException ex) {
+                Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+            int[] a = abc.getHighScore();
             }
         }
 
