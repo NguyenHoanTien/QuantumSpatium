@@ -7,8 +7,8 @@ import Graphics.Sprite;
 
 class WallTile extends Tile {
 
-    public WallTile(Sprite sprite) {
-         super(sprite);
+    public WallTile(Sprite sprite) {        
+         super(sprite);        
     }
        
     public void render (int x, int y, Screen screen) {
@@ -17,6 +17,5 @@ class WallTile extends Tile {
     
     public boolean solid() {
         return true;
-    }
-    
+    }    
 }

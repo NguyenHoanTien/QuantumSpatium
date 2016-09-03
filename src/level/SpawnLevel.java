@@ -12,6 +12,7 @@ public class SpawnLevel extends Level {
     }
 
     protected void LoadLevel(String path) {
+        super.LoadLevel(path);
         try {
             BufferedImage image = ImageIO.read(SpawnLevel.class.getResource(path));
             int w = width = image.getWidth();
@@ -23,9 +24,5 @@ public class SpawnLevel extends Level {
             System.out.println("Exception! Could not load level file! ");
         }
         currentLevel();
-    }
-
- 
-    protected void generateLevel() {
     }
 }

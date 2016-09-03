@@ -13,11 +13,12 @@ public class Music {
     public static Music tut1 = new Music("/audio/tutorial.wav");
     public static Music count = new Music("/audio/countdown.wav");
     public static Music hover1 = new Music("/audio/hover.wav");
-    public static Music shoot = new Music("/audio/shooting.wav");
+    public static Music shoot = new Music("/audio/shooting.wav");       //  player
     public static Music shoot1 = new Music("/audio/testshoot.wav");
     public static Music exp1 = new Music("/audio/exp1.wav");
     public static Music exp = new Music("/audio/exp.wav");
     public static Music bip = new Music("/audio/bip.wav");
+    public static Music levelup = new Music("/audio/levelup.wav");
     
     public Music (String fileName) {
         try {

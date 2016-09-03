@@ -10,6 +10,8 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.net.URL;
+import Entity.mob.Player;
+import level.Level;
 
 public class Menu extends Applet {
 
@@ -49,7 +51,9 @@ public class Menu extends Applet {
     private boolean Hcheck = false;
     private int Hc = 0;
     private int Hcount = 0;
-
+   
+    private Level level;
+    
     private Image getImage(String path) {
         Image tempImage = null;
         try {
@@ -263,18 +267,16 @@ public class Menu extends Applet {
 
     public void overRender(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
+        Font font1 = new Font("arial", Font.BOLD, 50);
+        Font font2 = new Font("calibri", Font.BOLD, 25);
         g.setColor(Color.blue);
         g2d.draw(Box);
         g.setColor(Color.white);
         g.fillRect(width - 65, height - 125, 400, 250);
-        Font font1 = new Font("arial", Font.BOLD, 50);
-        Font font2 = new Font("calibri", Font.BOLD, 25);
         g.setFont(font1);
         g.setColor(Color.red);
         g.drawString("GAME OVER", width - 20, height - 35);
         g.setFont(font2);
-
-        ////////
         g.setColor(Color.lightGray);
         g.fillRect(BackX, OverY, BackW, BackH);
         g.fillRect(StartX, OverY, StartW, StartH);

@@ -15,6 +15,8 @@ import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.IOException;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import level.Level;
 import level.SpawnLevel;
@@ -179,7 +181,6 @@ public class Game extends Canvas implements Runnable {
                 level.add(player);
             } else if (State == STATE.OVER || State == STATE.MENU) {
                 Playcounter = 0;
-
             }
 
             render();
@@ -278,7 +279,7 @@ public class Game extends Canvas implements Runnable {
                 b = b * 10;
                 a = a + 40;
             }
-            g.drawString("Level: " + level.level_state, screenSize.width /2  - 10, 50);
+            g.drawString("Level " + level.level_state, screenSize.width / 2 - 10, 50);
             g.drawString("Score: " + level.score, screenSize.width - a, 50);
         } else if (State == STATE.MENU) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
@@ -321,10 +322,29 @@ public class Game extends Canvas implements Runnable {
                 Mcheck = false;
                 Music.tut1.stop();
             }
-
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             menu.overRender(g);
-
+            Font font1 = new Font("arial", Font.BOLD, 50);
+            Font font2 = new Font("arial", Font.BOLD, 70);
+            Font font3 = new Font("arial", Font.BOLD, 40);
+            Font font4 = new Font("arial", Font.BOLD, 100);
+            g.setColor(Color.white);
+            g.setFont(font2);
+            g.drawString("High Score", Game.screenSize.width - 500, Game.screenSize.height / 2 - 400);
+            // score
+            g.setFont(font1);
+            int[] a = level.getClientPlayer().abc.getHighScore();
+            int b = 300;
+            for (int i = a.length - 1; i > 0; i--) {
+                int actual_width = g.getFontMetrics().stringWidth(String.valueOf(a[i]));
+                int x = (Game.screenSize.width - 120) - actual_width - 10;
+                g.drawString("" + a[i], x , Game.screenSize.height / 2 - b);
+                b -= 60;
+            }
+            g.setFont(font3);
+            g.drawString("Your score: ", Game.screenSize.width - 500, Game.screenSize.height / 2 - b);
+            g.setFont(font4);
+            g.drawString("" + level.score, Game.screenSize.width - 500, Game.screenSize.height / 2 - b + 100);
         }
 
         g.setColor(Color.WHITE);
