@@ -181,7 +181,6 @@ public class Game extends Canvas implements Runnable {
                 tEnd = System.currentTimeMillis();
                 tDelta = tEnd - tStart;
                 elapsedSeconds = tDelta / 1000.0;
-                System.out.println(elapsedSeconds);
                 Playcounter++;
                 TileCoordinate playerSpawn = new TileCoordinate(1210, 629);   // player spawn location
                 player = new Player(playerSpawn.x(), playerSpawn.y(), key);
