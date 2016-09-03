@@ -182,10 +182,11 @@ public class Menu extends Applet {
     }
 
     //render difficulty menu after click PLAY
-    public void playRender(Graphics g, int counter) {
+    public void playRender(Graphics g, double counter) {
         Graphics2D g2d = (Graphics2D) g;
-        counter = 3 - counter;
-        String counterStr = Integer.toString(counter);
+        int counterInt = (int)counter;
+        counterInt = 3 - counterInt;
+        String counterStr = Integer.toString(counterInt);
         //basic setting for font
         Font font1 = new Font("calibri", Font.BOLD, 300);
         g.setFont(font1);

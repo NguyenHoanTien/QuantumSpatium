@@ -46,6 +46,7 @@ public class Game extends Canvas implements Runnable {
     private boolean running = false;
 
     private long tStart, tEnd, tDelta;
+    double elapsedSeconds;
     //create states for the game
     public static enum STATE {
 
@@ -179,6 +180,10 @@ public class Game extends Canvas implements Runnable {
                     tStart = System.currentTimeMillis();
                     level = spawn;
                 }
+                tEnd = System.currentTimeMillis();
+                tDelta = tEnd - tStart;
+                elapsedSeconds = tDelta / 1000.0;
+                System.out.println(elapsedSeconds);
                 Playcounter++;
                 TileCoordinate playerSpawn = new TileCoordinate(1210, 629);   // player spawn location
                 player = new Player(playerSpawn.x(), playerSpawn.y(), key);
@@ -303,9 +308,9 @@ public class Game extends Canvas implements Runnable {
             }
 
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-            if (Playcounter / 90 < 3) {
-                menu.playRender(g, Playcounter / 90);
-            } else if (Playcounter / 100 >= 3) {
+            if (elapsedSeconds < 3) {
+                menu.playRender(g, elapsedSeconds );
+            } else if (elapsedSeconds >= 3) {
                 State = STATE.GAME;
                 if (Mcheck) {
                     Mcheck = false;
