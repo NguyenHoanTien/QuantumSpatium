@@ -35,8 +35,6 @@ public class Game extends Canvas implements Runnable {
 
     //for display
     private int Playcounter = 0;
-    private int a = 400;
-    private int b = 10;
 
     private JFrame frame;
     private Keyboard key;
@@ -276,20 +274,21 @@ public class Game extends Canvas implements Runnable {
             }
         } else if (State == STATE.GAME || State == STATE.DEAD) {
             g.setColor(Color.WHITE);
-            g.setFont(new Font("Verdana", 0, 60));
+            g.setFont(new Font("Verdana", 0, 100));
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-            g.drawString("" + level.count_level, 0, 50);
+            g.drawString("" + level.count_level, 10, 90);
 
-            if (level.score == 0) {
-                b = 10;
-                a = 400;
-            }
-            if (level.score >= b) {
-                b = b * 10;
-                a = a + 40;
-            }
-            g.drawString("Level: " + level.level_state, screenSize.width /2  - 100, 50);
-            g.drawString("Score: " + level.score, screenSize.width - a, 50);
+//            if (level.score == 0) {
+//                b = 10;
+//                a = 400;
+//            }
+//            if (level.score >= b) {
+//                b = b * 10;
+//                a = a + 40;
+//            }
+            g.setFont(new Font("Verdana", 0, 60));
+            g.drawString("Level " + level.level_state, screenSize.width / 2 - 100, 50);
+            g.drawString("Score: " + level.score, screenSize.width - 500, 50);
         } else if (State == STATE.MENU) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             menu.mainRender(g);
@@ -333,7 +332,6 @@ public class Game extends Canvas implements Runnable {
             }
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             menu.overRender(g);
-            Font font1 = new Font("arial", Font.BOLD, 50);
             Font font2 = new Font("arial", Font.BOLD, 70);
             Font font3 = new Font("arial", Font.BOLD, 40);
             Font font4 = new Font("arial", Font.BOLD, 100);
@@ -341,15 +339,17 @@ public class Game extends Canvas implements Runnable {
             g.setFont(font2);
             g.drawString("High Score", Game.screenSize.width - 500, Game.screenSize.height / 2 - 400);
             // score
-            g.setFont(font1);
+            g.setFont(font2);
             int[] a = level.getClientPlayer().abc.getHighScore();
             int b = 300;
             for (int i = a.length - 1; i > 0; i--) {
                 int actual_width = g.getFontMetrics().stringWidth(String.valueOf(a[i]));
                 int x = (Game.screenSize.width - 120) - actual_width - 10;
-                g.drawString("" + a[i], x , Game.screenSize.height / 2 - b);
+                g.drawString("" + a[i], x, Game.screenSize.height / 2 - b);
                 b -= 60;
             }
+            g.setColor(Color.white);
+            g.fillRect(1400, 790, 450, 5);
             g.setFont(font3);
             g.drawString("Your score: ", Game.screenSize.width - 500, Game.screenSize.height / 2 - b);
             g.setFont(font4);

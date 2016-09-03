@@ -43,7 +43,7 @@ public class Chaser extends Mob {
     private void move() {
         xa = 0;
         ya = 0;
-        List<Player> players = level.getPlayers(this, 400); // range to follow player
+        List<Player> players = level.getPlayers(this, 500); // range to follow player
 
         if (players.size() > 0) {
             Player player = players.get(0);
