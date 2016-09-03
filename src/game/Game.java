@@ -43,6 +43,7 @@ public class Game extends Canvas implements Runnable {
     private Player player;
     private boolean running = false;
 
+    private long tStart, tEnd, tDelta;
     //create states for the game
     public static enum STATE {
 
@@ -65,6 +66,7 @@ public class Game extends Canvas implements Runnable {
         QUIT,
         BUTTON1,
         BUTTON2,
+        ABOUTBACK,
         NONE
     }
 
@@ -172,6 +174,7 @@ public class Game extends Canvas implements Runnable {
                 }
                 spawn = new SpawnLevel("/textures/testL.png");
                 if (Playcounter == 0) {
+                    tStart = System.currentTimeMillis();
                     level = spawn;
                 }
                 Playcounter++;
@@ -279,7 +282,7 @@ public class Game extends Canvas implements Runnable {
                 b = b * 10;
                 a = a + 40;
             }
-            g.drawString("Level: " + level.level_state, screenSize.width /2  - 10, 50);
+            g.drawString("Level: " + level.level_state, screenSize.width /2  - 100, 50);
             g.drawString("Score: " + level.score, screenSize.width - a, 50);
         } else if (State == STATE.MENU) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);

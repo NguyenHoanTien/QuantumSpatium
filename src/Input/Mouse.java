@@ -81,7 +81,12 @@ public class Mouse implements MouseListener, MouseMotionListener {
                     }
                 }
             }
-        } else if (Game.State == Game.STATE.DEAD) {
+        } else if (Game.State == Game.STATE.ABOUT) {
+            if (mx >= Menu.AboutBack.x && mx <= Menu.AboutBack.x + 175) {
+                if (my >= Menu.AboutBack.y && my <= Menu.AboutBack.y + 50) {
+                    Game.State = Game.STATE.MENU;
+                }
+            }
         } else {
             mouseB = e.getButton();
         }
@@ -148,6 +153,14 @@ public class Mouse implements MouseListener, MouseMotionListener {
                 Game.Hover = Game.HOVER.NONE;
             }
 
+        } else if (Game.State == Game.STATE.ABOUT) {
+            if (mx >= Menu.AboutBack.x && mx <= Menu.AboutBack.x + 175) {
+                if (my >= Menu.AboutBack.y && my <= Menu.AboutBack.y + 50) {
+                    Game.Hover = Game.HOVER.ABOUTBACK;
+                } else {
+                    Game.Hover = Game.HOVER.NONE;
+                }
+            }
         }
     }
 

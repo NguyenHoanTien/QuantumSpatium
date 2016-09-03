@@ -46,6 +46,8 @@ public class Menu extends Applet {
     private Rectangle OverBack = new Rectangle(BackX, OverY, BackW, BackH);
     private Rectangle Restart = new Rectangle(StartX, OverY, StartW, StartH);
 
+    //About Back Button
+    public static Rectangle AboutBack = new Rectangle(Game.screenSize.width - 200, Game.screenSize.height - 100, 175, 50);
     private boolean Hcheck = false;
     private int Hc = 0;
     private int Hcount = 0;
@@ -386,16 +388,30 @@ public class Menu extends Applet {
         //basic setting for font
         Font font1 = new Font("Arial", Font.BOLD, 50);
         g.setFont(font1);
+
         g.setColor(Color.lightGray);
-        g.drawString("COSC2440", Game.screenSize.width / 2 - 120, 50);
+        g.drawString("Software Architecture: Design & Implementation", Game.screenSize.width / 2 - 575, 50);
+
         g.setColor(Color.yellow);
         g.drawString("Developers", Game.screenSize.width / 2 - 130, 100);
         g.drawString("Lecturer", Game.screenSize.width / 2 - 100, 400);
         g.drawString("Advisor", Game.screenSize.width / 2 - 90, 600);
+
         g.setColor(Color.white);
         g.drawString("Nguyen Hoang Tien         s3515589", Game.screenSize.width / 2 - 410, 200);
         g.drawString("Nguyen Quang Hai           s3517235", Game.screenSize.width / 2 - 410, 300);
         g.drawString("Vladimir Mariano", Game.screenSize.width / 2 - 210, 500);
         g.drawString("Nguyen Dang Tuan", Game.screenSize.width / 2 - 240, 700);
+
+        
+        g2d.draw(AboutBack);
+        Font font2 = new Font("arial", Font.BOLD, 25);
+        if (Game.Hover == Game.HOVER.ABOUTBACK) {
+            g.setColor(Color.white);
+            g.drawString("BACK", AboutBack.x + 18, AboutBack.y + 43);
+        } else {
+            g.setColor(Color.yellow);
+            g.drawString("BACK", AboutBack.x + 18, AboutBack.y + 43);
+        }
     }
 }
