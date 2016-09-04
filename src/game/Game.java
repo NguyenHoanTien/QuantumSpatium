@@ -22,6 +22,7 @@ import level.Level;
 import level.SpawnLevel;
 import level.TileCoordinate;
 import level.TutorialLevel;
+import Util.Timer;
 
 public class Game extends Canvas implements Runnable {
 
@@ -42,9 +43,11 @@ public class Game extends Canvas implements Runnable {
     private Level level;
     private Player player;
     private boolean running = false;
-
-    private long tStart, tEnd, tDelta;
-    double elapsedSeconds;
+    
+    //Timer
+    private Timer timeCounter = new Timer();
+   
+    private int duration;
     //create states for the game
     public static enum STATE {
 
@@ -82,7 +85,7 @@ public class Game extends Canvas implements Runnable {
     public static boolean a_released = false, d_released = false;
 
     private Screen screen;
-    private Thread thread;      /* thread is many program, it will run it own program. 
+    private Thread thread;      /* thread is many program, it will run iot own program. 
      (like sub program with many funtion in a big program and it run separately */
 
     private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -175,12 +178,14 @@ public class Game extends Canvas implements Runnable {
                 }
                 spawn = new SpawnLevel("/textures/testL.png");
                 if (Playcounter == 0) {
-                    tStart = System.currentTimeMillis();
+                    timeCounter.start();
                     level = spawn;
                 }
-                tEnd = System.currentTimeMillis();
-                tDelta = tEnd - tStart;
-                elapsedSeconds = tDelta / 1000.0;
+                //////// Timer ////////
+                timeCounter.stop();
+                duration = timeCounter.getDuration();
+                System.out.println(duration);
+                ////////////////////////////////
                 Playcounter++;
                 TileCoordinate playerSpawn = new TileCoordinate(1210, 629);   // player spawn location
                 player = new Player(playerSpawn.x(), playerSpawn.y(), key);
@@ -285,6 +290,9 @@ public class Game extends Canvas implements Runnable {
 //                b = b * 10;
 //                a = a + 40;
 //            }
+            
+            System.out.println("width: " + screenSize.width + "heigth: " + screenSize.height);
+            
             g.setFont(new Font("Verdana", 0, 60));
             g.drawString("Level " + level.level_state, screenSize.width / 2 - 100, 50);
             g.drawString("Score: " + level.score, screenSize.width - 500, 50);
@@ -306,9 +314,9 @@ public class Game extends Canvas implements Runnable {
             }
 
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-            if (elapsedSeconds < 3) {
-                menu.playRender(g, elapsedSeconds );
-            } else if (elapsedSeconds >= 3) {
+            if (duration < 3) {
+                menu.playRender(g, duration );
+            } else if (duration >= 3) {
                 State = STATE.GAME;
                 if (Mcheck) {
                     Mcheck = false;
@@ -330,7 +338,6 @@ public class Game extends Canvas implements Runnable {
                 Music.tut1.stop();
             }
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-            menu.overRender(g);
             Font font2 = new Font("arial", Font.BOLD, 70);
             Font font3 = new Font("arial", Font.BOLD, 40);
             Font font4 = new Font("arial", Font.BOLD, 100);
@@ -353,6 +360,7 @@ public class Game extends Canvas implements Runnable {
             g.drawString("Your score: ", Game.screenSize.width - 500, Game.screenSize.height / 2 - b);
             g.setFont(font4);
             g.drawString("" + level.score, Game.screenSize.width - 500, Game.screenSize.height / 2 - b + 100);
+            menu.overRender(g);
         }
         else if (State == STATE.ABOUT){
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);

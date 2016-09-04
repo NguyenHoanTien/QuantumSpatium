@@ -182,7 +182,7 @@ public class Menu extends Applet {
     }
 
     //render difficulty menu after click PLAY
-    public void playRender(Graphics g, double counter) {
+    public void playRender(Graphics g, int counter) {
         Graphics2D g2d = (Graphics2D) g;
         int counterInt = (int)counter;
         counterInt = 3 - counterInt;
