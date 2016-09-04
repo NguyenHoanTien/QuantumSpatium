@@ -1,6 +1,7 @@
 package Entity;
 
 import Audio.Music;
+import Entity.mob.Abilityshoot;
 import Entity.mob.Chaser;
 import Entity.mob.Dummy;
 import Entity.mob.Star;
@@ -13,8 +14,6 @@ import level.Level;
 
 public class Entity {
 
-
-    
     protected int x, y;
     private boolean removed = false;
     protected Level level;
@@ -77,12 +76,17 @@ public class Entity {
         health -= damage;
         if (health <= 0) {
             Music.exp.play();
-            removed = true;
+            removed = true;  
             level.decrement_level_display();
             count++;
-            //System.out.println("Count: " + count);
-            level.add(new ParticleSpawner((int) x, (int) y, 44, 15, level, Sprite.particle_gray));
+            Random rand = new Random();
+            int per = rand.nextInt(99);
             
+            if (per <= 10) 
+                level.add(new Abilityshoot(((int) x /16), ((int) y /16)));
+                
+            
+            level.add(new ParticleSpawner((int) x, (int) y, 44, 15, level, Sprite.particle_gray));
             if (this instanceof Dummy) {
                 level.add(new ParticleSpawner((int) x, (int) y, 44, 15, level, Sprite.particle_blue));
                 level.score += 10;

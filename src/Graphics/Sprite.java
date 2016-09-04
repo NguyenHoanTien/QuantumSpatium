@@ -27,7 +27,7 @@ public class Sprite {
     
     public static Sprite playerStop = new Sprite (32, 0, 7, SpriteSheet.tiles);
     
-    // Dummy 
+    public static Sprite shootab = new Sprite (16, 0, 0, SpriteSheet.Ability);
     
     
     // void sprite

@@ -2,6 +2,7 @@ package level;
 
 import Audio.Music;
 import Entity.Entity;
+import Entity.mob.Abilityshoot;
 import Entity.mob.Chaser;
 import Entity.mob.Dummy;
 import Entity.mob.Player;
@@ -153,10 +154,9 @@ public class Level {
         else{
             type = rand.nextInt(99);
         }
-                
         if (type <= 50) {
             add(new Dummy(x, y));
-        } else if (type > 50 && type < 89) {
+        } else if (type > 50 && type < 93) {
             add(new Chaser(x, y));
         } else {
             add(new Star(x, y));
