@@ -24,7 +24,10 @@ public class Level {
     public int count_level = level_num;
     public int score = 0;
     public int level_state = 1;
-
+    public boolean enableAbility = false;
+    public int abiPercent = 10;
+    
+    
     protected int width, height;
     protected int[] tilesInt;
     protected int[] tiles;
@@ -62,30 +65,15 @@ public class Level {
         // generateLevel();
     }
 
-//    ArrayList solidTileX = new ArrayList();
-//    ArrayList solidTileY = new ArrayList();
-
-//    protected void generateLevel() {
-//        for (int y = 0; y < 64; y++) {
-//            for (int x = 0; x < 64; x++) {      
-//                if(getTile(x, y).isBlockade()){            
-//                    solidTileX.add(x);
-//                    solidTileY.add(y);
-//                    System.out.println("tao vao roi");
-//                }               
-//            }
-//        }         
-//        for (int i = 0; i < solidTileX.size(); i++) {
-//                    System.out.println("Solid tile: " + solidTileX.get(i) + " " + solidTileY.get(i));
-//                }
-//        tile_size = 16;
-//    }
 
     public void levelUp() {
         level_state++;
         if(level_state % 3 == 0){
             level_present += 4;
         }        
+        if (level_state >= 2) {
+            enableAbility = true;
+        }
         level_num = 5 * level_state;
         count_level = level_num;
         spawnStart();

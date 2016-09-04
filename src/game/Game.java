@@ -184,7 +184,7 @@ public class Game extends Canvas implements Runnable {
                 //////// Timer ////////
                 timeCounter.stop();
                 duration = timeCounter.getDuration();
-                System.out.println(duration);
+//                System.out.println(duration);
                 ////////////////////////////////
                 Playcounter++;
                 TileCoordinate playerSpawn = new TileCoordinate(1210, 629);   // player spawn location
@@ -199,7 +199,6 @@ public class Game extends Canvas implements Runnable {
 
             if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
-                //System.out.println(updates + " ups, " + frames + " fps");
                 frame.setTitle(title + "  |  " + updates + " ups, " + frames + " fps");
                 updates = 0;
                 frames = 0;
@@ -212,9 +211,6 @@ public class Game extends Canvas implements Runnable {
         if (State == STATE.GAME || State == STATE.RUNTUT) {
             key.update();
             level.update();
-//            int a = level.getPlayerAt(0).getX();
-//            int b = level.getPlayerAt(0).getY();
-//            System.out.println("a : " + (a/16) + " | b: " + (b/16));
         } else if (State == STATE.DEAD) {
             level.update();
 
@@ -281,21 +277,15 @@ public class Game extends Canvas implements Runnable {
             g.setFont(new Font("Verdana", 0, 100));
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             g.drawString("" + level.count_level, 10, 90);
-
-//            if (level.score == 0) {
-//                b = 10;
-//                a = 400;
-//            }
-//            if (level.score >= b) {
-//                b = b * 10;
-//                a = a + 40;
-//            }
-            
-            System.out.println("width: " + screenSize.width + "heigth: " + screenSize.height);
-            
             g.setFont(new Font("Verdana", 0, 60));
             g.drawString("Level " + level.level_state, screenSize.width / 2 - 100, 50);
             g.drawString("Score: " + level.score, screenSize.width - 500, 50);
+            
+            if (player.checkShoot) {
+                g.setFont(new Font("Verdana", 0, 40));
+                g.drawString("Time: " + (player.limitShoot - player.duration), screenSize.width - 500, 150);
+            }
+            
         } else if (State == STATE.MENU) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             menu.mainRender(g);

@@ -11,6 +11,7 @@ import Graphics.Sprite;
 import Graphics.SpriteSheet;
 import Input.Keyboard;
 import Input.Mouse;
+import Util.Timer;
 import game.Game;
 import game.HighScore;
 import java.io.IOException;
@@ -40,6 +41,12 @@ public class Player extends Mob {
     public HighScore abc;
     private Abilityshoot Abilityshoot;
 
+    private Timer timeCounter = new Timer();
+    public int duration = 0;
+    public int limitShoot = 5;  // End time of shooting ability
+    public boolean checkShoot = false;
+    
+    
     public Player(Keyboard input) {
         this.input = input;
     }
@@ -90,19 +97,18 @@ public class Player extends Mob {
 
             updateRotating();
             clear();
-            
-            updateShooting();
 
             List<Entity> entities = level.entities;
             updateMobCollision(entities);  // mob collision, player will destroy when collision with mob
             //System.out.println ("player heal: " + heal); // check heal of player
+
             updateAP(entities);
-            
+            updateShooting();
+
         } else {
             Game.State = Game.STATE.DEAD;
             timer++;
             if (timer > 50) {
-                Game.State = Game.STATE.OVER;
                 int score = level.score;
                 abc = new HighScore();
                 try {
@@ -112,10 +118,13 @@ public class Player extends Mob {
                     Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                 }
                 int[] a = abc.getHighScore();
+                Game.State = Game.STATE.OVER;
             }
         }
 
     }
+
+
 
     public void updateMobCollision(List<Entity> entities) {
         for (int i = 0; i < entities.size(); i++) { // check the list of entities.
@@ -146,8 +155,6 @@ public class Player extends Mob {
         }
     }
 
-    private boolean acheck = false;
-    
     public void updateAP(List<Entity> entities) {
         for (int i = 0; i < entities.size(); i++) { // check the list of entities.
             if (entities.get(i) != null && entities.get(i) instanceof Abilityshoot) {
@@ -155,12 +162,23 @@ public class Player extends Mob {
                         && x > entities.get(i).getX() - 15
                         && y < entities.get(i).getY() + 15
                         && y > entities.get(i).getY() - 15) {
-                    level.add(new ParticleSpawner((int) x, (int) y, 44, 25, level, Sprite.particle_gray));    // display partical effect
+                    // display partical effect
                     level.add(new ParticleSpawner((int) x, (int) y, 44, 25, level, Sprite.particle_blue));
                     entities.get(i).remove();       // remove the mob that hit player
-                    acheck = true;
+                    checkShoot = true;
+                    timeCounter.start();
                 }
             }
+        }
+        
+        if (checkShoot) {
+            timeCounter.stop();
+            duration = timeCounter.getDuration();
+            System.out.println(duration);
+        } 
+        if (limitShoot - duration <= 0) {
+            checkShoot = false;
+            duration = 0;
         }
     }
 
@@ -174,19 +192,20 @@ public class Player extends Mob {
     }
 
     private void updateShooting() {
+
         if (Mouse.getButton() == 1 && firerate <= 0) {
             double dx = Mouse.getX() - Game.getWindowWidth() / 2;
             double dy = Mouse.getY() - Game.getWindowHeight() / 2;
             double dir = Math.atan2(dy, dx);
 
-            
-            if (acheck) {
-                shoot(x, y, (dir-0.1));
+            if (checkShoot) {
+                shoot(x, y, (dir - 0.1));
                 shoot(x, y, dir);
-                shoot(x, y, (dir+0.1));
-                
-            } else shoot(x, y, dir);
-            
+                shoot(x, y, (dir + 0.1));
+            } else {
+                shoot(x, y, dir);
+            }
+
             Music.shoot.play();
             firerate = WizardProjectile.FireRate;
         }

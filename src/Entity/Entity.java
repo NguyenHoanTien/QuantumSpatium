@@ -20,7 +20,7 @@ public class Entity {
     protected final Random random = new Random();
     protected Sprite sprite;
     protected int health;
-    
+
     public Entity() {
 
     }
@@ -76,16 +76,19 @@ public class Entity {
         health -= damage;
         if (health <= 0) {
             Music.exp.play();
-            removed = true;  
+            removed = true;
             level.decrement_level_display();
             count++;
-            Random rand = new Random();
-            int per = rand.nextInt(99);
-            
-            if (per <= 10) 
-                level.add(new Abilityshoot(((int) x /16), ((int) y /16)));
-                
-            
+
+            // check enable ability
+            if (level.enableAbility) {
+                Random rand = new Random();
+                int per = rand.nextInt(99);
+                if (per <= level.abiPercent) {
+                    level.add(new Abilityshoot(((int) x / 16), ((int) y / 16)));
+                }
+            }
+
             level.add(new ParticleSpawner((int) x, (int) y, 44, 15, level, Sprite.particle_gray));
             if (this instanceof Dummy) {
                 level.add(new ParticleSpawner((int) x, (int) y, 44, 15, level, Sprite.particle_blue));

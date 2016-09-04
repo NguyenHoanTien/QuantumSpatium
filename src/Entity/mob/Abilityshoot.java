@@ -5,6 +5,7 @@ import Graphics.AnimateSprite;
 import Graphics.Screen;
 import Graphics.Sprite;
 import Graphics.SpriteSheet;
+import Util.Timer;
 
 
 public class Abilityshoot extends Mob{
@@ -12,6 +13,10 @@ public class Abilityshoot extends Mob{
     private AnimateSprite aniSprite = Abiani;
     
     public boolean abilityS = false;
+    
+    private Timer timeCounter = new Timer();
+    private int duration;
+
     private int time = 0;
     private int life = 150;
     
@@ -19,25 +24,32 @@ public class Abilityshoot extends Mob{
         this.x = x << 4;
         this.y = y << 4;
         sprite = Sprite.shootab;
+        timeCounter.start();
     }
     
-    public boolean abilityS() {
-        abilityS = true;
-        return abilityS;
-    }
+//    public boolean start() {
+//        abilityS = true;
+//        return abilityS;
+//    }
+//    
+//    public boolean stop() {
+//        abilityS = false;
+//        return abilityS;
+//    }
     
     public void update() {
         aniSprite.update();
-        time++;
-        if (time >= 7400 ) time = 0;
-        if (time > life) {
-            remove();
+        
+        timeCounter.stop();
+        duration = timeCounter.getDuration();
+//        System.out.println(duration);
+        if (duration > 4) {
+            remove(); 
         }
     }
 
     public void render(Screen screen) {
         sprite = aniSprite.getSprite();
-        
         screen.renderAP((int) (x - 5), (int) (y - 5), this);
     }
     
