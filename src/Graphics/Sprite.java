@@ -28,7 +28,7 @@ public class Sprite {
     public static Sprite playerStop = new Sprite (32, 0, 7, SpriteSheet.tiles);
     
     public static Sprite shootab = new Sprite (16, 0, 0, SpriteSheet.Ability);
-    
+    public static Sprite shieldab = new Sprite (16, 1, 0, SpriteSheet.Ability);
     
     // void sprite
     public static Sprite voidSprite = new Sprite (16,0);
@@ -39,7 +39,7 @@ public class Sprite {
 
     // Projectile Sprite
     public static Sprite shoot = new Sprite (16, 2, 1, SpriteSheet.tiles);
-    
+    public static Sprite freeze = new Sprite (32, 2, 0, SpriteSheet.playerIcon);
     // particle Sprite
     public static Sprite particle_blue = new Sprite (3, 0x91D1FF);
     public static Sprite particle_gray = new Sprite (3, 0xEEEEEE);

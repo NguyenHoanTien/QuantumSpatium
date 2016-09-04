@@ -1,6 +1,7 @@
 package Entity;
 
 import Audio.Music;
+import Entity.mob.AbilityFreeze;
 import Entity.mob.Abilityshoot;
 import Entity.mob.Chaser;
 import Entity.mob.Dummy;
@@ -85,7 +86,12 @@ public class Entity {
                 Random rand = new Random();
                 int per = rand.nextInt(99);
                 if (per <= level.abiPercent) {
-                    level.add(new Abilityshoot(((int) x / 16), ((int) y / 16)));
+                    int type = rand.nextInt(10);
+                    if (type == 7 ) {
+                        level.add(new Abilityshoot(((int) x / 16), ((int) y / 16)));
+                    } else {
+                        level.add(new AbilityFreeze(((int) x / 16), ((int) y / 16)));
+                    }
                 }
             }
 

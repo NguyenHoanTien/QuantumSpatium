@@ -2,11 +2,7 @@
 package Entity.projectile;
 
 import Audio.Music;
-import Entity.Entity;
-import Entity.mob.Chaser;
-import Entity.mob.Dummy;
 import Entity.mob.Player;
-import Entity.mob.Star;
 import Entity.spawner.ParticleSpawner;
 import Graphics.Screen;
 import Graphics.Sprite;

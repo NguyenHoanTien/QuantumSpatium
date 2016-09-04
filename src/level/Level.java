@@ -19,26 +19,26 @@ import java.util.Random;
 import level.Tile.Tile;
 
 public class Level {
+
     public int level_present = 5;
     public int level_num = 5;
     public int count_level = level_num;
     public int score = 0;
     public int level_state = 1;
+
     public boolean enableAbility = false;
     public int abiPercent = 10;
-    
-    
+
     protected int width, height;
     protected int[] tilesInt;
     protected int[] tiles;
     protected int tile_size;
 
     public List<Entity> entities = new ArrayList<Entity>();
-    private List<Projectile> projectiles = new ArrayList<Projectile>();
+    public List<Projectile> projectiles = new ArrayList<Projectile>();
     private List<Particle> particles = new ArrayList<Particle>();
     public List<Player> players = new ArrayList<Player>();
 
-    
     private Comparator<Node> nodeSorter = new Comparator<Node>() {
         public int compare(Node n0, Node n1) {
             if (n1.fCost < n0.fCost) {
@@ -61,17 +61,19 @@ public class Level {
 
     public Level(String path) {
         LoadLevel(path);
-        
+
         // generateLevel();
     }
 
-
     public void levelUp() {
         level_state++;
-        if(level_state % 3 == 0){
+        if (level_state % 3 == 0) {
             level_present += 4;
-        }        
-        if (level_state >= 2) {
+        }
+        if (abiPercent <= 20) {
+            abiPercent += 2;
+        }
+        if (level_state >= 2 ) {
             enableAbility = true;
         }
         level_num = 5 * level_state;
@@ -79,12 +81,12 @@ public class Level {
         spawnStart();
         Music.levelup.play();
     }
-    
+
     public void currentLevel() {
- //       System.out.println(level_num);
-        spawnStart();  
+        //       System.out.println(level_num);
+        spawnStart();
     }
-    
+
     protected void LoadLevel(String path) {
         // generateLevel();
     }
@@ -102,12 +104,11 @@ public class Level {
         for (int i = 0; i < players.size(); i++) {
             players.get(i).update();
         }
-        //System.out.println("Mobs :" + entities.size());
         this.remove();
-        
-        if(count_level == 0){
+
+        if (count_level == 0) {
             levelUp();
-        }           
+        }
     }
 
     public int get_level_num() {
@@ -122,7 +123,6 @@ public class Level {
         count_level--;
     }
 
-    
     private boolean firstcheck = false;
     private int count = 0;
     private int x, y;
@@ -131,15 +131,13 @@ public class Level {
         Random rand = new Random();
         x = rand.nextInt(125) + 2;
         y = rand.nextInt(125) + 2;
-        
+
         int type = 0;
-        if(level_state == 1){
+        if (level_state == 1) {
             type = 50;
-        }
-        else if(level_state == 2){
+        } else if (level_state == 2) {
             type = rand.nextInt(89);
-        }
-        else{
+        } else {
             type = rand.nextInt(99);
         }
         if (type <= 50) {
@@ -157,7 +155,7 @@ public class Level {
             spawnMob();
             //System.out.println(level_num);
         }
-    }           
+    }
 
     public void remove() {
         for (int i = 0; i < entities.size(); i++) {
@@ -365,10 +363,10 @@ public class Level {
         if (x < 0 || y < 0 || x >= width || y >= height) {
             return Tile.voidTile;
         }
-        if (tiles[x + y * width] == Tile.col_plat) {            
+        if (tiles[x + y * width] == Tile.col_plat) {
             return Tile.plat;
         }
-        if (tiles[x + y * width] == Tile.col_plat1) {            
+        if (tiles[x + y * width] == Tile.col_plat1) {
             return Tile.plat1;
         }
         if (tiles[x + y * width] == Tile.col_plat2) {
@@ -382,8 +380,8 @@ public class Level {
         }
         return Tile.voidTile;
     }
-    
-    public int getScore(){
+
+    public int getScore() {
         return score;
     }
 }

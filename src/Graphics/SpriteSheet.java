@@ -21,12 +21,13 @@ public class SpriteSheet {
     
     public static SpriteSheet Enemy = new SpriteSheet("/textures/Enemy.png", 128);
     public static SpriteSheet EnemyT = new SpriteSheet("/textures/EnemyT.png", 128);
-    public static SpriteSheet Ability = new SpriteSheet("/textures/ability.png", 49);
+    public static SpriteSheet Ability = new SpriteSheet("/textures/ability.png", 49, 96);
     
     public static SpriteSheet dummymove = new SpriteSheet(EnemyT, 0, 1, 1, 3, 32);
     public static SpriteSheet chasermove = new SpriteSheet(EnemyT, 1, 1, 1, 3, 32);
     
-    public static SpriteSheet AbilityS = new SpriteSheet(Ability, 0, 0, 1, 3, 16);
+    public static SpriteSheet AbilityS = new SpriteSheet(Ability, 0, 0, 1, 6, 16);
+    public static SpriteSheet AbilityF = new SpriteSheet(Ability, 1, 0, 1, 6, 16);
     
     public static SpriteSheet starmoveU = new SpriteSheet(Enemy, 0, 1, 1, 3, 32);
     public static SpriteSheet starmoveD = new SpriteSheet(Enemy, 2, 1, 1, 3, 32);

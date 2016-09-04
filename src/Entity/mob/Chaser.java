@@ -11,16 +11,16 @@ import java.util.Random;
 
 public class Chaser extends Mob {
 
-    private AnimateSprite chaserAni = new AnimateSprite(SpriteSheet.chasermove, 32, 32, 3);
+    private AnimateSprite chaserAni = new AnimateSprite(SpriteSheet.chasermove, 32, 32, 3, 7);
     private AnimateSprite aniSprite = chaserAni;
-    
+
     private double xa = 0, ya = 0;
     private double xp = 0, yp = 0;
     private int time = 0;
     private double speed = 1;
     private double dir;
 
-    public int Firerate = 0;  
+    public int Firerate = 0;
 
     private boolean checkMove = false;
     private int countcheck = 0;
@@ -66,9 +66,11 @@ public class Chaser extends Mob {
         }
 
         if (xa != 0 || ya != 0) {
-            move(xa, ya);
-            moving = true;
-            checkMove = true;
+            if (!(level.getClientPlayer().Freeze)) {
+                move(xa, ya);
+                moving = true;
+                checkMove = true;
+            }
         } else {
             moving = false;
             if (x > 25 || y > 25) {
@@ -125,7 +127,7 @@ public class Chaser extends Mob {
                     shifted = -shifted;
                 }
                 double Accu = shifted + dir;
-            ///////////////////////////
+                ///////////////////////////
 
                 Mobshoot(x, y, Accu, 2.5, Sprite.bullet1);
                 Mobshoot(x, y, dir, 2.5, Sprite.bullet1);

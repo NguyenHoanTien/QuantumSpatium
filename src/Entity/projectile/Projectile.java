@@ -16,15 +16,20 @@ public abstract class Projectile extends Entity{
     protected int damage;
     protected double x, y;
     protected double distance;
-    
-    
-    
+
     protected final Random random = new Random(); 
     
     public Projectile (double x, double y, double dir) {
         xOrigin = x; 
         yOrigin = y;
         angle = dir;
+        this.x = x;
+        this.y = y;
+    }
+    
+    public Projectile (double x, double y) {
+        xOrigin = x; 
+        yOrigin = y;
         this.x = x;
         this.y = y;
     }

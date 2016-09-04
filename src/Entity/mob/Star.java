@@ -11,10 +11,10 @@ import level.Node;
 
 public class Star extends Mob {
 
-    private AnimateSprite starAniU = new AnimateSprite(SpriteSheet.starmoveU, 32, 32, 3);
-    private AnimateSprite starAniD = new AnimateSprite(SpriteSheet.starmoveD, 32, 32, 3);
-    private AnimateSprite starAniL = new AnimateSprite(SpriteSheet.starmoveL, 32, 32, 3);
-    private AnimateSprite starAniR = new AnimateSprite(SpriteSheet.starmoveR, 32, 32, 3);
+    private AnimateSprite starAniU = new AnimateSprite(SpriteSheet.starmoveU, 32, 32, 3, 7);
+    private AnimateSprite starAniD = new AnimateSprite(SpriteSheet.starmoveD, 32, 32, 3, 7);
+    private AnimateSprite starAniL = new AnimateSprite(SpriteSheet.starmoveL, 32, 32, 3, 7);
+    private AnimateSprite starAniR = new AnimateSprite(SpriteSheet.starmoveR, 32, 32, 3, 7);
 
     private AnimateSprite aniSprite;
 
@@ -76,8 +76,10 @@ public class Star extends Mob {
             }
         }
         if (xa != 0 || ya != 0) {
-            move(xa, ya);
-            moving = true;
+            if (!(level.getClientPlayer().Freeze)) {
+                move(xa, ya);
+                moving = true;
+            }
         } else {
             moving = false;
         }
@@ -85,6 +87,7 @@ public class Star extends Mob {
     }
 
     private int Hcount = 0;
+
     public void update() {
         time++;
         move();

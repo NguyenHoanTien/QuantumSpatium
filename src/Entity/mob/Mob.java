@@ -3,6 +3,7 @@ package Entity.mob;
 import Entity.Entity;
 import Entity.projectile.MobWizardProjectile;
 import Entity.projectile.Projectile;
+import Entity.projectile.FreezeWizardProjectile;
 import Entity.projectile.WizardProjectile;
 import Entity.spawner.ParticleSpawner;
 import Graphics.Screen;
@@ -68,11 +69,19 @@ public abstract class Mob extends Entity {
         level.add(p);
     }
     
+    protected void freeze (double x, double y) {
+        Projectile s = new FreezeWizardProjectile (x, y);
+        level.add(s);
+    }
+    
     protected void Mobshoot(double x, double y, double dir, double butspeed, Sprite sprite) {
         Projectile p = new MobWizardProjectile(x, y, dir, butspeed, sprite);
         level.add(p);
     }
 
+    
+    
+    
     private boolean collision(double xa, double ya) {
         boolean solid = false;
         for (int c = 0; c < 4; c++) {

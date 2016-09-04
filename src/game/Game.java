@@ -281,10 +281,10 @@ public class Game extends Canvas implements Runnable {
             g.drawString("Level " + level.level_state, screenSize.width / 2 - 100, 50);
             g.drawString("Score: " + level.score, screenSize.width - 500, 50);
             
-            if (player.checkShoot) {
+            if (player.checkShoot || player.checkFreeze) {
                 g.setFont(new Font("Verdana", 0, 40));
-                g.drawString("Time: " + (player.limitShoot - player.duration), screenSize.width - 500, 150);
-            }
+                g.drawString("Time: " + (player.limit - player.duration), screenSize.width - 500, 150);
+            } 
             
         } else if (State == STATE.MENU) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);

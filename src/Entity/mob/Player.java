@@ -3,6 +3,7 @@ package Entity.mob;
 import Audio.Music;
 import Entity.Entity;
 import Entity.projectile.Projectile;
+import Entity.projectile.FreezeWizardProjectile;
 import Entity.projectile.WizardProjectile;
 import Entity.spawner.ParticleSpawner;
 import Graphics.AnimateSprite;
@@ -27,10 +28,11 @@ public class Player extends Mob {
     public int heal = 1;
 
     public static int firerate = 0;
+    public static boolean check = false;
 
     private double speed = 3;
-    private AnimateSprite playerAni = new AnimateSprite(SpriteSheet.playermove, 32, 32, 3);
-    private AnimateSprite playerAni1 = new AnimateSprite(SpriteSheet.playermoveback, 32, 32, 3);
+    private AnimateSprite playerAni = new AnimateSprite(SpriteSheet.playermove, 32, 32, 3, 7);
+    private AnimateSprite playerAni1 = new AnimateSprite(SpriteSheet.playermoveback, 32, 32, 3, 7);
 
     public boolean alive = true;
 
@@ -43,9 +45,11 @@ public class Player extends Mob {
 
     private Timer timeCounter = new Timer();
     public int duration = 0;
-    public int limitShoot = 5;  // End time of shooting ability
-    public boolean checkShoot = false;
     
+    public int limit = 5;  // End time of shooting ability
+    public boolean checkShoot = false;
+    public boolean checkFreeze = false;
+    public boolean Freeze = false;
     
     public Player(Keyboard input) {
         this.input = input;
@@ -56,13 +60,16 @@ public class Player extends Mob {
         this.y = y;
         this.input = input;
         firerate = WizardProjectile.FireRate;
+        
     }
+
 
     public void update() {
         playerAni.update();
         double xa = 0;
         double ya = 0;
 
+        
         if (alive) {
             if (firerate > 0) {
                 firerate--;
@@ -124,8 +131,6 @@ public class Player extends Mob {
 
     }
 
-
-
     public void updateMobCollision(List<Entity> entities) {
         for (int i = 0; i < entities.size(); i++) { // check the list of entities.
             if (entities.get(i) != null && entities.get(i) instanceof Dummy || // these kind of mob will do the action
@@ -155,6 +160,7 @@ public class Player extends Mob {
         }
     }
 
+    
     public void updateAP(List<Entity> entities) {
         for (int i = 0; i < entities.size(); i++) { // check the list of entities.
             if (entities.get(i) != null && entities.get(i) instanceof Abilityshoot) {
@@ -163,21 +169,38 @@ public class Player extends Mob {
                         && y < entities.get(i).getY() + 15
                         && y > entities.get(i).getY() - 15) {
                     // display partical effect
-                    level.add(new ParticleSpawner((int) x, (int) y, 44, 25, level, Sprite.particle_blue));
                     entities.get(i).remove();       // remove the mob that hit player
                     checkShoot = true;
+                    timeCounter.start();
+                }
+            } else if (entities.get(i) != null && entities.get(i) instanceof AbilityFreeze) {
+                if (x < entities.get(i).getX() + 15 // range that will do the collision when hit the mob
+                        && x > entities.get(i).getX() - 15
+                        && y < entities.get(i).getY() + 15
+                        && y > entities.get(i).getY() - 15) {
+                    // display partical effect
+                    entities.get(i).remove();       // remove the mob that hit player
+                    //              System.out.println("Here");
+                    checkFreeze = true;
                     timeCounter.start();
                 }
             }
         }
         
-        if (checkShoot) {
+        if (checkFreeze) {
+            freeze(x, y);
+            Freeze = true;
             timeCounter.stop();
             duration = timeCounter.getDuration();
-            System.out.println(duration);
-        } 
-        if (limitShoot - duration <= 0) {
+        } else if (checkShoot) {
+            timeCounter.stop();
+            duration = timeCounter.getDuration();
+        }
+        
+        if (limit - duration <= 0) {
             checkShoot = false;
+            checkFreeze = false;
+            Freeze = false;
             duration = 0;
         }
     }
@@ -192,18 +215,17 @@ public class Player extends Mob {
     }
 
     private void updateShooting() {
-
         if (Mouse.getButton() == 1 && firerate <= 0) {
             double dx = Mouse.getX() - Game.getWindowWidth() / 2;
             double dy = Mouse.getY() - Game.getWindowHeight() / 2;
             double dir = Math.atan2(dy, dx);
-
             if (checkShoot) {
                 shoot(x, y, (dir - 0.1));
                 shoot(x, y, dir);
                 shoot(x, y, (dir + 0.1));
             } else {
                 shoot(x, y, dir);
+
             }
 
             Music.shoot.play();
