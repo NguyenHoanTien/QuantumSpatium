@@ -401,7 +401,7 @@ public class Menu extends Applet {
         g.drawString("Advisor", Game.screenSize.width / 2 - 90, 600);
 
         g.setColor(Color.white);
-        g.drawString("Nguyen Hoang Tien         s3515589", Game.screenSize.width / 2 - 410, 200);
+        g.drawString("Nguyen Hoan Tien           s3515589", Game.screenSize.width / 2 - 410, 200);
         g.drawString("Nguyen Quang Hai           s3517235", Game.screenSize.width / 2 - 410, 300);
         g.drawString("Vladimir Mariano", Game.screenSize.width / 2 - 210, 500);
         g.drawString("Nguyen Dang Tuan", Game.screenSize.width / 2 - 240, 700);
@@ -409,7 +409,23 @@ public class Menu extends Applet {
         
         g2d.draw(AboutBack);
         Font font2 = new Font("arial", Font.BOLD, 25);
+        
+        Hcount++;
+        if (Hcount >= 5) {
+            Hc = 0;
+        }
         if (Game.Hover == Game.HOVER.ABOUTBACK) {
+            Hcount = 0;
+            if (Hc == 1) {
+                Hcheck = true;
+            } else {
+                Hcheck = false;
+            }
+            Hc = 1;
+            if (!Hcheck && Hc == 1) {
+                Hcheck = true;
+                Music.hover.play();
+            }
             g.setColor(Color.white);
             g.drawString("BACK", AboutBack.x + 18, AboutBack.y + 43);
         } else {

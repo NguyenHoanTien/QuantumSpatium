@@ -18,7 +18,7 @@ public class MobWizardProjectile extends Projectile {
     
     public MobWizardProjectile(double x, double y, double dir, double speed, Sprite sprite) {
         super(x, y, dir);
-        range = random.nextInt(100) + 150;
+        range = random.nextInt(100) + 200;
         this.sprite = sprite;
         nx = speed * Math.cos(angle);
         ny = speed * Math.sin(angle);

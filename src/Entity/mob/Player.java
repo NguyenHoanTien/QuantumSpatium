@@ -24,21 +24,22 @@ public class Player extends Mob {
     private Sprite sprite1;
 
     public int heal = 1;
-    
+
     public static int firerate = 0;
-    
+
     private double speed = 3;
     private AnimateSprite playerAni = new AnimateSprite(SpriteSheet.playermove, 32, 32, 3);
     private AnimateSprite playerAni1 = new AnimateSprite(SpriteSheet.playermoveback, 32, 32, 3);
-    
+
     public boolean alive = true;
-    
+
     private double dir_player = 0;
     private double nx, ny;
-    
+
     private int timer = 0;
     public HighScore abc;
-    
+    private Abilityshoot Abilityshoot;
+
     public Player(Keyboard input) {
         this.input = input;
     }
@@ -61,15 +62,15 @@ public class Player extends Mob {
             }
 
             if (input.up) {
-            //ya -= speed;
+                //ya -= speed;
                 ya += ny;
                 xa += nx;
                 sprite1 = playerAni.getSprite();
             }
             if (input.down) {
                 //ya += speed;
-                ya -= ny/2;
-                xa -= nx/2;
+                ya -= ny / 2;
+                xa -= nx / 2;
                 sprite1 = playerAni1.getSprite();
             }
             if (input.left) {
@@ -89,26 +90,28 @@ public class Player extends Mob {
 
             updateRotating();
             clear();
-            updateShooting();
             
+            updateShooting();
+
             List<Entity> entities = level.entities;
             updateMobCollision(entities);  // mob collision, player will destroy when collision with mob
             //System.out.println ("player heal: " + heal); // check heal of player
-
+            updateAP(entities);
+            
         } else {
             Game.State = Game.STATE.DEAD;
             timer++;
             if (timer > 50) {
                 Game.State = Game.STATE.OVER;
                 int score = level.score;
-            abc = new HighScore();
-            try {
-                abc.setScore(score);
-                abc.getHighScore();
-            } catch (IOException ex) {
-                Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            }
-            int[] a = abc.getHighScore();
+                abc = new HighScore();
+                try {
+                    abc.setScore(score);
+                    abc.getHighScore();
+                } catch (IOException ex) {
+                    Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                }
+                int[] a = abc.getHighScore();
             }
         }
 
@@ -126,8 +129,8 @@ public class Player extends Mob {
 
                     heal = 0;               // when player hit the mob, heal = 0, mean die directly
 
-                    level.add(new ParticleSpawner((int) x, (int) y, 44, 25, level,Sprite.particle_gray));    // display partical effect
-                    level.add(new ParticleSpawner((int) x, (int) y, 44, 25, level,Sprite.particle_blue)); 
+                    level.add(new ParticleSpawner((int) x, (int) y, 44, 25, level, Sprite.particle_gray));    // display partical effect
+                    level.add(new ParticleSpawner((int) x, (int) y, 44, 25, level, Sprite.particle_blue));
                     if (heal == 0) {        // condition.
                         entities.get(i).remove();       // remove the mob that hit player
                         //System.out.println(" Died");  // checking...
@@ -138,6 +141,24 @@ public class Player extends Mob {
                     /* the reason why we have to remove mob and player: if we don't remove mob
                      system won't understand the syntax and display error null exception
                      => have to delete both */
+                }
+            }
+        }
+    }
+
+    private boolean acheck = false;
+    
+    public void updateAP(List<Entity> entities) {
+        for (int i = 0; i < entities.size(); i++) { // check the list of entities.
+            if (entities.get(i) != null && entities.get(i) instanceof Abilityshoot) {
+                if (x < entities.get(i).getX() + 15 // range that will do the collision when hit the mob
+                        && x > entities.get(i).getX() - 15
+                        && y < entities.get(i).getY() + 15
+                        && y > entities.get(i).getY() - 15) {
+                    level.add(new ParticleSpawner((int) x, (int) y, 44, 25, level, Sprite.particle_gray));    // display partical effect
+                    level.add(new ParticleSpawner((int) x, (int) y, 44, 25, level, Sprite.particle_blue));
+                    entities.get(i).remove();       // remove the mob that hit player
+                    acheck = true;
                 }
             }
         }
@@ -158,7 +179,14 @@ public class Player extends Mob {
             double dy = Mouse.getY() - Game.getWindowHeight() / 2;
             double dir = Math.atan2(dy, dx);
 
-            shoot(x, y, dir);
+            
+            if (acheck) {
+                shoot(x, y, (dir-0.1));
+                shoot(x, y, dir);
+                shoot(x, y, (dir+0.1));
+                
+            } else shoot(x, y, dir);
+            
             Music.shoot.play();
             firerate = WizardProjectile.FireRate;
         }

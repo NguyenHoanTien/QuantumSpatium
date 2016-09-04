@@ -103,8 +103,8 @@ public class Dummy extends Mob {
             ///////////////Shooting Accuray/////////////////
             Random random = new Random();
 
-            double max = 0.4;
-            double min = -0.4;
+            double max = 0.3;
+            double min = -0.3;
             double range = max - min;
 
             double dir1 = random.nextDouble() * range;
