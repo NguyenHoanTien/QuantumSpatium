@@ -52,7 +52,6 @@ public class Game extends Canvas implements Runnable {
     public static Combo combo = new Combo();
 
     //create states for the game
-
     public static enum STATE {
 
         TUTORIAL,
@@ -140,8 +139,10 @@ public class Game extends Canvas implements Runnable {
         }
     }
 
-    public void run() {         // the run method will run when the start method run
+    private int w, h;
+    public int WindowsCheck = 0;
 
+    public void run() {         // the run method will run when the start method run
         long lastTime = System.nanoTime();
         long timer = System.currentTimeMillis();
         final double ns = 1000000000.0 / 60.0;
@@ -149,6 +150,12 @@ public class Game extends Canvas implements Runnable {
         int frames = 0;
         int updates = 0;
         requestFocus();
+
+        w = getWindowWidth();
+        h = getWindowHeight();
+        if (w == 1920 && h == 1080) {
+            WindowsCheck = 1;
+        }
 
         while (running == true) {   // when the running keep true, the variable will loop over and over
             long now = System.nanoTime();
@@ -217,7 +224,6 @@ public class Game extends Canvas implements Runnable {
             level.update();
         } else if (State == STATE.DEAD) {
             level.update();
-
         }
 
     }
@@ -277,27 +283,31 @@ public class Game extends Canvas implements Runnable {
                 }
             }
         } else if (State == STATE.GAME || State == STATE.DEAD) {
-            g.setColor(Color.WHITE);
-            g.setFont(new Font("Verdana", 0, 100));
-            g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-            g.drawString("" + level.count_level, 10, 90);
-            g.setFont(new Font("Verdana", 0, 60));
-            g.drawString("Level " + level.level_state, screenSize.width / 2 - 100, 50);
-            g.drawString("Score: " + level.score, screenSize.width - 500, 50);
-            //showing Combo
-            combo.check();
-            if (combo.getCombo() > 1) {
-                g.setFont(new Font("Verdana", 0, 40));
-                g.drawString("Combo x" + combo.getCombo(), screenSize.width / 2 - 100, 150);
-            }
-            if (player.checkShoot || player.checkFreeze) {
-                g.setFont(new Font("Verdana", 0, 40));
-                g.drawString("Time: " + (player.limit - player.duration), screenSize.width - 500, 150);
+            if (WindowsCheck == 1) {
+                g.setColor(Color.WHITE);
+                g.setFont(new Font("Verdana", 0, 100));
+                g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+                g.drawString("" + level.count_level, 10, 90);
+                g.setFont(new Font("Verdana", 0, 60));
+                g.drawString("Level " + level.level_state, screenSize.width / 2 - 100, 50);
+                g.drawString("Score: " + level.score, screenSize.width - 500, 50);
+                //showing Combo
+                combo.check();
+                if (combo.getCombo() > 1) {
+                    g.setFont(new Font("Verdana", 0, 60));
+                    g.drawString("Combo x" + combo.getCombo(), screenSize.width / 2 - 150, 150);
+                }
+                if (player.checkShoot || player.checkFreeze) {
+                    g.setFont(new Font("Verdana", 0, 40));
+                    g.drawString("Time: " + (player.limitrd - player.duration), screenSize.width - 500, 150);
+                }
             }
 
         } else if (State == STATE.MENU) {
-            g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-            menu.mainRender(g);
+            if (WindowsCheck == 1) {
+                g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+                menu.mainRender(g);
+            }
             a_released = false;
             d_released = false;
             tutStep = 0;
@@ -311,63 +321,74 @@ public class Game extends Canvas implements Runnable {
                 Mcheck = true;
                 Music.count.play();
             }
-
-            g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-            if (duration < 3) {
-                menu.playRender(g, duration);
-            } else if (duration >= 3) {
-                State = STATE.GAME;
-                if (Mcheck) {
-                    Mcheck = false;
-                }
-                if (!Mcheck) {
-                    Mcheck = true;
-                    Music.tut1.play();
-                    Music.tut1.loop();
+            if (WindowsCheck == 1) {
+                g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+                if (duration < 3) {
+                    menu.playRender(g, duration);
+                } else if (duration >= 3) {
+                    State = STATE.GAME;
+                    if (Mcheck) {
+                        Mcheck = false;
+                    }
+                    if (!Mcheck) {
+                        Mcheck = true;
+                        Music.tut1.play();
+                        Music.tut1.loop();
+                    }
                 }
             }
         } else if (State == STATE.PAUSE) {
-            g.drawString("" + level.count_level, 0, 50);
-            g.drawString("Score: " + level.score, screenSize.width - 400, 50);
-            g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-            menu.pauseRender(g);
+            if (WindowsCheck == 1) {
+                g.setColor(Color.WHITE);
+                g.setFont(new Font("Verdana", 0, 100));
+                g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+                g.drawString("" + level.count_level, 10, 90);
+                g.setFont(new Font("Verdana", 0, 60));
+                g.drawString("Level " + level.level_state, screenSize.width / 2 - 100, 50);
+                g.drawString("Score: " + level.score, screenSize.width - 500, 50);
+                menu.pauseRender(g);
+            }
         } else if (State == STATE.OVER) {
             if (Music.tut1.isActive()) {
                 Mcheck = false;
                 Music.tut1.stop();
             }
-            g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-            Font font2 = new Font("arial", Font.BOLD, 70);
-            Font font3 = new Font("arial", Font.BOLD, 40);
-            Font font4 = new Font("arial", Font.BOLD, 100);
-            g.setColor(Color.white);
-            g.setFont(font2);
-            g.drawString("High Score", Game.screenSize.width - 500, Game.screenSize.height / 2 - 400);
-            // score
-            g.setFont(font2);
-            int[] a = level.getClientPlayer().abc.getHighScore();
-            int b = 300;
-            for (int i = a.length - 1; i > 0; i--) {
-                int actual_width = g.getFontMetrics().stringWidth(String.valueOf(a[i]));
-                int x = (Game.screenSize.width - 120) - actual_width - 10;
-                g.drawString("" + a[i], x, Game.screenSize.height / 2 - b);
-                b -= 60;
+            if (WindowsCheck == 1) {
+                g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+                Font font2 = new Font("arial", Font.BOLD, 70);
+                Font font3 = new Font("arial", Font.BOLD, 40);
+                Font font4 = new Font("arial", Font.BOLD, 100);
+                g.setColor(Color.white);
+                g.setFont(font2);
+                g.drawString("High Score", Game.screenSize.width - 500, Game.screenSize.height / 2 - 400);
+                // score
+                g.setFont(font2);
+                int[] a = level.getClientPlayer().abc.getHighScore();
+                int b = 300;
+                for (int i = a.length - 1; i > 0; i--) {
+                    int actual_width = g.getFontMetrics().stringWidth(String.valueOf(a[i]));
+                    int x = (Game.screenSize.width - 120) - actual_width - 10;
+                    g.drawString("" + a[i], x, Game.screenSize.height / 2 - b);
+                    b -= 60;
+                }
+                g.setColor(Color.white);
+                g.fillRect(1400, 790, 450, 5);
+                g.setFont(font3);
+                g.drawString("Your score: ", Game.screenSize.width - 500, Game.screenSize.height / 2 - b);
+                g.setFont(font4);
+                g.drawString("" + level.score, Game.screenSize.width - 500, Game.screenSize.height / 2 - b + 100);
+                menu.overRender(g);
             }
-            g.setColor(Color.white);
-            g.fillRect(1400, 790, 450, 5);
-            g.setFont(font3);
-            g.drawString("Your score: ", Game.screenSize.width - 500, Game.screenSize.height / 2 - b);
-            g.setFont(font4);
-            g.drawString("" + level.score, Game.screenSize.width - 500, Game.screenSize.height / 2 - b + 100);
-            menu.overRender(g);
         } else if (State == STATE.ABOUT) {
-            g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-            menu.aboutRender(g);
+            if (WindowsCheck == 1) {
+                g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+                menu.aboutRender(g);
+            }
         }
 
-        g.setColor(Color.WHITE);
-        g.setFont(new Font("Verdana", 0, 50));
-        //g.fillRect (Mouse.getX() - 32,Mouse.getY() - 32, 64,64);
+//        g.setColor(Color.WHITE);
+//        g.setFont(new Font("Verdana", 0, 50));
+//        //g.fillRect (Mouse.getX() - 32,Mouse.getY() - 32, 64,64);
 
         // end draw !
         g.dispose();

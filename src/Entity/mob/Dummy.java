@@ -21,7 +21,7 @@ public class Dummy extends Mob {
     private List<Node> path = null;
     private int time = 0;
     private Player player;
-    private double speed = 2;
+    private double speed = 1.5;
 
     private double dir;
     public int Firerate = 0;

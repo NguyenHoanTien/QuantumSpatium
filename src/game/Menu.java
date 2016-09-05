@@ -196,6 +196,7 @@ public class Menu extends Applet {
     }
 
     public void pauseRender(Graphics g) {
+        
         Graphics2D g2d = (Graphics2D) g;
         g.setColor(Color.blue);
         g2d.draw(Box);

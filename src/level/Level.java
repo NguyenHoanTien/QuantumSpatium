@@ -30,7 +30,7 @@ public class Level {
 
     public boolean enableAbilityS = false;
     public boolean enableAbilityD = false;
-    public int abiPercent = 20;
+    public int abiPercent = 14;
 
     protected int width, height;
     protected int[] tilesInt;
@@ -82,6 +82,7 @@ public class Level {
         if (level_state >= 3) {
             enableAbilityD = true;
         }
+        
         level_num = 5 * level_state;
         count_level = level_num;
         spawnStart();
@@ -91,12 +92,6 @@ public class Level {
     public void currentLevel() {
         //       System.out.println(level_num);
         spawnStart();
-        if (level_state >= 2) {
-            enableAbilityS = true;
-        }
-        if (level_state >= 3) {
-            enableAbilityD = true;
-        }
     }
 
     protected void LoadLevel(String path) {

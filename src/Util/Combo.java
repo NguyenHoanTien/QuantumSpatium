@@ -17,10 +17,11 @@ public class Combo {
 
     void Combo() {
     }
-    
-    public int getCombo(){
+
+    public int getCombo() {
         return combo;
     }
+
     public void update() {
         this.counter.start();
         combo++;
@@ -28,9 +29,15 @@ public class Combo {
 
     public void check() {
         this.counter.stop();
-        Comboduration =counter.getDuration();
-        System.out.println(Comboduration);
-        if(Comboduration > 3)
-            this.combo = 0;    
+        Comboduration = counter.getDuration();
+        if (combo > 5) {
+            if (Comboduration > 1) {
+                this.combo = 0;
+            }
+        } else {
+            if (Comboduration > 2) {
+                this.combo = 0;
+            }
+        }
     }
 }

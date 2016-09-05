@@ -21,8 +21,7 @@ public class Entity {
     protected final Random random = new Random();
     protected Sprite sprite;
     protected int health;
-    
-    
+
     public Entity() {
 
     }
@@ -82,29 +81,33 @@ public class Entity {
             Game.combo.update();
             level.decrement_level_display();
             count++;
-            
+
             // check enable ability
-                Random rand = new Random();
-                int per = rand.nextInt(99);
-                if (per <= level.abiPercent) {
-                    int type = rand.nextInt(10);
-                    if (type <= 7 && level.enableAbilityS) {
+            Random rand = new Random();
+            int per = rand.nextInt(99);
+            if (per <= level.abiPercent) {
+                if (level.enableAbilityD) {
+                     int type = rand.nextInt(10);
+                    if (type <= 7) {
                         level.add(new Abilityshoot(((int) x / 16), ((int) y / 16)));
-                    } else if (type > 7 && level.enableAbilityD) {
+                    } else if (type > 7) {
                         level.add(new AbilityFreeze(((int) x / 16), ((int) y / 16)));
                     }
+                } else if (level.enableAbilityS) {
+                   level.add(new Abilityshoot(((int) x / 16), ((int) y / 16)));
                 }
-
+            }
+            
             level.add(new ParticleSpawner((int) x, (int) y, 44, 15, level, Sprite.particle_gray));
             if (this instanceof Dummy) {
                 level.add(new ParticleSpawner((int) x, (int) y, 44, 15, level, Sprite.particle_blue));
-                level.score += 10*Game.combo.getCombo();
+                level.score += 10 * Game.combo.getCombo();
             } else if (this instanceof Chaser) {
                 level.add(new ParticleSpawner((int) x, (int) y, 44, 15, level, Sprite.particle_green));
-                level.score += 30*Game.combo.getCombo();
+                level.score += 30 * Game.combo.getCombo();
             } else if (this instanceof Star) {
                 level.add(new ParticleSpawner((int) x, (int) y, 44, 15, level, Sprite.particle_yellow));
-                level.score += 20*Game.combo.getCombo();
+                level.score += 20 * Game.combo.getCombo();
             }
             if (level.get_level_num() > 0) {
                 level.spawnMob();

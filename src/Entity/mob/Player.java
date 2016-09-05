@@ -46,7 +46,10 @@ public class Player extends Mob {
     private Timer timeCounter = new Timer();
     public int duration = 0;
 
-    public int limit = 5;  // End time of shooting ability
+    private int limitS = 5;  // End time of shooting ability
+    private int limitD = 3;
+    public int limitrd;
+
     public boolean checkShoot = false;
     public boolean checkFreeze = false;
     public boolean Freeze = false;
@@ -113,13 +116,12 @@ public class Player extends Mob {
 
             updateAP(entities);
 
-
             updateShooting(dir);
 
         } else {
             Game.State = Game.STATE.DEAD;
             timer++;
-            if (timer > 50) {
+            if (timer == 49) {
                 int score = level.score;
                 abc = new HighScore();
                 try {
@@ -129,6 +131,8 @@ public class Player extends Mob {
                     Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                 }
                 int[] a = abc.getHighScore();
+            }
+            if (timer > 50) {
                 Game.State = Game.STATE.OVER;
             }
         }
@@ -195,12 +199,14 @@ public class Player extends Mob {
             Freeze = true;
             timeCounter.stop();
             duration = timeCounter.getDuration();
+            limitrd = limitD;
         } else if (checkShoot) {
             timeCounter.stop();
             duration = timeCounter.getDuration();
+            limitrd = limitS;
         }
 
-        if (limit - duration <= 0) {
+        if (limitrd - duration <= 0) {
             checkShoot = false;
             checkFreeze = false;
             Freeze = false;
@@ -219,7 +225,7 @@ public class Player extends Mob {
 
     private void updateShooting(double dir) {
         if (Mouse.getButton() == 1 && firerate <= 0) {
-             dx = Mouse.getX() - Game.getWindowWidth() / 2;
+            dx = Mouse.getX() - Game.getWindowWidth() / 2;
             dy = Mouse.getY() - Game.getWindowHeight() / 2;
             dir = Math.atan2(dy, dx);
             if (checkShoot) {
