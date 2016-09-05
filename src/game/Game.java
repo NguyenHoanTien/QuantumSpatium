@@ -23,6 +23,7 @@ import level.SpawnLevel;
 import level.TileCoordinate;
 import level.TutorialLevel;
 import Util.Timer;
+import Util.Combo;
 
 public class Game extends Canvas implements Runnable {
 
@@ -43,12 +44,15 @@ public class Game extends Canvas implements Runnable {
     private Level level;
     private Player player;
     private boolean running = false;
-    
+
     //Timer
     private Timer timeCounter = new Timer();
-   
     private int duration;
+    //Combo
+    public static Combo combo = new Combo();
+
     //create states for the game
+
     public static enum STATE {
 
         TUTORIAL,
@@ -280,12 +284,17 @@ public class Game extends Canvas implements Runnable {
             g.setFont(new Font("Verdana", 0, 60));
             g.drawString("Level " + level.level_state, screenSize.width / 2 - 100, 50);
             g.drawString("Score: " + level.score, screenSize.width - 500, 50);
-            
+            //showing Combo
+            combo.check();
+            if (combo.getCombo() > 1) {
+                g.setFont(new Font("Verdana", 0, 40));
+                g.drawString("Combo x" + combo.getCombo(), screenSize.width / 2 - 100, 150);
+            }
             if (player.checkShoot || player.checkFreeze) {
                 g.setFont(new Font("Verdana", 0, 40));
                 g.drawString("Time: " + (player.limit - player.duration), screenSize.width - 500, 150);
-            } 
-            
+            }
+
         } else if (State == STATE.MENU) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             menu.mainRender(g);
@@ -305,7 +314,7 @@ public class Game extends Canvas implements Runnable {
 
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             if (duration < 3) {
-                menu.playRender(g, duration );
+                menu.playRender(g, duration);
             } else if (duration >= 3) {
                 State = STATE.GAME;
                 if (Mcheck) {
@@ -351,8 +360,7 @@ public class Game extends Canvas implements Runnable {
             g.setFont(font4);
             g.drawString("" + level.score, Game.screenSize.width - 500, Game.screenSize.height / 2 - b + 100);
             menu.overRender(g);
-        }
-        else if (State == STATE.ABOUT){
+        } else if (State == STATE.ABOUT) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             menu.aboutRender(g);
         }
