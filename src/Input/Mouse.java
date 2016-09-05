@@ -35,6 +35,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
     public void mousePressed(MouseEvent e) {
         int mx = e.getX();
         int my = e.getY();
+        
         if (Game.State == Game.STATE.MENU) {
             //handle menu clicking
             if (Game.State == Game.STATE.MENU) {

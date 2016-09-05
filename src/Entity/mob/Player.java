@@ -45,12 +45,15 @@ public class Player extends Mob {
 
     private Timer timeCounter = new Timer();
     public int duration = 0;
-    
+
     public int limit = 5;  // End time of shooting ability
     public boolean checkShoot = false;
     public boolean checkFreeze = false;
     public boolean Freeze = false;
-    
+
+    private double dx, dy;
+    private double dir;
+
     public Player(Keyboard input) {
         this.input = input;
     }
@@ -60,16 +63,15 @@ public class Player extends Mob {
         this.y = y;
         this.input = input;
         firerate = WizardProjectile.FireRate;
-        
-    }
 
+    }
 
     public void update() {
         playerAni.update();
+
         double xa = 0;
         double ya = 0;
 
-        
         if (alive) {
             if (firerate > 0) {
                 firerate--;
@@ -110,7 +112,9 @@ public class Player extends Mob {
             //System.out.println ("player heal: " + heal); // check heal of player
 
             updateAP(entities);
-            updateShooting();
+
+
+            updateShooting(dir);
 
         } else {
             Game.State = Game.STATE.DEAD;
@@ -160,7 +164,6 @@ public class Player extends Mob {
         }
     }
 
-    
     public void updateAP(List<Entity> entities) {
         for (int i = 0; i < entities.size(); i++) { // check the list of entities.
             if (entities.get(i) != null && entities.get(i) instanceof Abilityshoot) {
@@ -186,7 +189,7 @@ public class Player extends Mob {
                 }
             }
         }
-        
+
         if (checkFreeze) {
             freeze(x, y);
             Freeze = true;
@@ -196,7 +199,7 @@ public class Player extends Mob {
             timeCounter.stop();
             duration = timeCounter.getDuration();
         }
-        
+
         if (limit - duration <= 0) {
             checkShoot = false;
             checkFreeze = false;
@@ -214,11 +217,11 @@ public class Player extends Mob {
         }
     }
 
-    private void updateShooting() {
+    private void updateShooting(double dir) {
         if (Mouse.getButton() == 1 && firerate <= 0) {
-            double dx = Mouse.getX() - Game.getWindowWidth() / 2;
-            double dy = Mouse.getY() - Game.getWindowHeight() / 2;
-            double dir = Math.atan2(dy, dx);
+             dx = Mouse.getX() - Game.getWindowWidth() / 2;
+            dy = Mouse.getY() - Game.getWindowHeight() / 2;
+            dir = Math.atan2(dy, dx);
             if (checkShoot) {
                 shoot(x, y, (dir - 0.1));
                 shoot(x, y, dir);

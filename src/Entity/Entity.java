@@ -75,25 +75,23 @@ public class Entity {
 
     public void damageHealth(int damage) {
         health -= damage;
-        if (health <= 0) {
+        if (health <= 0 && removed == false) {
             Music.exp.play();
             removed = true;
             level.decrement_level_display();
             count++;
 
             // check enable ability
-            if (level.enableAbility) {
                 Random rand = new Random();
                 int per = rand.nextInt(99);
                 if (per <= level.abiPercent) {
                     int type = rand.nextInt(10);
-                    if (type == 7 ) {
+                    if (type <= 7 && level.enableAbilityS) {
                         level.add(new Abilityshoot(((int) x / 16), ((int) y / 16)));
-                    } else {
+                    } else if (type > 7 && level.enableAbilityD) {
                         level.add(new AbilityFreeze(((int) x / 16), ((int) y / 16)));
                     }
                 }
-            }
 
             level.add(new ParticleSpawner((int) x, (int) y, 44, 15, level, Sprite.particle_gray));
             if (this instanceof Dummy) {

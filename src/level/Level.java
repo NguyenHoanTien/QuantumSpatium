@@ -10,7 +10,9 @@ import Entity.mob.Star;
 import Entity.partical.Particle;
 import Entity.projectile.Projectile;
 import Graphics.Screen;
+import Input.Mouse;
 import Util.Vector2i;
+import game.Game;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -26,8 +28,9 @@ public class Level {
     public int score = 0;
     public int level_state = 1;
 
-    public boolean enableAbility = false;
-    public int abiPercent = 10;
+    public boolean enableAbilityS = false;
+    public boolean enableAbilityD = false;
+    public int abiPercent = 20;
 
     protected int width, height;
     protected int[] tilesInt;
@@ -70,11 +73,14 @@ public class Level {
         if (level_state % 3 == 0) {
             level_present += 4;
         }
-        if (abiPercent <= 20) {
+        if (abiPercent <= 30) {
             abiPercent += 2;
         }
-        if (level_state >= 2 ) {
-            enableAbility = true;
+        if (level_state >= 2) {
+            enableAbilityS = true;
+        }
+        if (level_state >= 3) {
+            enableAbilityD = true;
         }
         level_num = 5 * level_state;
         count_level = level_num;
@@ -85,11 +91,19 @@ public class Level {
     public void currentLevel() {
         //       System.out.println(level_num);
         spawnStart();
+        if (level_state >= 2) {
+            enableAbilityS = true;
+        }
+        if (level_state >= 3) {
+            enableAbilityD = true;
+        }
     }
 
     protected void LoadLevel(String path) {
         // generateLevel();
     }
+
+    public double dx;
 
     public void update() {
         for (int i = 0; i < entities.size(); i++) {
@@ -105,10 +119,10 @@ public class Level {
             players.get(i).update();
         }
         this.remove();
-
         if (count_level == 0) {
             levelUp();
         }
+
     }
 
     public int get_level_num() {
