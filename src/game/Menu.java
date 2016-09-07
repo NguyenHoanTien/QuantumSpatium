@@ -92,11 +92,11 @@ public class Menu extends Applet {
             font1 = new Font("Arial", Font.BOLD, 90);
             g.setFont(font1);
             g.drawString(Game.title, Game.screenSize.width - 950, Game.screenSize.height / 2 - 200);
-        
+
         } else {
             font1 = new Font("Arial", Font.BOLD, 100);
             g.setFont(font1);
-            g.drawString(Game.title, Game.screenSize.width - 1000, Game.screenSize.height / 2 - 200);
+            g.drawString(Game.title, Game.screenSize.width - 1050, Game.screenSize.height / 2 - 200);
         }
         //draw buttons
         Font font2 = new Font("Arial", Font.BOLD, 50);
@@ -396,24 +396,32 @@ public class Menu extends Applet {
         if (space == null) {
             space = getImage("/textures/space1.jpg");
         }
+
         g2d.drawImage(space, 0, 0, Game.screenSize.width, Game.screenSize.height, this);
         //basic setting for font
         Font font1 = new Font("Arial", Font.BOLD, 50);
-        g.setFont(font1);
-
+        Font font4 = new Font("Arial", Font.BOLD, 40);
+        Font font3 = new Font("Arial", Font.BOLD, 70);
+        int a = 50;
+        
+        g.setFont(font3);
         g.setColor(Color.lightGray);
-        g.drawString("Software Architecture: Design & Implementation", Game.screenSize.width / 2 - 575, 50);
-
+        g.drawString("Software Architecture: Design & Implementation", Game.screenSize.width / 2 - 800, 50 + a);
+        g.setFont(font1);
         g.setColor(Color.yellow);
-        g.drawString("Developers", Game.screenSize.width / 2 - 130, 100);
-        g.drawString("Lecturer", Game.screenSize.width / 2 - 100, 400);
-        g.drawString("Advisor", Game.screenSize.width / 2 - 90, 600);
+        g.drawString("Developers", Game.screenSize.width / 2 - 130, 150 + a);
+        g.drawString("Lecturer", Game.screenSize.width / 2 - 100, 450 + a);
+
 
         g.setColor(Color.white);
-        g.drawString("Nguyen Hoan Tien           s3515589", Game.screenSize.width / 2 - 410, 200);
-        g.drawString("Nguyen Quang Hai           s3517235", Game.screenSize.width / 2 - 410, 300);
-        g.drawString("Vladimir Mariano", Game.screenSize.width / 2 - 210, 500);
-        g.drawString("Nguyen Dang Tuan", Game.screenSize.width / 2 - 240, 700);
+        g.drawString("Nguyen Hoan Tien           s3515589", Game.screenSize.width / 2 - 410, 250 + a);
+        g.drawString("Nguyen Quang Hai           s3517235", Game.screenSize.width / 2 - 410, 350 + a);
+        g.drawString("Vladimir Mariano", Game.screenSize.width / 2 - 210, 550 + a);
+        g.setFont(font4);
+        g.setColor(Color.yellow);
+        g.drawString("Advisor", Game.screenSize.width / 2 - 80, 650 + a);
+        g.setColor(Color.white);
+        g.drawString("Nguyen Dang Tuan", Game.screenSize.width / 2 - 190, 750 + a);
 
         g2d.draw(AboutBack);
         Font font2 = new Font("arial", Font.BOLD, 25);

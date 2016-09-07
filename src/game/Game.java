@@ -397,7 +397,7 @@ public class Game extends Canvas implements Runnable {
                 // score
                 g.setFont(font2);
                 int[] a = level.getClientPlayer().abc.getHighScore();
-                int b = 300;
+                int b = 320;
                 for (int i = a.length - 1; i > 0; i--) {
                     int actual_width = g.getFontMetrics().stringWidth(String.valueOf(a[i]));
                     int x = (Game.screenSize.width - 120) - actual_width - 10;
@@ -409,7 +409,7 @@ public class Game extends Canvas implements Runnable {
                 g.setFont(font4);
                 g.drawString("" + level.score, Game.screenSize.width - 500, Game.screenSize.height / 2 - b + 100);
                 g.setColor(Color.white);
-                g.fillRect(1400, 790, 450, 5);
+                g.fillRect(1400, 775, 450, 5);
             }
 
             menu.overRender(g);

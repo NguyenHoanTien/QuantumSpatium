@@ -88,9 +88,9 @@ public class Entity {
             if (per <= level.abiPercent) {
                 if (level.enableAbilityD) {
                      int type = rand.nextInt(10);
-                    if (type <= 7) {
+                    if (type <= 6) {
                         level.add(new Abilityshoot(((int) x / 16), ((int) y / 16)));
-                    } else if (type > 7) {
+                    } else if (type > 6) {
                         level.add(new AbilityFreeze(((int) x / 16), ((int) y / 16)));
                     }
                 } else if (level.enableAbilityS) {
