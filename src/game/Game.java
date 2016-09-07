@@ -278,13 +278,21 @@ public class Game extends Canvas implements Runnable {
                 }
             }
         } else if (State == STATE.GAME || State == STATE.DEAD) {
-            g.setColor(Color.WHITE);
-            g.setFont(new Font("Verdana", 0, 100));
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-            g.drawString("" + level.count_level, 10, 90);
-            g.setFont(new Font("Verdana", 0, 60));
-            g.drawString("Level " + level.level_state, screenSize.width / 2 - 100, 50);
-            g.drawString("Score: " + level.score, screenSize.width - 500, 50);
+            g.setColor(Color.WHITE);
+            if (Game.screenSize.width <= 1366 && Game.screenSize.height <= 768) {
+                g.setFont(new Font("Verdana", 0, 80));
+                g.drawString("" + level.count_level, 10, 70);
+                g.setFont(new Font("Verdana", 0, 40));
+                g.drawString("Score: " + level.score, screenSize.width - 350, 50);
+                g.drawString("Level " + level.level_state, screenSize.width / 2 - 70, 50);
+            } else {
+                g.setFont(new Font("Verdana", 0, 100));
+                g.drawString("" + level.count_level, 10, 90);
+                g.setFont(new Font("Verdana", 0, 60));
+                g.drawString("Score: " + level.score, screenSize.width - 500, 50);
+                g.drawString("Level " + level.level_state, screenSize.width / 2 - 100, 50);
+            }
             //showing Combo
             combo.check();
             if (combo.getCombo() > 1) {
@@ -334,11 +342,19 @@ public class Game extends Canvas implements Runnable {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
             if (noDisplay == false) {
                 g.setColor(Color.WHITE);
-                g.setFont(new Font("Verdana", 0, 100));
-                g.drawString("" + level.count_level, 10, 90);
-                g.setFont(new Font("Verdana", 0, 60));
-                g.drawString("Level " + level.level_state, screenSize.width / 2 - 100, 50);
-                g.drawString("Score: " + level.score, screenSize.width - 500, 50);
+                if (Game.screenSize.width <= 1366 && Game.screenSize.height <= 768) {
+                    g.setFont(new Font("Verdana", 0, 80));
+                    g.drawString("" + level.count_level, 10, 70);
+                    g.setFont(new Font("Verdana", 0, 40));
+                    g.drawString("Score: " + level.score, screenSize.width - 350, 50);
+                    g.drawString("Level " + level.level_state, screenSize.width / 2 - 70, 50);
+                } else {
+                    g.setFont(new Font("Verdana", 0, 100));
+                    g.drawString("" + level.count_level, 10, 90);
+                    g.setFont(new Font("Verdana", 0, 60));
+                    g.drawString("Score: " + level.score, screenSize.width - 500, 50);
+                    g.drawString("Level " + level.level_state, screenSize.width / 2 - 100, 50);
+                }
             }
             menu.pauseRender(g);
         } else if (State == STATE.OVER) {
@@ -351,25 +367,51 @@ public class Game extends Canvas implements Runnable {
             Font font2 = new Font("arial", Font.BOLD, 70);
             Font font3 = new Font("arial", Font.BOLD, 40);
             Font font4 = new Font("arial", Font.BOLD, 100);
+            Font font5 = new Font("arial", Font.BOLD, 45);
+            Font font6 = new Font("arial", Font.BOLD, 30);
+            Font font7 = new Font("arial", Font.BOLD, 80);
             g.setColor(Color.white);
-            g.setFont(font2);
-            g.drawString("High Score", Game.screenSize.width - 500, Game.screenSize.height / 2 - 400);
-            // score
-            g.setFont(font2);
-            int[] a = level.getClientPlayer().abc.getHighScore();
-            int b = 300;
-            for (int i = a.length - 1; i > 0; i--) {
-                int actual_width = g.getFontMetrics().stringWidth(String.valueOf(a[i]));
-                int x = (Game.screenSize.width - 120) - actual_width - 10;
-                g.drawString("" + a[i], x, Game.screenSize.height / 2 - b);
-                b -= 60;
+
+            if (Game.screenSize.width <= 1366 && Game.screenSize.height <= 768) {
+                g.setFont(font5);
+                g.drawString("High Score", Game.screenSize.width - 350, Game.screenSize.height / 2 - 300);
+                // score
+                g.setFont(font5);
+                int[] a = level.getClientPlayer().abc.getHighScore();
+                int b = 240;
+                for (int i = a.length - 1; i > 0; i--) {
+                    int actual_width = g.getFontMetrics().stringWidth(String.valueOf(a[i]));
+                    int x = (Game.screenSize.width - 100) - actual_width - 10;
+                    g.drawString("" + a[i], x, Game.screenSize.height / 2 - b);
+                    b -= 50;
+                }
+                g.setFont(font6);
+                g.drawString("Your score: ", Game.screenSize.width - 370, Game.screenSize.height / 2 - b);
+                g.setFont(font7);
+                g.drawString("" + level.score, Game.screenSize.width - 370, Game.screenSize.height / 2 - b + 70);
+                g.setColor(Color.white);
+                g.fillRect(970, 607, 290, 5);
+            } else {
+                g.setFont(font2);
+                g.drawString("High Score", Game.screenSize.width - 500, Game.screenSize.height / 2 - 400);
+                // score
+                g.setFont(font2);
+                int[] a = level.getClientPlayer().abc.getHighScore();
+                int b = 300;
+                for (int i = a.length - 1; i > 0; i--) {
+                    int actual_width = g.getFontMetrics().stringWidth(String.valueOf(a[i]));
+                    int x = (Game.screenSize.width - 120) - actual_width - 10;
+                    g.drawString("" + a[i], x, Game.screenSize.height / 2 - b);
+                    b -= 60;
+                }
+                g.setFont(font3);
+                g.drawString("Your score: ", Game.screenSize.width - 500, Game.screenSize.height / 2 - b);
+                g.setFont(font4);
+                g.drawString("" + level.score, Game.screenSize.width - 500, Game.screenSize.height / 2 - b + 100);
+                g.setColor(Color.white);
+                g.fillRect(1400, 790, 450, 5);
             }
-            g.setColor(Color.white);
-            g.fillRect(1400, 790, 450, 5);
-            g.setFont(font3);
-            g.drawString("Your score: ", Game.screenSize.width - 500, Game.screenSize.height / 2 - b);
-            g.setFont(font4);
-            g.drawString("" + level.score, Game.screenSize.width - 500, Game.screenSize.height / 2 - b + 100);
+
             menu.overRender(g);
 
         } else if (State == STATE.ABOUT) {

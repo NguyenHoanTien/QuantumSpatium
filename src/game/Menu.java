@@ -53,9 +53,9 @@ public class Menu extends Applet {
     private boolean Hcheck = false;
     private int Hc = 0;
     private int Hcount = 0;
-   
+
     private Level level;
-    
+
     private Image getImage(String path) {
         Image tempImage = null;
         try {
@@ -84,12 +84,20 @@ public class Menu extends Applet {
         }
         g2d.drawImage(space, 0, 0, Game.screenSize.width, Game.screenSize.height, this);
         //basic setting for font
-        Font font1 = new Font("Arial", Font.BOLD, 100);
-        g.setFont(font1);
+        Font font1;
         g.setColor(Color.white);
 
         //draw the title
-        g.drawString(Game.title, Game.screenSize.width - 1000, Game.screenSize.height / 2 - 200);
+        if (Game.screenSize.width <= 1366 && Game.screenSize.height <= 768) {
+            font1 = new Font("Arial", Font.BOLD, 90);
+            g.setFont(font1);
+            g.drawString(Game.title, Game.screenSize.width - 950, Game.screenSize.height / 2 - 200);
+        
+        } else {
+            font1 = new Font("Arial", Font.BOLD, 100);
+            g.setFont(font1);
+            g.drawString(Game.title, Game.screenSize.width - 1000, Game.screenSize.height / 2 - 200);
+        }
         //draw buttons
         Font font2 = new Font("Arial", Font.BOLD, 50);
         g.setFont(font2);
@@ -184,7 +192,7 @@ public class Menu extends Applet {
     //render difficulty menu after click PLAY
     public void playRender(Graphics g, int counter) {
         Graphics2D g2d = (Graphics2D) g;
-        int counterInt = (int)counter;
+        int counterInt = (int) counter;
         counterInt = 3 - counterInt;
         String counterStr = Integer.toString(counterInt);
         //basic setting for font
@@ -196,7 +204,7 @@ public class Menu extends Applet {
     }
 
     public void pauseRender(Graphics g) {
-        
+
         Graphics2D g2d = (Graphics2D) g;
         g.setColor(Color.blue);
         g2d.draw(Box);
@@ -407,10 +415,9 @@ public class Menu extends Applet {
         g.drawString("Vladimir Mariano", Game.screenSize.width / 2 - 210, 500);
         g.drawString("Nguyen Dang Tuan", Game.screenSize.width / 2 - 240, 700);
 
-        
         g2d.draw(AboutBack);
         Font font2 = new Font("arial", Font.BOLD, 25);
-        
+
         Hcount++;
         if (Hcount >= 5) {
             Hc = 0;
