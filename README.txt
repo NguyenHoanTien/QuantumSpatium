@@ -7,7 +7,7 @@ In game:
 	Press S to move backward
 	press A or D to change direction
 	
-	Drag mouse to any where and press mouse-left to shoot
+	Press left-mouse in anywhere to shoot 
 --------------------------------------------------------------------------------------------
 
 Credits: 
