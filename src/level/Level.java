@@ -30,7 +30,7 @@ public class Level {
 
     public boolean enableAbilityS = false;
     public boolean enableAbilityD = false;
-    public int abiPercent = 30;
+    public int abiPercent = 26;
 
     protected int width, height;
     protected int[] tilesInt;
